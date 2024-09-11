@@ -1,0 +1,21 @@
+@if (!hasSuboptions()) {
+<div class="option">
+    <mat-icon>{{ icon }}</mat-icon>
+    <p>{{ text }}</p>
+</div>
+} @else {
+<div class="option" [matMenuTriggerFor]="submenu">
+    <mat-icon class="icon" >{{ icon }}</mat-icon>
+    <p>{{ text }}</p>
+    <mat-icon>arrow_forward_ios</mat-icon>
+    
+    <mat-menu #submenu>
+        @for (suboption of suboptions; track $index) {
+            <div mat-menu-item class="option">
+                <mat-icon class="icon" >{{ suboption.icon }}</mat-icon>
+                <p>{{ suboption.text }}</p>
+            </div>
+        }
+    </mat-menu>
+</div>
+}
