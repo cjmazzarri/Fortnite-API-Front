@@ -1,0 +1,33 @@
+.sidenav-container {
+    background-color: transparent;
+    height: 100vh;
+}
+
+mat-sidenav {
+    background-color: var(--secondary);
+    max-width: 14rem;
+    font-size: 1.5rem;
+}
+
+button.bg {
+    background-color: var(--bg);
+}
+
+button.secondary {
+    background-color: var(--secondary);
+}
+
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+mat-icon {
+    color: white;    
+}
