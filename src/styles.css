@@ -2,6 +2,23 @@
 :root {
     --bg: #051232;
     --secondary: #3661CF;
+    --common: #777C81;
+    --uncommon: #298203;
+    --rare: #0171BC;
+    --epic: #8C2FBA;
+    --legendary: #C4662D;
+    --marvel: #ED1C24;
+    --icon: #52E0E0;
+    --gaming: #8078FF;
+    --shadow: #323232;
+    --slurp: #53F0FF;
+    --starwars: #E7C413;
+    --dc: #6094CE;
+    --dark: #5B0D75;
+    --lava: #F95337;
+    --frozen: #C4DFF7;
+    --mclaren: #B1331A;
+    --lamborghini: #CAB2DC;    
 }
 
 body {

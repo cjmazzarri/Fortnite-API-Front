@@ -9,6 +9,10 @@ mat-sidenav {
     font-size: 1.5rem;
 }
 
+mat-sidenav-container mat-sidenav-content {
+    overflow-x: hidden;
+}
+
 button.bg {
     background-color: var(--bg);
 }

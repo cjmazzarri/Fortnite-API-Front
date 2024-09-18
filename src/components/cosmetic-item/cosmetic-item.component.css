@@ -1,0 +1,177 @@
+.item-container {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    margin: 0;
+    text-align: center;
+}
+
+.img-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.vbucks {
+    width: 1.5rem;
+    z-index: 1;
+}
+
+.price-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 0.9rem;
+    margin-top: -1rem;
+}
+
+.item-img {
+    border: 0.25rem solid;
+    border-radius: 0.9rem;
+}
+
+.price {
+    border-bottom-right-radius: 1rem;
+    text-align: end;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    margin-left: -0.5rem;
+}
+
+.common-p {
+    background-color: var(--common);
+}
+
+.common-img {
+    border-color: var(--common);
+}
+
+.uncommon-p {
+    background-color: var(--uncommon);
+}
+
+.uncommon-img {
+    border-color: var(--uncommon);
+}
+
+.rare-p {
+    background-color: var(--rare);
+}
+
+.rare-img {
+    border-color: var(--rare);
+}
+
+.epic-p {
+    background-color: var(--epic);
+}
+
+.epic-img {
+    border-color: var(--epic);
+}
+
+.legendary-p {
+    background-color: var(--legendary);
+}
+
+.legendary-img {
+    border-color: var(--legendary);
+}
+
+.icon-p {
+    background-color: var(--icon);
+}
+
+.icon-img {
+    border-color: var(--icon);
+}
+
+.marvel-p {
+    background-color: var(--marvel);
+}
+
+.marvel-img {
+    border-color: var(--marvel);
+}
+
+.shadow-p {
+    background-color: var(--shadow);
+}
+
+.shadow-img {
+    border-color: var(--shadow);
+}
+
+.gaming-p {
+    background-color: var(--gaming);
+}
+
+.gaming-img {
+    border-color: var(--gaming);
+}
+
+.slurp-p {
+    background-color: var(--slurp);
+}
+
+.slurp-img {
+    border-color: var(--slurp);
+}
+
+.starwars-p {
+    background-color: var(--starwars);
+}
+
+.starwars-img {
+    border-color: var(--starwars);
+}
+
+.dc-p {
+    background-color: var(--dc);
+}
+
+.dc-img {
+    border-color: var(--dc);
+}
+
+.dark-p {
+    background-color: var(--dark);
+}
+
+.dark-img {
+    border-color: var(--dark);
+}
+
+.lava-p {
+    background-color: var(--lava);
+}
+
+.lava-img {
+    border-color: var(--lava);
+}
+
+.frozen-p {
+    background-color: var(--frozen);
+}
+
+.frozen-img {
+    border-color: var(--frozen);
+}
+
+.mclaren-p {
+    background-color: var(--mclaren);
+}
+
+.mclaren-img {
+    border-color: var(--mclaren);
+}
+
+.lamborghini-p {
+    background-color: var(--lamborghini);
+}
+
+.lamborghini-img {
+    border-color: var(--lamborghini);
+}
