@@ -40,6 +40,10 @@ p {
     margin-left: -0.5rem;
 }
 
+.track {
+    width: 264px;
+}
+
 .common-p {
     background-color: var(--common);
 }

@@ -12,6 +12,7 @@ export class CosmeticItemComponent {
   @Input() price: number = 0;
   @Input() itemName: string | undefined = "";
   @Input() image: string | undefined = "";
-  @Input() rarity: string = "";
+  @Input() rarity?: string = "";
+  @Input() isJamTrack?: boolean = false;
 
 }

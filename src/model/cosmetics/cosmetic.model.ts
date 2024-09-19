@@ -64,13 +64,15 @@ class Variants {
     }
 }
 
-interface Cosmetic { //brItem, instrument, 
+export interface Cosmetic { //brItem, instrument, 
     id: string;
     name?: string;
     devname?: string;
     description: string;
     type: Type;
     rarity: Type;
+    albumArt?: string;
+    title?: string;
     //shop, no cosmetics
     /* regularPrice: number;
     finalPrice: number; */
@@ -85,7 +87,7 @@ export class BrItem implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
-    variants: Variants;
+    variants: Variants;    
 
     constructor() {
         this.id = "";
@@ -170,6 +172,8 @@ export class JamTrack implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
+    albumArt: string;
+    title: string;
     //TODO: + campos
 
     constructor() {
@@ -177,6 +181,8 @@ export class JamTrack implements Cosmetic {
         this.name = "";
         this.devname = "";
         this.description = "";
+        this.albumArt = "";
+        this.title = "";
         this.type = new Type();
         this.rarity = new Type();
         this.images = new Images();

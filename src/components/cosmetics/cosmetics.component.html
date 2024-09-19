@@ -27,7 +27,17 @@
                     [rarity]="instrument.rarity.value"
                     >
                 </app-cosmetic-item>
-            }            
+            }
+            
+            @for (track of jamTracks; track $index) {
+                <app-cosmetic-item
+                    [image]="checkImageType(track)"
+                    [itemName]="track.title"
+                    [isJamTrack]="true"
+                    >
+                </app-cosmetic-item>
+            }
+            
         </div>
     </section>
 </main>

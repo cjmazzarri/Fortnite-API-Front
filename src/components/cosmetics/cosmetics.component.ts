@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
-import { Bean, BrItem, Car, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
+import { Bean, BrItem, Car, Cosmetic, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 
@@ -23,8 +23,6 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   beans: Array<Bean> = [];
   legoSkins: Array<LegoSkin> = [];
   timeSub: Subscription = new Subscription;
-  @ViewChildren('cosmeticItem') itemReferencesList: QueryList<CosmeticItemComponent> = new QueryList()
-  itemReferenceArray: Array<CosmeticItemComponent> = [];
 
   ngOnInit(): void {
     this.getNewItems();
@@ -49,11 +47,9 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         console.log('Ocurrió un error')
       }
     })
-    console.log('list: ', this.itemReferencesList)
   }
 
-
-  checkImageType(item: BrItem | Car | JamTrack | Instrument | Bean) {
+  checkImageType(item: Cosmetic) {
     let imgPath: string | undefined = '';
     if (item.type) {
       switch (item.type.value) {
@@ -87,6 +83,8 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
           imgPath = item.images.large;
           break;
       }
+    } else {
+      return item.albumArt;
     }
     return imgPath;
   }
