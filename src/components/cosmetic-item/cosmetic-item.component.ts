@@ -10,7 +10,8 @@ import { Component, Input } from '@angular/core';
 
 export class CosmeticItemComponent {
   @Input() price: number = 0;
-  @Input() itemName: string = "";
-  @Input() image: string = "";
+  @Input() itemName: string | undefined = "";
+  @Input() image: string | undefined = "";
   @Input() rarity: string = "";
+
 }

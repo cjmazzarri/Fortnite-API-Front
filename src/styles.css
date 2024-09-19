@@ -18,7 +18,7 @@
     --lava: #F95337;
     --frozen: #C4DFF7;
     --mclaren: #B1331A;
-    --lamborghini: #CAB2DC;    
+    --lamborghini: #CAB2DC;
 }
 
 body {
@@ -37,4 +37,6 @@ body mat-sidenav-content {
     color: white;
 }
 
-html, body { height: 100%; }
+html, body {
+    height: 100%;
+}

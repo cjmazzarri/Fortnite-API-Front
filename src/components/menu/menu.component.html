@@ -1,5 +1,5 @@
-<mat-sidenav-container (backdropClick)="sidenav.close()" class="sidenav-container">
-    <mat-sidenav autoFocus="false" #sidenav>
+<mat-sidenav-container (backdropClick)="sidenav.close()" class="sidenav-container" #sidenavContainer>
+    <mat-sidenav autoFocus="false" fixedInViewport="true" #sidenav>
         <aside class="vertical-container">
             <div class="menu-item">
                 @if (sidenav.opened) {
@@ -24,7 +24,6 @@
             <mat-icon>menu</mat-icon>
         </button>
         }
-
         <router-outlet />
     </mat-sidenav-content>
 </mat-sidenav-container>

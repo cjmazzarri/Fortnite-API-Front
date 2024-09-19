@@ -2,37 +2,32 @@
     <section class="cosmetics-container">
         <h1>Latest cosmetics</h1>
         <div class="cosmetics-list">
-            <app-cosmetic-item 
-                [image]="'/assets/wolverine.png'" 
-                [itemName]="'Wolverine (Pen & Ink)'"
-                [price]="2000"
-                [rarity]="'marvel'"
-                >                
-            </app-cosmetic-item>
+            @for (item of brItems; track $index) {
+                <app-cosmetic-item
+                    [image]="checkImageType(item)"
+                    [itemName]="item.name"
+                    [rarity]="item.rarity.value"
+                    >
+                </app-cosmetic-item>
+            }         
 
-            <app-cosmetic-item 
-                [image]="'/assets/wolverine.png'" 
-                [itemName]="'Wolverine (Pen & Ink)'"
-                [price]="2000"
-                [rarity]="'slurp'"
-                >                
-            </app-cosmetic-item>
+            @for (car of cars; track $index) {
+                <app-cosmetic-item
+                    [image]="checkImageType(car)"
+                    [itemName]="car.name"
+                    [rarity]="car.rarity.value"
+                    >
+                </app-cosmetic-item>
+            }
 
-            <app-cosmetic-item 
-                [image]="'/assets/wolverine.png'" 
-                [itemName]="'Wolverine (Pen & Ink)'"
-                [price]="2000"
-                [rarity]="'dark'"
-                >                
-            </app-cosmetic-item>
-
-            <app-cosmetic-item 
-                [image]="'/assets/wolverine.png'" 
-                [itemName]="'Wolverine (Pen & Ink)'"
-                [price]="2000"
-                [rarity]="'lava'"
-                >                
-            </app-cosmetic-item>
+            @for (instrument of instruments; track $index) {
+                <app-cosmetic-item
+                    [image]="checkImageType(instrument)"
+                    [itemName]="instrument.name"
+                    [rarity]="instrument.rarity.value"
+                    >
+                </app-cosmetic-item>
+            }            
         </div>
     </section>
 </main>
