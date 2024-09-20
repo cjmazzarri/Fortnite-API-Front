@@ -42,7 +42,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.beans = response.data.items.beans;
         this.legoSkins = response.data.items.lego;
         //this.swapImages(this.brItems);
-        console.log(response)
+        //console.log(response)
       } else {
         console.log('Ocurrió un error')
       }
@@ -78,8 +78,10 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
           imgPath = item.images.large;
           break;
 
+        case 'mic':
         case 'bass':
         case 'guitar':
+        case 'drum':
           imgPath = item.images.large;
           break;
       }
