@@ -64,8 +64,9 @@ class Variants {
     }
 }
 
-export interface Cosmetic { //brItem, instrument, 
+export interface Cosmetic {
     id: string;
+    cosmetidId?: string;
     name?: string;
     devname?: string;
     description: string;
@@ -145,6 +146,7 @@ export class Instrument implements Cosmetic {
 
 export class Bean implements Cosmetic {
     id: string;
+    cosmeticId?: string | undefined;
     name?: string | undefined;
     devname?: string | undefined;
     description: string;
@@ -155,6 +157,7 @@ export class Bean implements Cosmetic {
 
     constructor() {
         this.id = "";
+        this.cosmeticId = "";
         this.name = "";
         this.devname = "";
         this.description = "";
@@ -191,6 +194,7 @@ export class JamTrack implements Cosmetic {
 
 export class LegoSkin implements Cosmetic {
     id: string;
+    cosmeticId?: string | undefined;
     name?: string | undefined;
     devname?: string | undefined;
     description: string;
@@ -200,6 +204,7 @@ export class LegoSkin implements Cosmetic {
 
     constructor() {
         this.id = "";
+        this.cosmeticId = "";
         this.name = "";
         this.devname = "";
         this.description = "";

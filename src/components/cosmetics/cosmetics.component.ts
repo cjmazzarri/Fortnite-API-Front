@@ -39,14 +39,28 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.cars = response.data.items.cars;
         this.instruments = response.data.items.instruments;
         this.jamTracks = response.data.items.tracks;
-        this.beans = response.data.items.beans;
         this.legoSkins = response.data.items.lego;
-        //this.swapImages(this.brItems);
-        //console.log(response)
+        this.beans = response.data.items.beans;
+        console.log(response)
       } else {
         console.log('Ocurrió un error')
       }
     })
+  }  
+
+  getBrItemImages(item: BrItem) {
+    let imgArray: Array<string | undefined> = [];
+    item.type.value == 'emoji' ? imgArray.push(item.images.smallIcon) : imgArray.push(item.images.icon);
+    let legoStyle = this.legoSkins.find(skin => skin.cosmeticId == item.id);
+    if (legoStyle) {
+      imgArray.push(legoStyle.images.large);
+      console.log('lego style found')
+    }
+    let bean = this.beans.find(skin => skin.cosmeticId == item.id);
+    if (bean) {      
+      imgArray.push(bean.images.large);
+    }
+    return imgArray;
   }
 
   checkImageType(item: Cosmetic) {
@@ -59,9 +73,6 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'pickaxe':
         case 'spray':
         case 'wrap':
-          imgPath = item.images.icon;
-          break;
-
         case 'outfit':
           imgPath = item.images.icon;
           break;
@@ -78,6 +89,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
           imgPath = item.images.large;
           break;
 
+        //Festival cosmetics
         case 'mic':
         case 'bass':
         case 'guitar':
