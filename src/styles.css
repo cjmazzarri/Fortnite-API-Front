@@ -39,6 +39,7 @@ body mat-sidenav-content {
 
 .mat-drawer-inner-container::-webkit-scrollbar {
     display: none;
+}
 
 html, body {
     height: 100%;
