@@ -1,1 +1,43 @@
-<p>cosmetics works!</p>
+<main class="main-container">
+    <section class="cosmetics-container">
+        <h1>Latest cosmetics</h1>
+        <div class="cosmetics-list">
+            @for (item of brItems; track $index) {
+                <app-cosmetic-item
+                    [image]="checkImageType(item)"
+                    [itemName]="item.name"
+                    [rarity]="item.rarity.value"
+                    >
+                </app-cosmetic-item>
+            }         
+
+            @for (car of cars; track $index) {
+                <app-cosmetic-item
+                    [image]="checkImageType(car)"
+                    [itemName]="car.name"
+                    [rarity]="car.rarity.value"
+                    >
+                </app-cosmetic-item>
+            }
+
+            @for (instrument of instruments; track $index) {
+                <app-cosmetic-item
+                    [image]="checkImageType(instrument)"
+                    [itemName]="instrument.name"
+                    [rarity]="instrument.rarity.value"
+                    >
+                </app-cosmetic-item>
+            }
+            
+            @for (track of jamTracks; track $index) {
+                <app-cosmetic-item
+                    [image]="checkImageType(track)"
+                    [itemName]="track.title"
+                    [isJamTrack]="true"
+                    >
+                </app-cosmetic-item>
+            }
+            
+        </div>
+    </section>
+</main>

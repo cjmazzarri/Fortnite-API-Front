@@ -1,0 +1,22 @@
+.main-container {    
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cosmetics-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cosmetics-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+}
