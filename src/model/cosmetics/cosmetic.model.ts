@@ -46,20 +46,26 @@ class Images {
     }
 }
 
-class Variant {
+class Option {
+    tag: string;
     name: string;
     image: string;
 
     constructor() {
+        this.tag = "";
         this.name = "";
         this.image = "";
     }
 }
 
-class Variants {
-    options: Array<Variant>;
+class Channel {
+    parts: string;
+    type: string;
+    options: Array<Option>
 
     constructor() {
+        this.parts = "";
+        this.type = "";
         this.options = [];
     }
 }
@@ -88,7 +94,7 @@ export class BrItem implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
-    variants: Variants;    
+    variants: Array<Channel>;    
 
     constructor() {
         this.id = "";
@@ -98,7 +104,7 @@ export class BrItem implements Cosmetic {
         this.type = new Type();
         this.rarity = new Type();
         this.images = new Images();
-        this.variants = new Variants();
+        this.variants = []
     }
 }
 

@@ -46,18 +46,26 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         console.log('Ocurrió un error')
       }
     })
-  }  
+  }
 
   getBrItemImages(item: BrItem) {
     let imgArray: Array<string | undefined> = [];
     item.type.value == 'emoji' ? imgArray.push(item.images.smallIcon) : imgArray.push(item.images.icon);
+    //variant imgs are low quality...
+    /* if (item.variants) {
+      for (let channel of item.variants) {
+        for (let option of channel.options) {
+          imgArray.push(option.image);
+        }
+      }
+      //imgArray.splice(1, 1); //1st variant is always the same as the default icon, so we remove it
+    } */
     let legoStyle = this.legoSkins.find(skin => skin.cosmeticId == item.id);
     if (legoStyle) {
       imgArray.push(legoStyle.images.large);
-      console.log('lego style found')
     }
     let bean = this.beans.find(skin => skin.cosmeticId == item.id);
-    if (bean) {      
+    if (bean) {
       imgArray.push(bean.images.large);
     }
     return imgArray;
@@ -102,22 +110,4 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     }
     return imgPath;
   }
-
-  swapImages(items: BrItem[]) {
-    this.timeSub = interval(5000).subscribe((x) => {
-      console.log('5 segs');
-      for (let item of items) {
-        let img: string | undefined = item.images.icon;
-        if (item.images.lego && img == item.images.icon)
-          img = item.images.lego.large;
-
-        if (item.images.bean && img == item.images.lego?.large)
-          img = item.images.bean.large;
-
-        if (img == item.images.bean?.large)
-          img = item.images.icon;
-      }
-    })
-  }
-
 }
