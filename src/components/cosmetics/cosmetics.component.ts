@@ -51,15 +51,6 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   getBrItemImages(item: BrItem) {
     let imgArray: Array<string | undefined> = [];
     item.type.value == 'emoji' ? imgArray.push(item.images.smallIcon) : imgArray.push(item.images.icon);
-    //variant imgs are low quality...
-    /* if (item.variants) {
-      for (let channel of item.variants) {
-        for (let option of channel.options) {
-          imgArray.push(option.image);
-        }
-      }
-      //imgArray.splice(1, 1); //1st variant is always the same as the default icon, so we remove it
-    } */
     let legoStyle = this.legoSkins.find(skin => skin.cosmeticId == item.id);
     if (legoStyle) {
       imgArray.push(legoStyle.images.large);
@@ -69,6 +60,20 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
       imgArray.push(bean.images.large);
     }
     return imgArray;
+  }
+
+  getBrItemVariants(item: BrItem) {
+    let variants: Array<string | undefined> = [];
+    if (item.variants) {
+      for (let channel of item.variants) {
+        for (let option of channel.options) {
+          variants.push(option.image);
+        }
+      }
+      return variants;      
+    } else {
+      return [];
+    }
   }
 
   checkImageType(item: Cosmetic) {

@@ -1,10 +1,23 @@
 import { afterNextRender, AfterRenderPhase, Component, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MAT_MENU_PANEL, MatMenuModule } from '@angular/material/menu';
 import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cosmetic-item',
   standalone: true,
-  imports: [],
+  imports: [
+    MatIconModule,
+    MatMenuModule
+  ],
+  providers: [
+    {
+      provide: MAT_MENU_PANEL,
+      useValue: {
+        overlayPanelClass: 'variant-menu'
+      }
+    }
+  ],
   templateUrl: './cosmetic-item.component.html',
   styleUrl: './cosmetic-item.component.css'
 })
@@ -15,6 +28,7 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   @Input() image: string | undefined = "";
   @Input() rarity?: string = "";
   @Input() isJamTrack?: boolean = false;
+  @Input() variantImgs?: Array<string | undefined> = [];
 
   @Input() images: Array<string | undefined> = [];
   timeSub: Subscription = new Subscription();

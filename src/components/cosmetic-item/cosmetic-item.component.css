@@ -41,6 +41,24 @@ p {
     margin-left: -0.5rem;
 }
 
+.icon-container {
+    height: 1rem;
+    margin-bottom: -1.25rem;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.variants-icon {
+    font-weight: bold;
+}
+
+.variant-menu {
+    background-color: var(--bg);
+}
+
 .common-p {
     background-color: var(--common);
 }
