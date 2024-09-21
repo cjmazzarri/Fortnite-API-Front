@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { Suboption } from '../../../model/menu/suboption.model';
 
 @Component({
   selector: 'app-menu-option',
@@ -14,7 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 
 export class MenuOptionComponent {
-  @Input() suboptions: MenuOptionComponent[] = [];
+  @Input() suboptions: Suboption[] = [];
   @Input() text: string = '';
   @Input() icon: string = '';
   @Input() route: string = '';

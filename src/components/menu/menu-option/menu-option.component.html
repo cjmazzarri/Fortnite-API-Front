@@ -5,16 +5,16 @@
 </div>
 } @else {
 <div class="option" [matMenuTriggerFor]="submenu">
-    <mat-icon class="icon" >{{ icon }}</mat-icon>
+    <mat-icon class="icon">{{ icon }}</mat-icon>
     <p>{{ text }}</p>
     <mat-icon>arrow_forward_ios</mat-icon>
-    
-    <mat-menu #submenu>
+
+    <mat-menu #submenu xPosition="after" yPosition="above" class="submenu">
         @for (suboption of suboptions; track $index) {
-            <div mat-menu-item class="option">
-                <mat-icon class="icon" >{{ suboption.icon }}</mat-icon>
-                <p>{{ suboption.text }}</p>
-            </div>
+        <button mat-menu-item class="mat-menu-item">
+            <mat-icon class="icon">{{ suboption.icon }}</mat-icon>
+            <p class="option-text" >{{ suboption.text }}</p>
+        </button>
         }
     </mat-menu>
 </div>

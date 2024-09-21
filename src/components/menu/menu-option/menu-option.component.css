@@ -8,6 +8,7 @@ mat-drawer {
     align-items: center;
     justify-content: center;
     column-gap: 0.5rem;
+    cursor: pointer;
 }
 
 p, mat-icon {
@@ -17,4 +18,8 @@ p, mat-icon {
 
 p, .icon {
     text-align: center;
+}
+
+button.mat-menu-item {
+    background-color: var(--secondary);
 }

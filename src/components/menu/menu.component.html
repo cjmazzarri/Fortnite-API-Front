@@ -3,18 +3,19 @@
         <aside class="vertical-container">
             <div class="menu-item">
                 @if (sidenav.opened) {
-                    <button mat-icon-button disableRipple="true" (click)="sidenav.close()">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                    }
+                <button mat-icon-button disableRipple="true" (click)="sidenav.close()">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
             </div>
 
-            <app-menu-option [text]="'Cosmetics'" [icon]="'dry_cleaning'"></app-menu-option>
+            <app-menu-option [text]="'Cosmetics'" [icon]="'dry_cleaning'"
+                [suboptions]="cosmeticSuboptions"></app-menu-option>
             <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'"></app-menu-option>
             <app-menu-option [text]="'Player stats'" [icon]="'group'"></app-menu-option>
             <app-menu-option [text]="'News'" [icon]="'newspaper'"></app-menu-option>
             <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'"></app-menu-option>
-            <app-menu-option [text]="'Minimap'" [icon]="'map'"></app-menu-option>                    
+            <app-menu-option [text]="'Minimap'" [icon]="'map'"></app-menu-option>
         </aside>
     </mat-sidenav>
 
