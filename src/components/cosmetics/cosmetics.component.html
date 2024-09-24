@@ -5,7 +5,7 @@
             @for (item of brItems; track $index) {
                 <app-cosmetic-item
                     [image]="checkImageType(item)"
-                    [itemName]="item.name"
+                    [itemName]="item.name == 'null' ? 'Placeholder item': item.name"
                     [rarity]="item.rarity.value"
                     [images]="getBrItemImages(item)"
                     [variantImgs]="getBrItemVariants(item)"

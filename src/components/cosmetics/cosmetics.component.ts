@@ -87,7 +87,11 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'spray':
         case 'wrap':
         case 'outfit':
-          imgPath = item.images.icon;
+          if (item.name == 'null') {
+            imgPath = item.images.smallIcon;
+          } else {
+            imgPath = item.images.icon;
+          }          
           break;
 
         case 'emoji':
