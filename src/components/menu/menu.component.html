@@ -1,3 +1,4 @@
+@if (useSidenav) {
 <mat-sidenav-container (backdropClick)="sidenav.close()" class="sidenav-container">
     <mat-sidenav autoFocus="false" #sidenav>
         <aside class="vertical-container">
@@ -9,22 +10,34 @@
                 }
             </div>
 
-            <app-menu-option [text]="'Cosmetics'" [icon]="'dry_cleaning'"
+            <app-menu-option [text]="'Cosmetics'" [icon]="'dry_cleaning'" [useSidenav]="useSidenav"
                 [suboptions]="cosmeticSuboptions"></app-menu-option>
-            <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'"></app-menu-option>
-            <app-menu-option [text]="'Player stats'" [icon]="'group'"></app-menu-option>
-            <app-menu-option [text]="'News'" [icon]="'newspaper'"></app-menu-option>
-            <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'"></app-menu-option>
-            <app-menu-option [text]="'Minimap'" [icon]="'map'"></app-menu-option>
+            <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'" [useSidenav]="useSidenav"></app-menu-option>
+            <app-menu-option [text]="'Player stats'" [icon]="'group'" [useSidenav]="useSidenav"></app-menu-option>
+            <app-menu-option [text]="'News'" [icon]="'newspaper'" [useSidenav]="useSidenav"></app-menu-option>
+            <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'" [useSidenav]="useSidenav"></app-menu-option>
+            <app-menu-option [text]="'Minimap'" [icon]="'map'" [useSidenav]="useSidenav"></app-menu-option>
         </aside>
     </mat-sidenav>
 
     <mat-sidenav-content>
         @if (!sidenav.opened) {
-        <button mat-icon-button disableRipple="true" class="bg" (click)="sidenav.open()">
+        <button mat-icon-button disableRipple="true" class="bg fixed-btn" (click)="sidenav.open()">
             <mat-icon>menu</mat-icon>
         </button>
         }
         <router-outlet />
     </mat-sidenav-content>
 </mat-sidenav-container>
+} @else {
+<mat-toolbar>
+    <app-menu-option [text]="'Cosmetics'" [icon]="'dry_cleaning'"
+        [suboptions]="cosmeticSuboptions"></app-menu-option>
+    <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'"></app-menu-option>
+    <app-menu-option [text]="'Player stats'" [icon]="'group'"></app-menu-option>
+    <app-menu-option [text]="'News'" [icon]="'newspaper'"></app-menu-option>
+    <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'"></app-menu-option>
+    <app-menu-option [text]="'Minimap'" [icon]="'map'"></app-menu-option>    
+</mat-toolbar>
+<router-outlet />
+}

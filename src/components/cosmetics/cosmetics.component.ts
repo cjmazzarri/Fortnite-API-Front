@@ -29,7 +29,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.timeSub.unsubscribe();
+    this.timeSub.unsubscribe();    
   }
 
   getNewItems() {
@@ -41,7 +41,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.jamTracks = response.data.items.tracks;
         this.legoSkins = response.data.items.lego;
         this.beans = response.data.items.beans;
-        console.log(response)
+        //console.log(response);
       } else {
         console.log('Ocurrió un error')
       }

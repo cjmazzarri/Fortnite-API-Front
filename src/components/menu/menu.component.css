@@ -7,14 +7,19 @@ mat-sidenav {
     max-width: 14rem;
     font-size: 1.5rem;
     overflow: hidden;
+    position: fixed;
 }
 
 mat-sidenav-container mat-sidenav-content {
     overflow-x: hidden;
 }
 
-button.bg {
-    background-color: var(--bg);
+.fixed-btn {
+    position: fixed;
+}
+
+.transparent-bg {
+    background-color: transparent;
 }
 
 button.secondary {
@@ -24,6 +29,17 @@ button.secondary {
 .vertical-container {
     display: flex;
     flex-direction: column;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+}
+
+mat-toolbar {
+    background-color: var(--secondary);
+    column-gap: 4rem;
+    position: fixed;
 }
 
 .menu-item {

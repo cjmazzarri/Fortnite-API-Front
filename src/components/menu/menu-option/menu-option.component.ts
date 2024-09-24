@@ -19,6 +19,7 @@ export class MenuOptionComponent {
   @Input() text: string = '';
   @Input() icon: string = '';
   @Input() route: string = '';
+  @Input()useSidenav: boolean = false;
 
   hasSuboptions(): boolean {
     return this.suboptions.length > 0;

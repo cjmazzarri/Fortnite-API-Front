@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { MaterialModule } from '../../app/material-module/material.module';
 import { MenuOptionComponent } from './menu-option/menu-option.component';
 import { Suboption } from '../../model/menu/suboption.model';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +18,21 @@ import { Suboption } from '../../model/menu/suboption.model';
 })
 export class MenuComponent implements OnInit {
   cosmeticSuboptions: Suboption[] = [];
-  
+  useSidenav: boolean = false;
+  constructor(private breakpointObs: BreakpointObserver) { 
+    breakpointObs.observe([
+      Breakpoints.TabletLandscape,
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait
+    ]).subscribe((result) => {
+      if (result.breakpoints[Breakpoints.HandsetPortrait]) {
+        this.useSidenav = true;
+      } else {
+        this.useSidenav = false;
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.addSuboptions();
   }
@@ -29,4 +44,4 @@ export class MenuComponent implements OnInit {
     )
   }
 
-  }
+}
