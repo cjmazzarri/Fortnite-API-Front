@@ -70,6 +70,20 @@ class Channel {
     }
 }
 
+class Series {
+    backendValue: string;
+    colors: Array<string>;
+    image?: string;
+    value: string; //Series name
+
+    constructor() {
+        this.backendValue = "";
+        this.colors = [];
+        this.image = "";
+        this.value = "";
+    }
+}
+
 export interface Cosmetic {
     id: string;
     added: string;
@@ -82,6 +96,7 @@ export interface Cosmetic {
     albumArt?: string;
     title?: string;
     variants?: Array<Channel>;
+    series?: Series;
     //shop, no cosmetics
     /* regularPrice: number;
     finalPrice: number; */

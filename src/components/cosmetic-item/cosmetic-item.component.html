@@ -12,7 +12,7 @@
             </mat-menu>
             }
         </header>
-        <img [className]="'item-img ' +rarity+'-img '" class="item-img" src={{image}} alt="A cosmetic's appearance">
+        <img [className]="'item-img ' +rarity+'-img '" [ngStyle]="{'background-image': seriesBackground? seriesBackground : '' }" class="item-img" src={{image}} alt="A cosmetic's appearance">
         @if (price > 0) {
         <footer class="price-area">
             <img class="vbucks" src="assets/vbucks.png" alt="V-Bucks icon">

@@ -137,7 +137,24 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     return imgPath;
   }
 
-  sortCosmetics() {
+  //Items from certain series have a set of colors for a gradient, others might have a special background
+  getItemColorGradient(item: Cosmetic): Array<string> {
+    if (item.series) {
+      return item.series.colors;
+    } else {
+      return [];
+    }
+  }
+
+  getItemSeriesBackground(item: Cosmetic): string {
+    if (item.series && item.series.image) {
+      return 'url(' + item.series.image + ')';
+    } else {
+      return '';
+    }
+  }
+
+  sortCosmetics(): void {
     this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
     this.allCosmetics.sort((a, b) => {
       if (a.added < b.added) {

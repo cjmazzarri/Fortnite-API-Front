@@ -14,7 +14,9 @@
                         cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
                 [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
                 [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
-                [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] ">
+                [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
+                [seriesBackground]="getItemSeriesBackground(cosmetic)"
+                >
             </app-cosmetic-item>
             }
 

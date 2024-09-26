@@ -2,13 +2,15 @@ import { afterNextRender, AfterRenderPhase, Component, Input, NgZone, OnDestroy,
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_MENU_PANEL, MatMenuModule } from '@angular/material/menu';
 import { interval, Subscription } from 'rxjs';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-cosmetic-item',
   standalone: true,
   imports: [
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    NgStyle
   ],
   providers: [
     {
@@ -28,6 +30,8 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   @Input() image: string | undefined = "";
   @Input() rarity?: string = "";
   @Input() variantImgs?: Array<string | undefined> = [];
+  @Input() colorGradient: Array<string> = [];
+  @Input() seriesBackground: string = "";
 
   @Input() images: Array<string | undefined> = [];
   timeSub: Subscription = new Subscription();
