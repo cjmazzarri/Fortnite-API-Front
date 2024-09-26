@@ -41,7 +41,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.jamTracks = response.data.items.tracks;
         this.legoSkins = response.data.items.lego;
         this.beans = response.data.items.beans;
-        //console.log(response);
+        console.log(response);
       } else {
         console.log('Ocurrió un error')
       }
@@ -103,6 +103,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'booster':
         case 'skin':
         case 'body':
+        case 'wheel':
           imgPath = item.images.large;
           break;
 
