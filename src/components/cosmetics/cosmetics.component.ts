@@ -42,7 +42,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.jamTracks = response.data.items.tracks;
         this.legoSkins = response.data.items.lego;
         this.beans = response.data.items.beans;
-        console.log(response);
+        //console.log(response);
         this.sortCosmetics();
       } else {
         //TODO: Dialog?
