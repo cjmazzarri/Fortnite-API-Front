@@ -47,8 +47,8 @@ html, body {
 }
 
 .submenu {
-    margin-left: 14rem;
-    margin-top: -4.8rem;
+    margin-left: 10rem;
+    margin-top: -2.8rem;
 }
 
 .mat-mdc-menu-content {
@@ -58,7 +58,7 @@ html, body {
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    padding: 1rem 0.5rem !important; /* had to use !important as a last resort */
+    padding: 0 0.5rem !important; /* had to use !important as a last resort */
     gap: 0.5rem;
 }
 
@@ -67,7 +67,7 @@ html, body {
 }
 
 .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text p {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .variant-menu {

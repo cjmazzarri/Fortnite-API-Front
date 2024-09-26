@@ -9,6 +9,7 @@ mat-drawer {
     justify-content: center;
     column-gap: 0.5rem;
     cursor: pointer;
+    height: 3rem;
 }
 
 p, mat-icon {
@@ -23,4 +24,5 @@ p, .icon {
 
 button.mat-menu-item {
     background-color: var(--secondary);
+    height: 3rem;
 }
