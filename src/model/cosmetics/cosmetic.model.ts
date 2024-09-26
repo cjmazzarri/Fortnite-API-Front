@@ -72,7 +72,8 @@ class Channel {
 
 export interface Cosmetic {
     id: string;
-    cosmetidId?: string;
+    added: string;
+    cosmeticId?: string;
     name?: string;
     devname?: string;
     description: string;
@@ -80,6 +81,7 @@ export interface Cosmetic {
     rarity: Type;
     albumArt?: string;
     title?: string;
+    variants?: Array<Channel>;
     //shop, no cosmetics
     /* regularPrice: number;
     finalPrice: number; */
@@ -94,10 +96,11 @@ export class BrItem implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
-    variants: Array<Channel>;    
-
+    variants?: Channel[] | undefined;
+    
     constructor() {
         this.id = "";
+        this.added = "";
         this.name = "";
         this.devname = "";
         this.description = "";
@@ -106,6 +109,9 @@ export class BrItem implements Cosmetic {
         this.images = new Images();
         this.variants = []
     }
+    added: string;    
+    albumArt?: string | undefined;
+    title?: string | undefined;
 }
 
 export class Car implements Cosmetic {
@@ -116,10 +122,10 @@ export class Car implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
-    //TODO: +campos
 
     constructor() {
         this.id = "";
+        this.added = "";
         this.name = "";
         this.devname = "";
         this.description = "";
@@ -127,6 +133,10 @@ export class Car implements Cosmetic {
         this.rarity = new Type();
         this.images = new Images();
     }
+    added: string;
+    cosmeticId?: string | undefined;
+    albumArt?: string | undefined;
+    title?: string | undefined;
 }
 
 export class Instrument implements Cosmetic {
@@ -137,10 +147,10 @@ export class Instrument implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
-    //TODO: +campos
 
     constructor() {
         this.id = "";
+        this.added = "";
         this.name = "";
         this.devname = "";
         this.description = "";
@@ -148,6 +158,10 @@ export class Instrument implements Cosmetic {
         this.rarity = new Type();
         this.images = new Images();
     }
+    added: string;
+    cosmeticId?: string | undefined;
+    albumArt?: string | undefined;
+    title?: string | undefined;
 }
 
 export class Bean implements Cosmetic {
@@ -159,10 +173,10 @@ export class Bean implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
-    //TODO:+ campos
 
     constructor() {
         this.id = "";
+        this.added = "";
         this.cosmeticId = "";
         this.name = "";
         this.devname = "";
@@ -171,10 +185,13 @@ export class Bean implements Cosmetic {
         this.rarity = new Type();
         this.images = new Images();
     }
+    added: string;
+    albumArt?: string | undefined;
+    title?: string | undefined;
 }
 
 export class JamTrack implements Cosmetic {
-    id: string;
+    id: string;    
     name?: string | undefined;
     devname?: string | undefined;
     description: string;
@@ -183,10 +200,10 @@ export class JamTrack implements Cosmetic {
     images: Images;
     albumArt: string;
     title: string;
-    //TODO: + campos
 
     constructor() {
         this.id = "";
+        this.added = "";
         this.name = "";
         this.devname = "";
         this.description = "";
@@ -196,6 +213,8 @@ export class JamTrack implements Cosmetic {
         this.rarity = new Type();
         this.images = new Images();
     }
+    added: string;
+    cosmeticId?: string | undefined;
 }
 
 export class LegoSkin implements Cosmetic {
@@ -210,6 +229,7 @@ export class LegoSkin implements Cosmetic {
 
     constructor() {
         this.id = "";
+        this.added = "";
         this.cosmeticId = "";
         this.name = "";
         this.devname = "";
@@ -218,6 +238,9 @@ export class LegoSkin implements Cosmetic {
         this.rarity = new Type();
         this.images = new Images();
     }
+    added: string;
+    albumArt?: string | undefined;
+    title?: string | undefined;
 }
 
 class Items {

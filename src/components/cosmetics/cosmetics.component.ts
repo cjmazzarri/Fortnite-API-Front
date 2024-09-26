@@ -22,14 +22,15 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   jamTracks: Array<JamTrack> = [];
   beans: Array<Bean> = [];
   legoSkins: Array<LegoSkin> = [];
-  timeSub: Subscription = new Subscription;
+  timeSub: Subscription = new Subscription; //Used to cycle images
+  allCosmetics: Array<BrItem | Car | JamTrack | Instrument> = [];
 
   ngOnInit(): void {
     this.getNewItems();
   }
 
   ngOnDestroy(): void {
-    this.timeSub.unsubscribe();    
+    this.timeSub.unsubscribe();
   }
 
   getNewItems() {
@@ -42,13 +43,15 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.legoSkins = response.data.items.lego;
         this.beans = response.data.items.beans;
         console.log(response);
+        this.sortCosmetics();
       } else {
-        console.log('Ocurrió un error')
+        //TODO: Dialog?
+        console.log('Ocurrió un error');
       }
     })
   }
 
-  getBrItemImages(item: BrItem) {
+  getBrItemImages(item: BrItem | Cosmetic) {
     let imgArray: Array<string | undefined> = [];
     item.type.value == 'emoji' ? imgArray.push(item.images.smallIcon) : imgArray.push(item.images.icon);
     let legoStyle = this.legoSkins.find(skin => skin.cosmeticId == item.id);
@@ -62,7 +65,16 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     return imgArray;
   }
 
-  getBrItemVariants(item: BrItem) {
+  //Check if the item is a 'BR item' bc we need to provide their
+  //alternate images (lego or bean), or styles if present
+  //other types of items don't have them
+  isBrItem(item: BrItem | Car | Instrument | JamTrack) {
+    if (item.type && item.type.value) {
+      return item.type.value === 'outfit' || item.type.value === 'backpack' || item.type.value === 'pickaxe'
+    } else return false;
+  }
+
+  getBrItemVariants(item: BrItem | Cosmetic) {
     let variants: Array<string | undefined> = [];
     if (item.variants) {
       for (let channel of item.variants) {
@@ -70,12 +82,16 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
           variants.push(option.image);
         }
       }
-      return variants;      
+      return variants;
     } else {
       return [];
     }
   }
 
+  //Different types of objects have different structures, so image
+  //names or locations (the image can be within another object) can
+  //vary. By checking the type we can know how to provide the image
+  //with its proper field name
   checkImageType(item: Cosmetic) {
     let imgPath: string | undefined = '';
     if (item.type) {
@@ -91,7 +107,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
             imgPath = item.images.smallIcon;
           } else {
             imgPath = item.images.icon;
-          }          
+          }
           break;
 
         case 'emoji':
@@ -119,5 +135,17 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
       return item.albumArt;
     }
     return imgPath;
+  }
+
+  sortCosmetics() {
+    this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
+    this.allCosmetics.sort((a, b) => {
+      if (a.added < b.added) {
+        return 1;
+      } else if (a.added > b.added) {
+        return -1
+      }
+      return 0;
+    });
   }
 }

@@ -1,8 +1,21 @@
 <main class="main-container">
     <section class="cosmetics-container">
-        <h1>Latest cosmetics</h1>
+        <div class="text-container">
+            <h1>Latest cosmetics</h1>
+            <h3>Ordered by newest first</h3>
+        </div>
         <div class="cosmetics-list">
-            @for (item of brItems; track $index) {
+            @for (cosmetic of allCosmetics; track $index) {
+            <!-- Validation for Placeholder items and jam tracks (which have the field 'title' instead of 'name') -->
+            <app-cosmetic-item [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
+                        cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
+                [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
+                [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
+                [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] ">
+            </app-cosmetic-item>
+            }
+
+            <!-- @for (item of brItems; track $index) {
                 <app-cosmetic-item
                     [image]="checkImageType(item)"
                     [itemName]="item.name == 'null' ? 'Placeholder item': item.name"
@@ -35,11 +48,10 @@
                 <app-cosmetic-item
                     [image]="checkImageType(track)"
                     [itemName]="track.title"
-                    [isJamTrack]="true"
                     >
                 </app-cosmetic-item>
-            }
-            
+            } -->
+
         </div>
     </section>
 </main>

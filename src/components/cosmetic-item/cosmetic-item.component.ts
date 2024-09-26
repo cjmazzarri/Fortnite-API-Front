@@ -27,7 +27,6 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   @Input() itemName: string | undefined = "";
   @Input() image: string | undefined = "";
   @Input() rarity?: string = "";
-  @Input() isJamTrack?: boolean = false;
   @Input() variantImgs?: Array<string | undefined> = [];
 
   @Input() images: Array<string | undefined> = [];
