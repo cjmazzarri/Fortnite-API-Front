@@ -37,9 +37,13 @@ button.secondary {
 }
 
 mat-toolbar {
+    display: flex;
+    flex-direction: row;
     background-color: var(--secondary);
-    column-gap: 4rem;
+    column-gap: 1.25rem;
     position: fixed;
+    width: 100%;
+    flex-wrap: nowrap;
 }
 
 .menu-item {
