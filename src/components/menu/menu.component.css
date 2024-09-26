@@ -36,14 +36,24 @@ button.secondary {
     flex-direction: row;
 }
 
+.toolbar-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 3rem;
+    position: fixed;
+    background-color: var(--secondary);
+}
+
 mat-toolbar {
     display: flex;
     flex-direction: row;
     background-color: var(--secondary);
-    column-gap: 1.25rem;
+    column-gap: 1rem;
     position: fixed;
-    width: 100%;
-    flex-wrap: nowrap;
+    width: 80%;
+    justify-content: space-evenly;
+    height: 3rem;
 }
 
 .menu-item {

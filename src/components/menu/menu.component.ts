@@ -19,13 +19,16 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class MenuComponent implements OnInit {
   cosmeticSuboptions: Suboption[] = [];
   useSidenav: boolean = false;
-  constructor(private breakpointObs: BreakpointObserver) { 
+  constructor(private breakpointObs: BreakpointObserver) {
     breakpointObs.observe([
       Breakpoints.TabletLandscape,
       Breakpoints.HandsetLandscape,
-      Breakpoints.HandsetPortrait
+      Breakpoints.HandsetPortrait,
+      Breakpoints.TabletPortrait
     ]).subscribe((result) => {
-      if (result.breakpoints[Breakpoints.HandsetPortrait]) {
+      if (result.breakpoints[Breakpoints.HandsetPortrait] ||
+        result.breakpoints[Breakpoints.HandsetLandscape] ||
+        result.breakpoints[Breakpoints.TabletPortrait]) {
         this.useSidenav = true;
       } else {
         this.useSidenav = false;

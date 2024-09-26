@@ -4,6 +4,9 @@
             <h1>Latest cosmetics</h1>
             <h3>Ordered by newest first</h3>
         </div>
+        <div class="text-container">
+            <h3>This page shows the latest items added to the API. This means they might or might not be in the game yet.</h3>
+        </div>
         <div class="cosmetics-list">
             @for (cosmetic of allCosmetics; track $index) {
             <!-- Validation for Placeholder items and jam tracks (which have the field 'title' instead of 'name') -->
