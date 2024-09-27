@@ -12,7 +12,9 @@
             </mat-menu>
             }
         </header>
-        <img [className]="'item-img ' +rarity+'-img '" [ngStyle]="{'background-image': seriesBackground? seriesBackground : '' }" class="item-img" src={{image}} alt="A cosmetic's appearance">
+        <img [className]="'item-img ' +rarity+'-img '" class="item-img" src={{image}} 
+            [ngStyle]="{'background-image': seriesBackground? seriesBackground : 'linear-gradient' + '(-45deg,' + getGradientColors() + ')'}" 
+            alt="A cosmetic's appearance"> <!-- If the item has a background img, sets is as background, if it doesn't, uses the color gradient -->
         @if (price > 0) {
         <footer class="price-area">
             <img class="vbucks" src="assets/vbucks.png" alt="V-Bucks icon">

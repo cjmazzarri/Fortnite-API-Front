@@ -137,7 +137,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     return imgPath;
   }
 
-  //Items from certain series have a set of colors for a gradient, others might have a special background
+  //Items from certain series might have a set of colors for a background gradient
   getItemColorGradient(item: Cosmetic): Array<string> {
     if (item.series) {
       return item.series.colors;
@@ -146,6 +146,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     }
   }
 
+  //Items from certain series might have a background image
   getItemSeriesBackground(item: Cosmetic): string {
     if (item.series && item.series.image) {
       return 'url(' + item.series.image + ')';

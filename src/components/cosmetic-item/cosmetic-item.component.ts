@@ -37,17 +37,17 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   timeSub: Subscription = new Subscription();
   index: number = 0;
 
-  constructor(ngZone: NgZone) { 
+  constructor(ngZone: NgZone) {
     //allows the page to actually load bc of issue between SSR and intervals
     afterNextRender(() => {
       ngZone.run(() => {
         this.showcaseImages();
       });
-    }, { phase: AfterRenderPhase.Write } )
+    }, { phase: AfterRenderPhase.Write })
   }
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnDestroy(): void {
@@ -65,5 +65,13 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
         this.image = this.images[this.index];
       })
     }
+  }
+
+  getGradientColors() {
+    if (this.colorGradient.length > 0) {
+      let addedHashtag = this.colorGradient.map(color => '#' + color);
+      let gradientString = addedHashtag.join(',');
+      return gradientString;
+    } else return '';
   }
 }
