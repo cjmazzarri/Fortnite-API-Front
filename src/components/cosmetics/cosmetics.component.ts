@@ -10,7 +10,8 @@ import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component'
   standalone: true,
   imports: [CosmeticItemComponent],
   templateUrl: './cosmetics.component.html',
-  styleUrl: './cosmetics.component.css'
+  styleUrl: './cosmetics.component.css',
+  host: { ngSkipHydration: 'true' }
 })
 export class CosmeticsComponent implements OnInit, OnDestroy {
   constructor(private cosmeticsService: CosmeticsService) {
