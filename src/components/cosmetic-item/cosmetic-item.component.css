@@ -11,6 +11,8 @@ p {
 .img-area {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .vbucks {
@@ -30,6 +32,13 @@ p {
 .item-img {
     border: 0.25rem solid;
     border-radius: 0.9rem;    
+}
+
+.name-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .price {

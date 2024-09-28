@@ -27,5 +27,10 @@
         </footer>
         }
     </div>
-    <p>{{ itemName }}</p>
+    <div class="name-container"
+        [ngStyle]="{
+            'max-width': usingSidenav? '136px': '272px'
+        }">
+        <p>{{ itemName }}</p>
+    </div>
 </div>
