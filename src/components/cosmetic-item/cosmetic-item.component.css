@@ -29,8 +29,7 @@ p {
 
 .item-img {
     border: 0.25rem solid;
-    border-radius: 0.9rem;
-    width: 264px;
+    border-radius: 0.9rem;    
 }
 
 .price {

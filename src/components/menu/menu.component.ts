@@ -4,6 +4,8 @@ import { MaterialModule } from '../../app/material-module/material.module';
 import { MenuOptionComponent } from './menu-option/menu-option.component';
 import { Suboption } from '../../model/menu/suboption.model';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { BreakpointService } from '../../services/breakpoint.service';
 
 @Component({
   selector: 'app-menu',
@@ -19,20 +21,10 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class MenuComponent implements OnInit {
   cosmeticSuboptions: Suboption[] = [];
   useSidenav: boolean = false;
-  constructor(private breakpointObs: BreakpointObserver) {
-    breakpointObs.observe([
-      Breakpoints.TabletLandscape,
-      Breakpoints.HandsetLandscape,
-      Breakpoints.HandsetPortrait,
-      Breakpoints.TabletPortrait
-    ]).subscribe((result) => {
-      if (result.breakpoints[Breakpoints.HandsetPortrait] ||
-        result.breakpoints[Breakpoints.HandsetLandscape] ||
-        result.breakpoints[Breakpoints.TabletPortrait]) {
-        this.useSidenav = true;
-      } else {
-        this.useSidenav = false;
-      }
+  
+  constructor(private breakpointService: BreakpointService) {
+    this.breakpointService.useSidenav$.subscribe((value) => {      
+      this.useSidenav = value;
     })
   }
 

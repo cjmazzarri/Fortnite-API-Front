@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MAT_MENU_PANEL, MatMenuModule } from '@angular/material/menu';
 import { interval, Subscription } from 'rxjs';
 import { NgStyle } from '@angular/common';
+import { BreakpointService } from '../../services/breakpoint.service';
 
 @Component({
   selector: 'app-cosmetic-item',
@@ -32,18 +33,23 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   @Input() variantImgs?: Array<string | undefined> = [];
   @Input() colorGradient: Array<string> = [];
   @Input() seriesBackground: string = "";
+  @Input() usingSidenav: boolean = false;
 
   @Input() images: Array<string | undefined> = [];
   timeSub: Subscription = new Subscription();
   index: number = 0;
 
-  constructor(ngZone: NgZone) {
+  constructor(ngZone: NgZone, breakpointService: BreakpointService) {
     //allows the page to actually load bc of issue between SSR and intervals
     afterNextRender(() => {
       ngZone.run(() => {
         this.showcaseImages();
       });
     }, { phase: AfterRenderPhase.Write })
+
+    breakpointService.useSidenav$.subscribe((useSidenav) => {
+      this.usingSidenav = useSidenav;
+    })
   }
 
   ngOnInit(): void {
