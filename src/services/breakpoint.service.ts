@@ -10,8 +10,7 @@ export class BreakpointService {
   useSidenav$ = this.useSidenavSubj.asObservable();
 
   constructor(private breakpointObs: BreakpointObserver) {
-    breakpointObs.observe([
-      Breakpoints.TabletLandscape,
+    breakpointObs.observe([      
       Breakpoints.HandsetLandscape,
       Breakpoints.HandsetPortrait,
       Breakpoints.TabletPortrait

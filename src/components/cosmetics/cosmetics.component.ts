@@ -11,7 +11,6 @@ import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component'
   imports: [CosmeticItemComponent],
   templateUrl: './cosmetics.component.html',
   styleUrl: './cosmetics.component.css',
-  host: { ngSkipHydration: 'true' }
 })
 export class CosmeticsComponent implements OnInit, OnDestroy {
   constructor(private cosmeticsService: CosmeticsService) {
@@ -42,8 +41,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.instruments = response.data.items.instruments;
         this.jamTracks = response.data.items.tracks;
         this.legoSkins = response.data.items.lego;
-        this.beans = response.data.items.beans;
-        //console.log(response);
+        this.beans = response.data.items.beans; 
         this.sortCosmetics();
       } else {
         //TODO: Dialog?

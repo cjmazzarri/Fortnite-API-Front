@@ -39,14 +39,7 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   timeSub: Subscription = new Subscription();
   index: number = 0;
 
-  constructor(ngZone: NgZone, breakpointService: BreakpointService) {
-    //allows the page to actually load bc of issue between SSR and intervals
-    afterNextRender(() => {
-      ngZone.run(() => {
-        this.showcaseImages();
-      });
-    }, { phase: AfterRenderPhase.Write })
-
+  constructor(breakpointService: BreakpointService) {
     breakpointService.useSidenav$.subscribe((useSidenav) => {
       this.usingSidenav = useSidenav;
     })
