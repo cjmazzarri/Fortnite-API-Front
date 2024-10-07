@@ -11,7 +11,7 @@ import { Suboption } from '../../../model/menu/suboption.model';
     MatMenuModule
   ],
   templateUrl: './menu-option.component.html',
-  styleUrl: './menu-option.component.css'
+  styleUrl: './menu-option.component.scss'
 })
 
 export class MenuOptionComponent {

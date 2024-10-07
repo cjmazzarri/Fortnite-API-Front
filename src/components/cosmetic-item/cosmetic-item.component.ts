@@ -22,7 +22,7 @@ import { BreakpointService } from '../../services/breakpoint.service';
     }
   ],
   templateUrl: './cosmetic-item.component.html',
-  styleUrl: './cosmetic-item.component.css'
+  styleUrl: './cosmetic-item.component.scss'
 })
 
 export class CosmeticItemComponent implements OnInit, OnDestroy {

@@ -3,14 +3,17 @@ import { Subscription } from 'rxjs';
 import { Bean, BrItem, Car, Cosmetic, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
-
+//import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Component({
   selector: 'app-cosmetics',
   standalone: true,
-  imports: [CosmeticItemComponent],
+  imports: [
+    CosmeticItemComponent,
+    /* SearchBarComponent */
+  ],
   templateUrl: './cosmetics.component.html',
-  styleUrl: './cosmetics.component.css',
+  styleUrl: './cosmetics.component.scss',
 })
 export class CosmeticsComponent implements OnInit, OnDestroy {
   constructor(private cosmeticsService: CosmeticsService) {

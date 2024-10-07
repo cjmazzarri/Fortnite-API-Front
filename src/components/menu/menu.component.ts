@@ -16,7 +16,7 @@ import { BreakpointService } from '../../services/breakpoint.service';
     MenuOptionComponent
   ],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css'
+  styleUrl: './menu.component.scss'
 })
 export class MenuComponent implements OnInit {
   cosmeticSuboptions: Suboption[] = [];

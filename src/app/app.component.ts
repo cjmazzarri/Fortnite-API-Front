@@ -7,7 +7,7 @@ import { MenuComponent } from '../components/menu/menu.component';
   standalone: true,
   imports: [RouterOutlet, MenuComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'Fortnite-API-Front';
