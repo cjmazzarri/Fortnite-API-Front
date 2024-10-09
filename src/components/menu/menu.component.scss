@@ -14,8 +14,13 @@ mat-sidenav-container mat-sidenav-content {
     overflow-x: hidden;
 }
 
-.fixed-btn {
+.fixed {
     position: fixed;
+}
+
+.search-fixed {
+    position: fixed;
+    margin-top: 3rem;
 }
 
 .transparent-bg {
@@ -42,6 +47,7 @@ button.secondary {
     justify-content: center;
     height: 3rem;
     position: fixed;
+    z-index: 2;
     background-color: var(--secondary);
 }
 

@@ -21,11 +21,22 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        @if (!sidenav.opened) {
-        <button mat-icon-button disableRipple="true" class="bg fixed-btn" (click)="sidenav.open()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        }
+        <div class="vertical-container fixed">
+            @if (!sidenav.opened) {
+            <button mat-icon-button disableRipple="true" class="bg" (click)="sidenav.open()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            }
+            @if (!showSearchbar) {
+            <button mat-icon-button disableRipple="true" class="bg" (click)="toggleSearch(true)">
+                <mat-icon>search</mat-icon>
+            </button>
+            } @else {
+            <button mat-icon-button disableRipple="true" class="bg" (click)="toggleSearch(false)">
+                <mat-icon>close</mat-icon>
+            </button>
+            }
+        </div>
         <router-outlet />
     </mat-sidenav-content>
 </mat-sidenav-container>
@@ -40,6 +51,17 @@
         <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'"></app-menu-option>
         <app-menu-option [text]="'Minimap'" [icon]="'map'"></app-menu-option>
     </mat-toolbar>
+</div>
+<div class="search-fixed">
+    @if (!showSearchbar) {
+    <button mat-icon-button disableRipple="true" class="bg" (click)="toggleSearch(true)">
+        <mat-icon>search</mat-icon>
+    </button>
+    } @else {
+    <button mat-icon-button disableRipple="true" class="bg" (click)="toggleSearch(false)">
+        <mat-icon>close</mat-icon>
+    </button>
+    }
 </div>
 <router-outlet />
 }

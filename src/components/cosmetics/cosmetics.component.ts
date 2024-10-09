@@ -3,20 +3,25 @@ import { Subscription } from 'rxjs';
 import { Bean, BrItem, Car, Cosmetic, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
-//import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { NgStyle } from '@angular/common';
+import { BreakpointService } from '../../services/breakpoint.service';
 
 @Component({
   selector: 'app-cosmetics',
   standalone: true,
   imports: [
     CosmeticItemComponent,
-    /* SearchBarComponent */
+    SearchBarComponent,
+    NgStyle
   ],
   templateUrl: './cosmetics.component.html',
   styleUrl: './cosmetics.component.scss',
 })
 export class CosmeticsComponent implements OnInit, OnDestroy {
-  constructor(private cosmeticsService: CosmeticsService) {
+  constructor(
+    private cosmeticsService: CosmeticsService,
+    private breakpointService: BreakpointService) {
   }
 
   brItems: Array<BrItem> = [];
@@ -27,13 +32,19 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   legoSkins: Array<LegoSkin> = [];
   timeSub: Subscription = new Subscription; //Used to cycle images
   allCosmetics: Array<BrItem | Car | JamTrack | Instrument> = [];
+  allAux: Array<BrItem | Car | JamTrack | Instrument> = [];
+  search: string | null = "";
+  showSearchbar: boolean = true;
 
   ngOnInit(): void {
     this.getNewItems();
+    this.breakpointService.searchbarShow$.subscribe((show) => {
+      this.showSearchbar = show;
+    })
   }
 
   ngOnDestroy(): void {
-    this.timeSub.unsubscribe();
+    this.timeSub.unsubscribe();    
   }
 
   getNewItems() {
@@ -44,7 +55,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.instruments = response.data.items.instruments;
         this.jamTracks = response.data.items.tracks;
         this.legoSkins = response.data.items.lego;
-        this.beans = response.data.items.beans; 
+        this.beans = response.data.items.beans;
         this.sortCosmetics();
       } else {
         //TODO: Dialog?
@@ -167,5 +178,20 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
       }
       return 0;
     });
+    this.allAux = this.allCosmetics;
+  }
+
+  getSearchChange(search: string) {
+    if (!search || search == "") {
+      this.allCosmetics = this.allAux;
+    } else {      
+      let s = search.toLowerCase();
+      let filtered = this.allCosmetics.filter((item) =>      
+        (item.name? item.name.toLowerCase().match(s) : item.title?.toLowerCase().match(s))  
+          || (item.rarity? item.rarity.value.match(s) : '')
+      );
+      
+      this.allCosmetics = filtered;
+    }
   }
 }

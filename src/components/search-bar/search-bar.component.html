@@ -1,0 +1,7 @@
+<mat-form-field class="backgrounded-field" appearance="outline"
+    [ngStyle]="{
+    'width': usingSidenav ? '15rem' : '30rem'
+}">
+    <input matInput placeholder="Search by item name or rarity" type="text" [formControl]="searchTerm">
+    <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
