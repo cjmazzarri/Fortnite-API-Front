@@ -37,10 +37,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   showSearchbar: boolean = true;
 
   ngOnInit(): void {
-    this.getNewItems();
-    this.breakpointService.searchbarShow$.subscribe((show) => {
-      this.showSearchbar = show;
-    })
+    this.getNewItems();    
   }
 
   ngOnDestroy(): void {

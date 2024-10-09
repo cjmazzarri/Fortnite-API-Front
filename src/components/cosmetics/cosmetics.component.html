@@ -7,10 +7,7 @@
         <div class="text-container">
             <h3>This page shows the latest items added to the API. This means they might or might not be in the game yet.</h3>
         </div>
-        <div class="search-container"
-            [ngStyle]="{
-                'display': showSearchbar ? 'flex' : 'none' 
-            }">
+        <div class="search-container">
             <app-search-bar (searchValueChange)="getSearchChange($event)" ></app-search-bar>
         </div>
         <div class="cosmetics-list">

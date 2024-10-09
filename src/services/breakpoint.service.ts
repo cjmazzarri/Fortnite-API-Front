@@ -7,9 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BreakpointService {
   useSidenavSubj = new BehaviorSubject<boolean>(false);
-  useSidenav$ = this.useSidenavSubj.asObservable();
-  searchbarShowSubj = new BehaviorSubject<boolean>(false);
-  searchbarShow$ = this.searchbarShowSubj.asObservable();
+  useSidenav$ = this.useSidenavSubj.asObservable();  
 
   constructor(private breakpointObs: BreakpointObserver) {
     breakpointObs.observe([      
@@ -25,9 +23,5 @@ export class BreakpointService {
         this.useSidenavSubj.next(false);
       }
     })
-  }
-
-  toggleSearchbar(value: boolean) {
-    this.searchbarShowSubj.next(value);
   }
 }

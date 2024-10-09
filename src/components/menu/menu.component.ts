@@ -25,9 +25,6 @@ export class MenuComponent implements OnInit {
     this.breakpointService.useSidenav$.subscribe((value) => {      
       this.useSidenav = value;
     });
-    this.breakpointService.searchbarShow$.subscribe((show) => {
-      this.showSearchbar = show;
-    })
   }
 
   ngOnInit(): void {
@@ -40,9 +37,4 @@ export class MenuComponent implements OnInit {
       new Suboption('density_small', 'All', '/all-cosmetics'),
     )
   }
-
-  toggleSearch(value: boolean) {
-    this.breakpointService.toggleSearchbar(value);
-  }
-
 }
