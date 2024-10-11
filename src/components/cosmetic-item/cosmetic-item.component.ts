@@ -4,6 +4,7 @@ import { MAT_MENU_PANEL, MatMenuModule } from '@angular/material/menu';
 import { interval, Subscription } from 'rxjs';
 import { NgStyle } from '@angular/common';
 import { BreakpointService } from '../../services/breakpoint.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cosmetic-item',
@@ -11,7 +12,8 @@ import { BreakpointService } from '../../services/breakpoint.service';
   imports: [
     MatIconModule,
     MatMenuModule,
-    NgStyle
+    NgStyle,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
@@ -25,7 +27,7 @@ import { BreakpointService } from '../../services/breakpoint.service';
   styleUrl: './cosmetic-item.component.scss'
 })
 
-export class CosmeticItemComponent implements OnInit, OnDestroy {
+export class CosmeticItemComponent implements OnDestroy {
   @Input() price: number = 0;
   @Input() itemName: string | undefined = "";
   @Input() image: string | undefined = "";
@@ -36,6 +38,8 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   @Input() usingSidenav: boolean = false;
 
   @Input() images: Array<string | undefined> = [];
+  loadingImg: boolean = true;
+  errorLoadingImg: boolean = false;
   timeSub: Subscription = new Subscription();
   index: number = 0;
 
@@ -43,10 +47,6 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
     breakpointService.useSidenav$.subscribe((useSidenav) => {
       this.usingSidenav = useSidenav;
     })
-  }
-
-  ngOnInit(): void {
-
   }
 
   ngOnDestroy(): void {
@@ -72,5 +72,14 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
       let gradientString = addedHashtag.join(',');
       return gradientString;
     } else return '';
+  }
+
+  onLoadImg() {
+    this.loadingImg = false;    
+  }
+
+  onLoadImgError() {
+    this.errorLoadingImg = true;
+    this.image = 'assets/error_img.png'
   }
 }

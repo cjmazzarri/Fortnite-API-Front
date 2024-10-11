@@ -12,7 +12,21 @@
             </mat-menu>
             }
         </header>
-        <img [className]="this.colorGradient.length == 0 ? 'item-img ' +rarity+'-img ' : 'item-img'" class="item-img"
+        @if(loadingImg && !errorLoadingImg){
+            <div class="spinner-container"
+                [ngStyle]="{
+                    'width': usingSidenav? '128px' : '264px',
+                    'heigth': usingSidenav? '128px' : '264px'
+                }"
+            >
+                <mat-spinner></mat-spinner>
+            </div>
+        }
+        <img [className]="this.colorGradient.length == 0 ? 'item-img ' +rarity+'-img ' : 'item-img'" 
+            class="item-img"
+            [hidden]="loadingImg"
+            (load)="onLoadImg()"
+            (error)="onLoadImgError()"
             src={{image}} [ngStyle]="{
                 'background-image': seriesBackground? seriesBackground : this.colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + getGradientColors() + ')' : '',
                 'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : '',
