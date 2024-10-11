@@ -1,10 +1,10 @@
-import { afterNextRender, AfterRenderPhase, Component, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_MENU_PANEL, MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { interval, Subscription } from 'rxjs';
-import { NgStyle } from '@angular/common';
 import { BreakpointService } from '../../services/breakpoint.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cosmetic-item',
