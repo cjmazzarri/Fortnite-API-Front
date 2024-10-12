@@ -13,6 +13,7 @@
         </div>
         <div class="cosmetics-list">
             @for (cosmetic of allCosmetics; track $index) {
+            <!-- Validation for undefined elements -->
             @if (cosmetic) {
             <!-- Validation for Placeholder items and jam tracks (which have the field 'title' instead of 'name') -->
             <app-cosmetic-item [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 

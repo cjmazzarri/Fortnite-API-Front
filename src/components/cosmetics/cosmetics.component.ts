@@ -115,6 +115,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'outfit':
         case 'contrail':
         case 'glider':
+        case 'music':
           if (item.name == 'null') {
             imgPath = item.images.smallIcon;
           } else {
@@ -122,7 +123,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
           }
           break;
 
-        case 'emoji':
+        case 'emoji':        
           imgPath = item.images.smallIcon;
           break;
 
