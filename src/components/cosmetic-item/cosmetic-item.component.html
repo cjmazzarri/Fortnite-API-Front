@@ -42,7 +42,7 @@
             [ngStyle]="{'width': usingSidenav? '1.5rem': '2rem'}"
         >
         <div class="name">
-            <p>{{ itemName }}</p>
+            <p [ngStyle]="{'font-size': usingSidenav? '1rem': '1.25rem'}">{{ itemName }}</p>
         </div>
     </div>
 </div>
