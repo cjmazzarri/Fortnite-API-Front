@@ -1,4 +1,4 @@
-class Type {
+export class Type {
     value: string;
     displayValue: string;
 

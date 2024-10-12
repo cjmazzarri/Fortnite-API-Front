@@ -33,12 +33,22 @@ p {
     border-radius: 0.9rem;    
 }
 
+.type-icon {
+    width: 2rem;
+    padding-right: 0.5rem;
+}
+
 .name-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    padding-top: 0.5rem;
+}
+
+.name-container p {
+    font-size: 1.25rem;
 }
 
 .price {

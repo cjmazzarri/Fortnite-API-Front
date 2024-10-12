@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Bean, BrItem, Car, Cosmetic, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
+import { Bean, BrItem, Car, Cosmetic, Instrument, JamTrack, LegoSkin, Type } from '../../model/cosmetics/cosmetic.model';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
@@ -116,10 +116,11 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'contrail':
         case 'glider':
         case 'music':
-          if (item.name == 'null') {
+        case 'banner':
+          if (item.images.icon) {
+            imgPath = item.images.icon
+          } else  {
             imgPath = item.images.smallIcon;
-          } else {
-            imgPath = item.images.icon;
           }
           break;
 
@@ -150,10 +151,15 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     return imgPath;
   }
 
-  getCosmeticType(item: Cosmetic): string {
-    if (!item.type)
-      return 'jamtrack'
-    else return item.type.value;
+  getCosmeticType(item: Cosmetic): Type {
+    //jam tracks don't have the type property
+    if (!item.type) {
+      let type = new Type();
+      type.value = 'jamtrack';
+      type.displayValue = 'Jam Track';
+      return type;
+    }            
+    else return item.type;
   }
 
   //Items from certain series might have a set of colors for a background gradient

@@ -5,6 +5,8 @@ import { MAT_MENU_PANEL, MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { interval, Subscription } from 'rxjs';
 import { BreakpointService } from '../../services/breakpoint.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { Type } from '../../model/cosmetics/cosmetic.model';
 
 @Component({
   selector: 'app-cosmetic-item',
@@ -13,7 +15,8 @@ import { BreakpointService } from '../../services/breakpoint.service';
     MatIconModule,
     MatMenuModule,
     NgStyle,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [
     {
@@ -37,7 +40,9 @@ export class CosmeticItemComponent implements OnDestroy {
   @Input() seriesBackground: string = "";
   @Input() usingSidenav: boolean = false;
   @Input() images: Array<string | undefined> = [];
-  @Input() type: string | undefined = "";
+  @Input() type: Type = new Type();
+  /* @Input() type: string | undefined = "";
+  @Input() typeValue: string | undefined = ""; */
 
   loadingImg: boolean = true;
   errorLoadingImg: boolean = false;
@@ -84,26 +89,13 @@ export class CosmeticItemComponent implements OnDestroy {
     this.image = 'assets/error_img.png'
   }
 
-  getTypeIcon() {
-    let useIcon = true;
-    switch (this.type) {
-      case 'backpack':
-        return 'backpack'      
-      case 'loadingscreen':
-        return 'image';
-      case 'pickaxe':
-        return 'swords';
-      case 'spray':
-        //TODO:
-        return '';
-      case 'wrap':
-        //TODO:
-        return '';
-      case 'outfit':
-        return 'apparel';
-      case 'jamtrack':
-        return 'music_note';
+  getTypeImg() {
+    let imgPath = 'assets/item-types/';
+    if (this.type.value == 'skin') {      
+      return imgPath.concat('car.PNG');
     }
-    return '';
+      
+    else
+    return imgPath.concat(this.type.value + '.PNG');
   }
 }
