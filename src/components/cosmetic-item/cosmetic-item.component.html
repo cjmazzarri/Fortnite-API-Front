@@ -22,7 +22,9 @@
         }
         <img [className]="this.colorGradient.length == 0 ? 'item-img ' +rarity+'-img ' : 'item-img'" class="item-img"
             [hidden]="loadingImg" (load)="onLoadImg()" (error)="onLoadImgError()" src={{image}} [ngStyle]="{
-                'background-image': seriesBackground? seriesBackground : this.colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + getGradientColors() + ')' : '',
+                'background-image': seriesBackground? seriesBackground : 
+                    this.colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + getGradientColors() + ')' : 
+                    'linear-gradient(45deg, var(--' + rarity +'), transparent)',
                 'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : '',
                 'width': usingSidenav? '128px' : '264px'
                 }" alt="Cosmetic's picture">
