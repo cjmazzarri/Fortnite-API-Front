@@ -5,23 +5,25 @@
             <h3>Ordered by newest first</h3>
         </div>
         <div class="text-container">
-            <h3>This page shows the latest items added to the API. This means they might or might not be in the game yet.</h3>
+            <h3>This page shows the latest items added to the API. This means they might or might not be in the game
+                yet.</h3>
         </div>
         <div class="search-container">
-            <app-search-bar (searchValueChange)="getSearchChange($event)" ></app-search-bar>
+            <app-search-bar (searchValueChange)="getSearchChange($event)"></app-search-bar>
         </div>
         <div class="cosmetics-list">
             @for (cosmetic of allCosmetics; track $index) {
+            @if (cosmetic) {
             <!-- Validation for Placeholder items and jam tracks (which have the field 'title' instead of 'name') -->
             <app-cosmetic-item [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
-                        cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
+            cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
                 [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
                 [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
                 [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
-                [seriesBackground]="getItemSeriesBackground(cosmetic)"
-                [colorGradient]="getItemColorGradient(cosmetic)"
-                >
+                [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
+                [type]="getCosmeticType(cosmetic)">
             </app-cosmetic-item>
+            }
             }
 
             <!-- @for (item of brItems; track $index) {

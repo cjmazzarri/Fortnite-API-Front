@@ -36,8 +36,9 @@ export class CosmeticItemComponent implements OnDestroy {
   @Input() colorGradient: Array<string> = [];
   @Input() seriesBackground: string = "";
   @Input() usingSidenav: boolean = false;
-
   @Input() images: Array<string | undefined> = [];
+  @Input() type: string | undefined = "";
+
   loadingImg: boolean = true;
   errorLoadingImg: boolean = false;
   timeSub: Subscription = new Subscription();
@@ -75,11 +76,34 @@ export class CosmeticItemComponent implements OnDestroy {
   }
 
   onLoadImg() {
-    this.loadingImg = false;    
+    this.loadingImg = false;
   }
 
   onLoadImgError() {
     this.errorLoadingImg = true;
     this.image = 'assets/error_img.png'
+  }
+
+  getTypeIcon() {
+    let useIcon = true;
+    switch (this.type) {
+      case 'backpack':
+        return 'backpack'      
+      case 'loadingscreen':
+        return 'image';
+      case 'pickaxe':
+        return 'swords';
+      case 'spray':
+        //TODO:
+        return '';
+      case 'wrap':
+        //TODO:
+        return '';
+      case 'outfit':
+        return 'apparel';
+      case 'jamtrack':
+        return 'music_note';
+    }
+    return '';
   }
 }

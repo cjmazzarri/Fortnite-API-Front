@@ -113,6 +113,8 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'spray':
         case 'wrap':
         case 'outfit':
+        case 'contrail':
+        case 'glider':
           if (item.name == 'null') {
             imgPath = item.images.smallIcon;
           } else {
@@ -147,6 +149,12 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     return imgPath;
   }
 
+  getCosmeticType(item: Cosmetic): string {
+    if (!item.type)
+      return 'jamtrack'
+    else return item.type.value;
+  }
+
   //Items from certain series might have a set of colors for a background gradient
   getItemColorGradient(item: Cosmetic): Array<string> {
     if (item.series) {
@@ -176,6 +184,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
       return 0;
     });
     this.allAux = this.allCosmetics;
+    //console.log(this.allCosmetics);
   }
 
   getSearchChange(search: string) {
