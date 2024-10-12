@@ -35,10 +35,12 @@
         </footer>
         }
     </div>
-    <div class="name-container" [ngStyle]="{
-            'max-width': usingSidenav? '136px': '272px'
-        }">
-        <img class="type-icon" matTooltip= '{{this.type.displayValue}}' src={{getTypeImg()}} alt="Cosmetic type icon">
-        <p>{{ itemName }}</p>
+    <div class="name-container" [ngStyle]="{'max-width': usingSidenav? '136px': '272px'}">
+        <img class="type-icon" matTooltip= '{{validateTooltip()}}' src={{getTypeImg()}} alt="Cosmetic type icon"
+            [ngStyle]="{'width': usingSidenav? '1.5rem': '2rem'}"
+        >
+        <div class="name">
+            <p>{{ itemName }}</p>
+        </div>
     </div>
 </div>

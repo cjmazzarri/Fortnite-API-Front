@@ -41,14 +41,22 @@ p {
 .name-container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     padding-top: 0.5rem;
 }
 
-.name-container p {
+.name p {
     font-size: 1.25rem;
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .price {

@@ -98,4 +98,8 @@ export class CosmeticItemComponent implements OnDestroy {
     else
     return imgPath.concat(this.type.value + '.PNG');
   }
+
+  validateTooltip() {
+    return this.type.displayValue && this.type.displayValue != 'null' ? this.type.displayValue : '';
+  }
 }
