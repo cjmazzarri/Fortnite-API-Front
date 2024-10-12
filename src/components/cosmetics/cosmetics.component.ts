@@ -202,8 +202,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
       let filtered = this.allCosmetics.filter((item) =>      
         (item.name? item.name.toLowerCase().match(s) : item.title?.toLowerCase().match(s))  
           || (item.rarity? item.rarity.value.match(s) : '')
-      );
-      
+      );      
       this.allCosmetics = filtered;
     }
   }

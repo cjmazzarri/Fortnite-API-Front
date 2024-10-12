@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_MENU_PANEL, MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -30,7 +30,7 @@ import { Type } from '../../model/cosmetics/cosmetic.model';
   styleUrl: './cosmetic-item.component.scss'
 })
 
-export class CosmeticItemComponent implements OnDestroy {
+export class CosmeticItemComponent implements OnInit, OnDestroy {
   @Input() price: number = 0;
   @Input() itemName: string | undefined = "";
   @Input() image: string | undefined = "";
@@ -55,6 +55,10 @@ export class CosmeticItemComponent implements OnDestroy {
     })
   }
 
+  ngOnInit(): void {
+    this.showcaseImages();
+  }
+
   ngOnDestroy(): void {
     this.timeSub.unsubscribe();
   }
@@ -68,6 +72,7 @@ export class CosmeticItemComponent implements OnDestroy {
           this.index = 0;
         }
         this.image = this.images[this.index];
+        console.log('changing img')
       })
     }
   }
