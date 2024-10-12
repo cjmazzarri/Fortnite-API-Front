@@ -190,6 +190,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
       }
       return 0;
     });
+    this.allCosmetics = this.allCosmetics.filter((item) => item !== undefined); //remove undefined values from the array
     this.allAux = this.allCosmetics;
     //console.log(this.allCosmetics);
   }

@@ -72,7 +72,6 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
           this.index = 0;
         }
         this.image = this.images[this.index];
-        console.log('changing img')
       })
     }
   }
