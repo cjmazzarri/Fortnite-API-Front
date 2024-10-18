@@ -1,0 +1,49 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin backgroundcolor($theme) {
+    .mat-button-toggle-appearance-standard.mat-button-toggle-checked {
+        background-color: mat.get-theme-color($theme, secondary, 20);
+        color: mat.get-theme-color($theme, primary, 100);
+    }
+    
+    .mat-button-toggle {
+        background-color: mat.get-theme-color($theme, primary, 40);
+        color: mat.get-theme-color($theme, primary, 100);
+        height: 100%;    
+    }
+}
+
+@mixin center($theme) {
+    .mat-button-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    
+    .mat-button-toggle-label-content {
+        display: flex;
+    }
+}
+
+@mixin borders($theme) {
+    .mat-button-toggle-group {
+        border: 0.2rem solid mat.get-theme-color($theme, primary, 100);        
+    }
+    
+    .mat-button-toggle:nth-child(2) {        
+        border-style: solid;
+        border-color: mat.get-theme-color($theme, primary, 100) !important;
+    }    
+    
+    .mat-button-toggle:nth-child(2) {
+        border-width: 0 0.2rem !important;
+    }
+
+    .mat-button-toggle {
+        img.gamemode-logo {
+            padding: 0.5rem 0;
+        }
+    }
+}

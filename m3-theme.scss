@@ -3,6 +3,7 @@
 
 @use 'sass:map';
 @use '@angular/material' as mat;
+@use 'src/components/cosmetics/_button-toggle-theme.scss' as buttontoggle;
 
 // Note: Color palettes are generated from primary: #051232, secondary: #3661CF, tertiary: #FFFFFF
 $_palettes: (
@@ -135,9 +136,9 @@ $_rest: (
 $_primary: map.merge(map.get($_palettes, primary), $_rest);
 $_tertiary: map.merge(map.get($_palettes, tertiary), $_rest);
 
-$dark-theme: mat.define-theme((
+$light-theme: mat.define-theme((
   color: (
-    theme-type: dark,
+    theme-type: light,
     primary: $_primary,
     tertiary: $_tertiary,
   ),
@@ -148,7 +149,9 @@ $dark-theme: mat.define-theme((
 ));
 
 html {
-  @include mat.core-theme($dark-theme);
-  @include mat.form-field-color($dark-theme);  
-  
+  @include mat.core-theme($light-theme);
+  @include mat.form-field-color($light-theme);
+  @include buttontoggle.backgroundcolor($light-theme);
+  @include buttontoggle.center($light-theme);
+  @include buttontoggle.borders($light-theme);
 }

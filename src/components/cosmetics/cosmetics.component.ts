@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Bean, BrItem, Car, Cosmetic, Instrument, JamTrack, LegoSkin, Type } from '../../model/cosmetics/cosmetic.model';
+import { Bean, BrItem, Car, Cosmetic, Gamemode, Instrument, JamTrack, LegoSkin, Type } from '../../model/cosmetics/cosmetic.model';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { NgStyle } from '@angular/common';
 import { BreakpointService } from '../../services/breakpoint.service';
+import { MatButtonToggle, MatButtonToggleChange, MatButtonToggleModule } from '@angular/material/button-toggle';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-cosmetics',
@@ -13,7 +15,9 @@ import { BreakpointService } from '../../services/breakpoint.service';
   imports: [
     CosmeticItemComponent,
     SearchBarComponent,
-    NgStyle
+    NgStyle,
+    MatButtonToggleModule,
+    NgClass
   ],
   templateUrl: './cosmetics.component.html',
   styleUrl: './cosmetics.component.scss',
@@ -22,6 +26,9 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   constructor(
     private cosmeticsService: CosmeticsService,
     private breakpointService: BreakpointService) {
+      breakpointService.useSidenav$.subscribe((useSidenav) => {
+        this.usingSidenav = useSidenav;
+      })
   }
 
   brItems: Array<BrItem> = [];
@@ -35,24 +42,34 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   allAux: Array<BrItem | Car | JamTrack | Instrument> = [];
   search: string | null = "";
   showSearchbar: boolean = true;
+  typeFilters: Gamemode[] = [];
+  gamemode = Gamemode;
+  usingSidenav: boolean = true;
 
   ngOnInit(): void {
-    this.getNewItems();    
+    this.getNewItems();
   }
 
   ngOnDestroy(): void {
-    this.timeSub.unsubscribe();    
+    this.timeSub.unsubscribe();
   }
 
   getNewItems() {
     this.cosmeticsService.getNewItems().subscribe(response => {
       if (response.status == 200) {
         this.brItems = response.data.items.br;
+        this.brItems.map(item => item.gamemode = Gamemode.BattleRoyale);
         this.cars = response.data.items.cars;
+        this.cars.map(item => item.gamemode = Gamemode.RocketRacing);
         this.instruments = response.data.items.instruments;
+        this.instruments.forEach(item => item.gamemode = Gamemode.Festival);
         this.jamTracks = response.data.items.tracks;
+        this.instruments.forEach(item => item.gamemode = Gamemode.Festival);
         this.legoSkins = response.data.items.lego;
         this.beans = response.data.items.beans;
+        this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
+        this.allCosmetics = this.allCosmetics.filter((item) => item !== undefined); //remove undefined values from the array
+        this.allAux = this.allCosmetics;
         this.sortCosmetics();
       } else {
         //TODO: Dialog?
@@ -119,12 +136,12 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'banner':
           if (item.images.icon) {
             imgPath = item.images.icon
-          } else  {
+          } else {
             imgPath = item.images.smallIcon;
           }
           break;
 
-        case 'emoji':        
+        case 'emoji':
           imgPath = item.images.smallIcon;
           break;
 
@@ -158,7 +175,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
       type.value = 'jamtrack';
       type.displayValue = 'Jam Track';
       return type;
-    }            
+    }
     else return item.type;
   }
 
@@ -180,8 +197,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     }
   }
 
-  sortCosmetics(): void {
-    this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
+  sortCosmetics(): void {    
     this.allCosmetics.sort((a, b) => {
       if (a.added < b.added) {
         return 1;
@@ -189,22 +205,27 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         return -1
       }
       return 0;
-    });
-    this.allCosmetics = this.allCosmetics.filter((item) => item !== undefined); //remove undefined values from the array
-    this.allAux = this.allCosmetics;
+    });    
     //console.log(this.allCosmetics);
   }
 
-  getSearchChange(search: string) {
+  getSearchChange(search: string): void {
     if (!search || search == "") {
       this.allCosmetics = this.allAux;
-    } else {      
+    } else {
       let s = search.toLowerCase();
-      let filtered = this.allCosmetics.filter((item) =>      
-        (item.name? item.name.toLowerCase().match(s) : item.title?.toLowerCase().match(s))  
-          || (item.rarity? item.rarity.value.match(s) : '')
-      );      
+      let filtered = this.allCosmetics.filter((item) =>
+        (item.name ? item.name.toLowerCase().match(s) : item.title?.toLowerCase().match(s))
+        || (item.rarity ? item.rarity.value.match(s) : '')
+      );
       this.allCosmetics = filtered;
     }
+  }
+
+  filterCosmetics(selectedFiltersChange: MatButtonToggleChange): void {
+    this.typeFilters = selectedFiltersChange.value;
+    console.log(selectedFiltersChange)
+    this.allCosmetics = this.allAux;
+    this.allCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
   }
 }

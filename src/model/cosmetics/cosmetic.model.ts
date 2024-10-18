@@ -84,6 +84,13 @@ class Series {
     }
 }
 
+export enum Gamemode {
+    BattleRoyale = '0',
+    RocketRacing = '1',
+    Festival = '2',
+    Other = '3'
+}
+
 export interface Cosmetic {
     id: string;
     added: string;
@@ -101,6 +108,7 @@ export interface Cosmetic {
     /* regularPrice: number;
     finalPrice: number; */
     images: Images;
+    gamemode: Gamemode;
 }
 
 export class BrItem implements Cosmetic {
@@ -112,6 +120,7 @@ export class BrItem implements Cosmetic {
     rarity: Type;
     images: Images;
     variants?: Channel[] | undefined;
+    gamemode: Gamemode;
     
     constructor() {
         this.id = "";
@@ -122,7 +131,8 @@ export class BrItem implements Cosmetic {
         this.type = new Type();
         this.rarity = new Type();
         this.images = new Images();
-        this.variants = []
+        this.variants = [];
+        this.gamemode = Gamemode.BattleRoyale;
     }
     added: string;    
     albumArt?: string | undefined;
@@ -137,6 +147,7 @@ export class Car implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
+    gamemode: Gamemode;
 
     constructor() {
         this.id = "";
@@ -147,6 +158,7 @@ export class Car implements Cosmetic {
         this.type = new Type();
         this.rarity = new Type();
         this.images = new Images();
+        this.gamemode = Gamemode.RocketRacing;
     }
     added: string;
     cosmeticId?: string | undefined;
@@ -162,6 +174,7 @@ export class Instrument implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
+    gamemode: Gamemode;
 
     constructor() {
         this.id = "";
@@ -172,6 +185,7 @@ export class Instrument implements Cosmetic {
         this.type = new Type();
         this.rarity = new Type();
         this.images = new Images();
+        this.gamemode = Gamemode.Festival;
     }
     added: string;
     cosmeticId?: string | undefined;
@@ -188,6 +202,7 @@ export class Bean implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
+    gamemode: Gamemode;
 
     constructor() {
         this.id = "";
@@ -199,6 +214,7 @@ export class Bean implements Cosmetic {
         this.type = new Type();
         this.rarity = new Type();
         this.images = new Images();
+        this.gamemode = Gamemode.Other;
     }
     added: string;
     albumArt?: string | undefined;
@@ -215,6 +231,7 @@ export class JamTrack implements Cosmetic {
     images: Images;
     albumArt: string;
     title: string;
+    gamemode: Gamemode;
 
     constructor() {
         this.id = "";
@@ -227,6 +244,7 @@ export class JamTrack implements Cosmetic {
         this.type = new Type();
         this.rarity = new Type();
         this.images = new Images();
+        this.gamemode = Gamemode.Festival;
     }
     added: string;
     cosmeticId?: string | undefined;
@@ -241,6 +259,7 @@ export class LegoSkin implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
+    gamemode: Gamemode;
 
     constructor() {
         this.id = "";
@@ -252,6 +271,7 @@ export class LegoSkin implements Cosmetic {
         this.type = new Type();
         this.rarity = new Type();
         this.images = new Images();
+        this.gamemode = Gamemode.Other;
     }
     added: string;
     albumArt?: string | undefined;

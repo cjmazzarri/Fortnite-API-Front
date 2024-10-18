@@ -32,5 +32,28 @@
 .search-container {
     display: flex;
     flex-direction: row;
+    justify-content: center;    
+}
+
+.gamemode-logo {
+    width: 6rem;
+}
+
+.gamemode-filter-container {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.mat-button-toggle:first-child {
+    & img {
+        width: 5rem;        
+    }
+}
+
+.mat-button-toggle:nth-child(2) {
+    & img {
+        width: 6rem;
+    }
 }
