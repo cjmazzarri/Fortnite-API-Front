@@ -64,7 +64,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.instruments = response.data.items.instruments;
         this.instruments.forEach(item => item.gamemode = Gamemode.Festival);
         this.jamTracks = response.data.items.tracks;
-        this.instruments.forEach(item => item.gamemode = Gamemode.Festival);
+        this.jamTracks.forEach(item => item.gamemode = Gamemode.Festival);
         this.legoSkins = response.data.items.lego;
         this.beans = response.data.items.beans;
         this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
