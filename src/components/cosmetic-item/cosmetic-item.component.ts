@@ -95,7 +95,7 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
 
   getTypeImg() {
     let imgPath = 'assets/item-types/';
-    if (this.type.value == 'skin') {      
+    if (this.type.value == 'body') {      
       return imgPath.concat('car.PNG');
     }
       
