@@ -69,7 +69,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         this.beans = response.data.items.beans;
         this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
         this.allCosmetics = this.allCosmetics.filter((item) => item !== undefined); //remove undefined values from the array
-        this.allAux = this.allCosmetics;
+        this.allAux = this.allCosmetics;        
         this.sortCosmetics();
       } else {
         //TODO: Dialog?
@@ -158,6 +158,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'mic':
         case 'bass':
         case 'guitar':
+        case 'keyboard':
         case 'drum':
           imgPath = item.images.large;
           break;
