@@ -151,7 +151,11 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         case 'skin':
         case 'body':
         case 'wheel':
-          imgPath = item.images.large;
+          if (item.images.large) {
+            imgPath = item.images.large;
+          } else {
+            imgPath = item.images.small;
+          }
           break;
 
         //Festival cosmetics
