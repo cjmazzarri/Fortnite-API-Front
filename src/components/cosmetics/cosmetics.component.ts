@@ -83,7 +83,9 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     item.type.value == 'emoji' ? imgArray.push(item.images.smallIcon) : imgArray.push(item.images.icon);
     let legoStyle = this.legoSkins.find(skin => skin.cosmeticId == item.id);
     if (legoStyle) {
-      imgArray.push(legoStyle.images.large);
+      if (legoStyle.images && legoStyle.images.large) {
+        imgArray.push(legoStyle.images.large);
+      }
     }
     let bean = this.beans.find(skin => skin.cosmeticId == item.id);
     if (bean) {
@@ -97,7 +99,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   //other types of items don't have them
   isBrItem(item: BrItem | Car | Instrument | JamTrack) {
     if (item.type && item.type.value) {
-      return item.type.value === 'outfit' || item.type.value === 'backpack' || item.type.value === 'pickaxe'
+      return item.type.value === 'outfit' || item.type.value === 'backpack' || item.type.value === 'pickaxe' || item.type.value === 'wrap'
     } else return false;
   }
 
