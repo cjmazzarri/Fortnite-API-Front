@@ -35,9 +35,6 @@
     .mat-button-toggle:nth-child(2) {        
         border-style: solid;
         border-color: mat.get-theme-color($theme, primary, 100) !important;
-    }    
-    
-    .mat-button-toggle:nth-child(2) {
         border-width: 0 0.2rem !important;
     }
 

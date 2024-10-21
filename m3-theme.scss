@@ -4,6 +4,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use 'src/components/cosmetics/_button-toggle-theme.scss' as buttontoggle;
+@use 'src/components/cosmetics/_search-bar-theme.scss' as searchbar;
 
 // Note: Color palettes are generated from primary: #051232, secondary: #3661CF, tertiary: #FFFFFF
 $_palettes: (
@@ -139,7 +140,7 @@ $_tertiary: map.merge(map.get($_palettes, tertiary), $_rest);
 $light-theme: mat.define-theme((
   color: (
     theme-type: light,
-    primary: $_primary,
+    primary: $_primary,    
     tertiary: $_tertiary,
   ),
   typography: (
@@ -154,4 +155,5 @@ html {
   @include buttontoggle.backgroundcolor($light-theme);
   @include buttontoggle.center($light-theme);
   @include buttontoggle.borders($light-theme);
+  @include searchbar.colors($light-theme);
 }

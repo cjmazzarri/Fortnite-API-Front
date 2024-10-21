@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin colors($theme) {
+    /* .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mat-mdc-notch-piece,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mat-mdc-notch-piece,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled):hover .mat-mdc-notch-piece:hover,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused:hover .mat-mdc-notch-piece:hover
+    {
+        border-color: mat.get-theme-color($theme, primary, 100);
+    } */
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mat-mdc-notch-piece,
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mat-mdc-notch-piece,
+    .mat-mdc-text-field-wrapper:hover .mdc-text-field:hover .mdc-text-field--outlined:hover .mdc-text-field--no-label:hover,
+    .mdc-outlined-text-field-hover-outline-color,
+    .mdc-filled-text-field-hover-active-indicator-color
+    {        
+        border-color: white;
+    }
+    
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input,    
+    .mat-mdc-form-field-icon-suffix
+    {
+        color: white;
+    }
+}
