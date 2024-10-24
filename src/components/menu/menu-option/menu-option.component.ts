@@ -2,13 +2,17 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Suboption } from '../../../model/menu/suboption.model';
+import { RouterLink } from '@angular/router';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-menu-option',
   standalone: true,
   imports: [
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './menu-option.component.html',
   styleUrl: './menu-option.component.scss'
@@ -19,10 +23,9 @@ export class MenuOptionComponent {
   @Input() text: string = '';
   @Input() icon: string = '';
   @Input() route: string = '';
-  @Input()useSidenav: boolean = false;
+  @Input() useSidenav: boolean = false;
 
   hasSuboptions(): boolean {
     return this.suboptions.length > 0;
   }
-
 }

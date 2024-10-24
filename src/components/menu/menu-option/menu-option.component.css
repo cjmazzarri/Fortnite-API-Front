@@ -12,14 +12,22 @@ mat-drawer {
     height: 3rem;
 }
 
-p, mat-icon {
+a {
+    text-decoration: none;
+}
+
+a, p, mat-icon {
     color: white;
     text-align: center;
     font-size: 1.25rem;
 }
 
-p, .icon {
+a, p, .icon {
     text-align: center;
+}
+
+.active-route {
+    font-weight: bold;
 }
 
 button.mat-menu-item {
