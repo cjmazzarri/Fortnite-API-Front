@@ -33,8 +33,8 @@ export class MenuComponent implements OnInit {
 
   addSuboptions() {
     this.cosmeticSuboptions.push(
-      new Suboption('fiber_new', 'Latest', '/'),
-      new Suboption('density_small', 'All', '/all-cosmetics'),
+      new Suboption('fiber_new', 'Latest', '/cosmetics/latest'),
+      new Suboption('density_small', 'All', '/cosmetics/all'),
     )
   }
 }

@@ -12,7 +12,7 @@
 
             <app-menu-option [text]="'Cosmetics'" [icon]="'dry_cleaning'" [useSidenav]="useSidenav"
                 [suboptions]="cosmeticSuboptions"></app-menu-option>
-            <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'" [useSidenav]="useSidenav"></app-menu-option>
+            <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'" [useSidenav]="useSidenav" [route]="'/shop'" ></app-menu-option>
             <app-menu-option [text]="'Player stats'" [icon]="'group'" [useSidenav]="useSidenav"></app-menu-option>
             <app-menu-option [text]="'News'" [icon]="'newspaper'" [useSidenav]="useSidenav"></app-menu-option>
             <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'" [useSidenav]="useSidenav"></app-menu-option>
@@ -36,7 +36,7 @@
     <mat-toolbar>
         <app-menu-option [text]="'Cosmetics'" [icon]="'dry_cleaning'"
             [suboptions]="cosmeticSuboptions"></app-menu-option>
-        <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'"></app-menu-option>
+        <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'" [route]="'/shop'"></app-menu-option>
         <app-menu-option [text]="'Player stats'" [icon]="'group'"></app-menu-option>
         <app-menu-option [text]="'News'" [icon]="'newspaper'"></app-menu-option>
         <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'"></app-menu-option>
