@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseDto } from '../model/api/responseDto.model';
-import { CosmeticList } from '../model/cosmetics/cosmetic.model';
+import { CosmeticList, Items } from '../model/cosmetics/cosmetic.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +12,9 @@ export class CosmeticsService {
 
   getNewItems(): Observable<ResponseDto<CosmeticList>> {
     return this.http.get<ResponseDto<CosmeticList>>("https://fortnite-api.com/v2/cosmetics/new");
+  }
+
+  getAllItems(): Observable<ResponseDto<Items>> {
+    return this.http.get<ResponseDto<Items>>("https://fortnite-api.com/v2/cosmetics");
   }
 }

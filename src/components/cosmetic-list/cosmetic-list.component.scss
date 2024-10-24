@@ -5,13 +5,17 @@
     gap: 2rem;
     justify-content: center;
     align-items: center;
-    padding-bottom: 2rem;
+    padding-bottom: 2rem;    
+}
+
+.cosmetics-list-size {
+    height: 35rem;
 }
 
 .search-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;    
+    justify-content: center;
 }
 
 .gamemode-logo {
@@ -27,7 +31,7 @@
 
 .mat-button-toggle:first-child {
     & img {
-        width: 5rem;        
+        width: 5rem;
     }
 }
 

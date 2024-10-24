@@ -278,7 +278,7 @@ export class LegoSkin implements Cosmetic {
     title?: string | undefined;
 }
 
-class Items {
+export class Items {
     br: Array<BrItem>;
     cars: Array<Car>;
     instruments: Array<Instrument>;

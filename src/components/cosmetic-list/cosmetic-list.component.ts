@@ -1,12 +1,14 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { BrItem, Car, Instrument, JamTrack, Bean, LegoSkin, Gamemode, Cosmetic, Type } from '../../model/cosmetics/cosmetic.model';
-import { MatButtonToggleChange, MatButtonToggleModule } from '@angular/material/button-toggle';
-import { CosmeticsService } from '../../services/cosmetics.service';
-import { BreakpointService } from '../../services/breakpoint.service';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgClass, NgStyle } from '@angular/common';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { MatButtonToggleChange, MatButtonToggleModule } from '@angular/material/button-toggle';
+import { Subscription } from 'rxjs';
+import { Bean, BrItem, Car, Cosmetic, Gamemode, Instrument, JamTrack, LegoSkin, Type } from '../../model/cosmetics/cosmetic.model';
+import { BreakpointService } from '../../services/breakpoint.service';
+import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cosmetic-list',
@@ -17,12 +19,13 @@ import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component'
     SearchBarComponent,
     MatButtonToggleModule,
     SearchBarComponent,
-    CosmeticItemComponent
+    CosmeticItemComponent,
+    ScrollingModule
   ],
   templateUrl: './cosmetic-list.component.html',
   styleUrl: './cosmetic-list.component.scss'
 })
-export class CosmeticListComponent implements OnInit, OnDestroy {
+export class CosmeticListComponent implements OnDestroy {
   @Input() brItems: Array<BrItem> = [];
   @Input() cars: Array<Car> = [];
   @Input() instruments: Array<Instrument> = [];
@@ -36,17 +39,19 @@ export class CosmeticListComponent implements OnInit, OnDestroy {
   typeFilters: Gamemode[] = [];
   gamemode = Gamemode;
   usingSidenav: boolean = true;
+  currentRoute: string = "";
 
   constructor(
     private cosmeticsService: CosmeticsService,
-    private breakpointService: BreakpointService
+    private breakpointService: BreakpointService,
+    public route: ActivatedRoute
   ) {
     breakpointService.useSidenav$.subscribe((useSidenav) => {
       this.usingSidenav = useSidenav;
+    });
+    this.route.url.subscribe(params => {
+      this.currentRoute = params[0].path;
     })
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
@@ -128,10 +133,13 @@ export class CosmeticListComponent implements OnInit, OnDestroy {
         case 'skin':
         case 'body':
         case 'wheel':
-          if (item.images.large) {
-            imgPath = item.images.large;
-          } else {
-            imgPath = item.images.small;
+          if (item.images) {
+            if (item.images.large) {
+              imgPath = item.images.large;
+            } else {
+              item.images.small;
+            }
+
           }
           break;
 
@@ -194,7 +202,7 @@ export class CosmeticListComponent implements OnInit, OnDestroy {
   }
 
   filterCosmetics(selectedFiltersChange: MatButtonToggleChange): void {
-    this.typeFilters = selectedFiltersChange.value;    
+    this.typeFilters = selectedFiltersChange.value;
     this.allCosmetics = this.allAux;
     this.allCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
   }

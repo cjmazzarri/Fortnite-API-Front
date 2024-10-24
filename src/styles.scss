@@ -76,6 +76,16 @@ body {
     background-color: var(--bg);
 }
 
+
+div.cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
 /* .backgrounded-field .mdc-text-field--outlined .mdc-notched-outline {
     z-index: 0;    
 } */
