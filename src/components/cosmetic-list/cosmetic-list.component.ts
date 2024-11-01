@@ -213,8 +213,14 @@ export class CosmeticListComponent implements OnChanges {
 
   filterCosmetics(selectedFiltersChange: MatButtonToggleChange): void {
     this.typeFilters = selectedFiltersChange.value;
-    this.allCosmetics = this.allAux;
-    this.allCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
+    if (this.currentRoute == 'latest') {
+      this.allCosmetics = this.allAux;
+      this.allCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
+    }
+    if (this.currentRoute == 'all') {
+      this.currentCosmetics = this.allAux.slice(0, this.endIndex);
+      this.currentCosmetics = this.currentCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
+    }
   }
 
   loadMore() {
