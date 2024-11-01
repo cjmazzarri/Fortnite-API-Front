@@ -29,7 +29,7 @@
 
 @mixin borders($theme) {
     .mat-button-toggle-group {
-        border: 0.2rem solid mat.get-theme-color($theme, primary, 100);        
+        border: 0.2rem solid mat.get-theme-color($theme, primary, 100);      
     }
     
     .mat-button-toggle:nth-child(2) {        

@@ -1,14 +1,16 @@
-import { ScrollingModule } from '@angular/cdk/scrolling';
+
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleChange, MatButtonToggleModule } from '@angular/material/button-toggle';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Bean, BrItem, Car, Cosmetic, Gamemode, Instrument, JamTrack, LegoSkin, Type } from '../../model/cosmetics/cosmetic.model';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { ActivatedRoute } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-cosmetic-list',
@@ -20,12 +22,13 @@ import { ActivatedRoute } from '@angular/router';
     MatButtonToggleModule,
     SearchBarComponent,
     CosmeticItemComponent,
-    ScrollingModule
+    MatButtonModule,
+    MatIcon
   ],
   templateUrl: './cosmetic-list.component.html',
   styleUrl: './cosmetic-list.component.scss'
 })
-export class CosmeticListComponent implements OnDestroy {
+export class CosmeticListComponent implements OnChanges {
   @Input() brItems: Array<BrItem> = [];
   @Input() cars: Array<Car> = [];
   @Input() instruments: Array<Instrument> = [];
@@ -40,6 +43,9 @@ export class CosmeticListComponent implements OnDestroy {
   gamemode = Gamemode;
   usingSidenav: boolean = true;
   currentRoute: string = "";
+  endIndex: number = 20;
+  currentCosmetics: Array<BrItem | Car | JamTrack | Instrument> = []; //cosmetics shown on screen (not all)
+  showLoadMoreButton: boolean = true;
 
   constructor(
     private cosmeticsService: CosmeticsService,
@@ -51,7 +57,12 @@ export class CosmeticListComponent implements OnDestroy {
     });
     this.route.url.subscribe(params => {
       this.currentRoute = params[0].path;
-    })
+    });    
+  }
+
+  //Waits until allCosmetics has received the values via @Input
+  ngOnChanges(): void {
+    this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);
   }
 
   ngOnDestroy(): void {
@@ -187,7 +198,6 @@ export class CosmeticListComponent implements OnDestroy {
     }
   }
 
-
   getSearchChange(search: string): void {
     if (!search || search == "") {
       this.allCosmetics = this.allAux;
@@ -197,7 +207,7 @@ export class CosmeticListComponent implements OnDestroy {
         (item.name ? item.name.toLowerCase().match(s) : item.title?.toLowerCase().match(s))
         || (item.rarity ? item.rarity.value.match(s) : '')
       );
-      this.allCosmetics = filtered;
+      this.allCosmetics = filtered;      
     }
   }
 
@@ -205,5 +215,10 @@ export class CosmeticListComponent implements OnDestroy {
     this.typeFilters = selectedFiltersChange.value;
     this.allCosmetics = this.allAux;
     this.allCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
+  }
+
+  loadMore() {
+    this.endIndex += 20;
+    this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);
   }
 }

@@ -34,7 +34,7 @@
     @if (cosmetic) {
     <!-- Validation for Placeholder items and jam tracks (which have the field 'title' instead of 'name') -->
     <app-cosmetic-item [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
-            cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
+                cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
         [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
         [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
         [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
@@ -47,15 +47,26 @@
 }
 <!--  -->
 @if (currentRoute == "all"){
-<cdk-virtual-scroll-viewport itemSize="53" minBufferPx="316" maxBufferPx="564"
-    class="cosmetics-list-size">
-    <app-cosmetic-item *cdkVirtualFor="let cosmetic of allCosmetics" [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
-        cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
-        [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
-        [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
-        [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
-        [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
-        [type]="getCosmeticType(cosmetic)">
-    </app-cosmetic-item>
-</cdk-virtual-scroll-viewport>
+    <div class="cosmetics-list">
+        @for (cosmetic of currentCosmetics; track $index) {
+            @if (cosmetic) {
+            <app-cosmetic-item [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
+                cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
+                [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
+                [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
+                [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
+                [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
+                [type]="getCosmeticType(cosmetic)">
+            </app-cosmetic-item>
+            }
+        }
+    </div>
+    @if (currentCosmetics.length > 0) {
+        <div class="btn-container">
+            <button mat-button (click)="loadMore()">
+                <mat-icon>add</mat-icon>
+                Load more
+            </button>
+        </div>
+    }
 }

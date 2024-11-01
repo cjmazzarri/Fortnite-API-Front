@@ -1,12 +1,11 @@
 <main class="main-container">
     <section class="cosmetics-container">
         <div class="text-container">
-            <h1>Latest cosmetics</h1>
+            <h1>{{ title }}</h1>
             <h3>Ordered by newest first</h3>
         </div>
         <div class="text-container">
-            <h3>This page shows the latest items added to the API. This means they might or might not be in the game
-                yet.</h3>
+            <h3>{{ description }}</h3>
         </div>
         <app-cosmetic-list
             [allCosmetics]="allCosmetics"

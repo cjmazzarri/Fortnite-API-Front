@@ -1,0 +1,12 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin style($theme) {
+    .mat-mdc-button:not(:disabled) {
+        color: mat.get-theme-color($theme, primary, 100);
+        background-color: mat.get-theme-color($theme, secondary, 20);
+        border: 0.2rem solid mat.get-theme-color($theme, primary, 100);
+        font-family: Karla, serif;
+        font-size: 1.25rem;
+    }
+}

@@ -36,9 +36,19 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
       });
       this.route.url.subscribe(params => {
         this.currentRoute = params[0].path;
+        if (this.currentRoute == "latest") {
+          this.title = "Latest cosmetics"
+          this.description = "This page shows the latest items added to the API. This means they might or might not be in the game yet."
+        }
+        if (this.currentRoute == "all") {
+          this.title = "All cosmetics"
+          this.description = "This page shows every item in the API."
+        }
       })
   }
 
+  title: string = "";
+  description: string = "";
   currentRoute: string = "";
   brItems: Array<BrItem> = [];
   cars: Array<Car> = [];
