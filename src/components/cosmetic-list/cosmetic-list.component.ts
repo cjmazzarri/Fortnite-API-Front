@@ -127,6 +127,7 @@ export class CosmeticListComponent implements OnChanges {
         case 'glider':
         case 'music':
         case 'banner':
+        case 'aura':
           if (item.images.icon) {
             imgPath = item.images.icon
           } else {
