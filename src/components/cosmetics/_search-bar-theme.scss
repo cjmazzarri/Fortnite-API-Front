@@ -17,10 +17,23 @@
     {        
         border-color: white;
     }
+
+    mat-form-field:hover {
+        border-color: white !important;
+    }
+
+    .mat-mdc-text-field-wrapper:hover .mdc-text-field:hover .mdc-text-field--outlined:hover .mdc-text-field--no-label:hover {
+        border-color: white;
+    }
     
     .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input,    
-    .mat-mdc-form-field-icon-suffix
+    .mat-mdc-form-field-icon-suffix, mat-icon
     {
         color: white;
+        caret-color: white;
+    }
+
+    input::placeholder {
+        color: white !important;
     }
 }

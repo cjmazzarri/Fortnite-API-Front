@@ -5,6 +5,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BreakpointService } from '../../services/breakpoint.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-search-bar',
@@ -14,7 +15,8 @@ import { BreakpointService } from '../../services/breakpoint.service';
     MatInputModule,
     MatIconModule,
     NgStyle,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
@@ -23,12 +25,12 @@ import { BreakpointService } from '../../services/breakpoint.service';
 export class SearchBarComponent implements OnInit {
   usingSidenav: boolean = true;
   searchTerm: FormControl = new FormControl('');
-  @Output() searchValueChange = new EventEmitter<string>();  
+  @Output() searchValueChange = new EventEmitter<string>();
 
   constructor(breakpointService: BreakpointService) {
     breakpointService.useSidenav$.subscribe((useSidenav) => {
       this.usingSidenav = useSidenav;
-    });    
+    });
   }
 
   ngOnInit(): void {

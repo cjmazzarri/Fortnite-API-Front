@@ -1,7 +1,9 @@
-<mat-form-field class="white-searchbar" appearance="outline"
+<mat-form-field appearance="outline"
     [ngStyle]="{
     'width': usingSidenav ? '15rem' : '30rem'
 }">
     <input matInput placeholder="Search by item name or rarity" type="text" [formControl]="searchTerm">
-    <mat-icon matSuffix>search</mat-icon>
+    <button matSuffix mat-icon-button>
+        <mat-icon matSuffix>search</mat-icon>
+    </button>
 </mat-form-field>
