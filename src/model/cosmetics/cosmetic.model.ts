@@ -96,6 +96,7 @@ export interface Cosmetic {
     added: string;
     cosmeticId?: string;
     name?: string;
+    artist?: string;
     devname?: string;
     description: string;
     type: Type;
@@ -115,6 +116,7 @@ export class BrItem implements Cosmetic {
     id: string;
     name?: string | undefined;
     devname?: string | undefined;
+    artist?: string | undefined;
     description: string;
     type: Type;
     rarity: Type;
@@ -143,6 +145,7 @@ export class Car implements Cosmetic {
     id: string;
     name?: string | undefined;
     devname?: string | undefined;
+    artist?: string | undefined;
     description: string;
     type: Type;
     rarity: Type;
@@ -170,6 +173,7 @@ export class Instrument implements Cosmetic {
     id: string;
     name?: string | undefined;
     devname?: string | undefined;
+    artist?: string | undefined;
     description: string;
     type: Type;
     rarity: Type;
@@ -217,14 +221,13 @@ export class Bean implements Cosmetic {
         this.gamemode = Gamemode.Other;
     }
     added: string;
-    albumArt?: string | undefined;
-    title?: string | undefined;
 }
 
 export class JamTrack implements Cosmetic {
     id: string;    
     name?: string | undefined;
     devname?: string | undefined;
+    artist: string;
     description: string;
     type: Type;
     rarity: Type;
@@ -238,6 +241,7 @@ export class JamTrack implements Cosmetic {
         this.added = "";
         this.name = "";
         this.devname = "";
+        this.artist = "";
         this.description = "";
         this.albumArt = "";
         this.title = "";
