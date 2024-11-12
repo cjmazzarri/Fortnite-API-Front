@@ -104,6 +104,20 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   }
 
   validateTooltip() {
-    return this.type.displayValue && this.type.displayValue != 'null' ? this.type.displayValue : '';
+    let tooltip = '';
+    if (this.type.displayValue && this.type.displayValue != 'null') {
+      switch(this.type.displayValue) {
+        case 'Skin':
+          tooltip = 'Car skin';
+          break;
+        case 'Body':
+          tooltip = 'Car body';
+          break;
+        default:
+          tooltip = this.type.displayValue;
+          break;
+      }      
+    }
+    return tooltip;
   }
 }
