@@ -11,7 +11,7 @@
 
     <mat-menu #submenu xPosition="after" yPosition="above" class="submenu">
         @for (suboption of suboptions; track $index) {
-        <button  routerLink="{{suboption.route}}" mat-menu-item class="mat-menu-item">
+        <button type="button" routerLink="{{suboption.route}}" mat-menu-item class="mat-menu-item">
             <mat-icon class="icon">{{ suboption.icon }}</mat-icon>
             <p class="option-text" >{{ suboption.text }}</p>
         </button>

@@ -1,11 +1,15 @@
 import { NgStyle } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
+import { BrItem } from '../../model/cosmetics/cosmetic.model';
 import { BreakpointService } from '../../services/breakpoint.service';
-import { MatButtonModule } from '@angular/material/button';
+import { CosmeticsService } from '../../services/cosmetics.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -16,30 +20,43 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     NgStyle,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule,
+    ReactiveFormsModule
   ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })
 
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
   usingSidenav: boolean = true;
-  searchTerm: FormControl = new FormControl('');
-  @Output() searchValueChange = new EventEmitter<string>();
+  searchForm = new FormGroup({
+    searchTerm: new FormControl('', [Validators.required, Validators.minLength(3)])
+  });
+  foundItems: Array<BrItem> = [];
 
-  constructor(breakpointService: BreakpointService) {
+  constructor(
+    breakpointService: BreakpointService,
+    private cosmeticsService: CosmeticsService,
+    private router: Router
+  ) {
     breakpointService.useSidenav$.subscribe((useSidenav) => {
       this.usingSidenav = useSidenav;
     });
   }
 
-  ngOnInit(): void {
-    this.searchTerm.valueChanges.subscribe((value) => {
-      this.sendChange(value);
+  searchBrItems(): void {
+    let search = this.searchForm.controls["searchTerm"].value!;
+    this.cosmeticsService.searchBrItems(search).subscribe(response => {
+      if (response.status == 200) {
+        this.cosmeticsService.searchResultsSubj.next(response.data);
+        this.router.navigate(["cosmetics/search"]);
+      }
+    }, (error) => {
+      if (error.status == 404) {
+        this.cosmeticsService.searchResultsSubj.next([]);
+        this.router.navigate(["cosmetics/search"]);
+      }
     })
-  }
-
-  public sendChange(value: string) {
-    this.searchValueChange.emit(value);
   }
 }

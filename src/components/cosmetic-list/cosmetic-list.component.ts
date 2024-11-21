@@ -151,7 +151,6 @@ export class CosmeticListComponent implements OnChanges {
             } else {
               item.images.small;
             }
-
           }
           break;
 
@@ -199,7 +198,8 @@ export class CosmeticListComponent implements OnChanges {
     }
   }
 
-  getSearchChange(search: string): void {
+  //Previously used to filter through the current array
+  /* getSearchChange(search: string): void {
     if (!search || search == "") {
       this.allCosmetics = this.allAux;
     } else {
@@ -210,7 +210,7 @@ export class CosmeticListComponent implements OnChanges {
       );
       this.allCosmetics = filtered;      
     }
-  }
+  } */  
 
   filterCosmetics(selectedFiltersChange: MatButtonToggleChange): void {
     this.typeFilters = selectedFiltersChange.value;

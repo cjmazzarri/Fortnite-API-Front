@@ -1,9 +1,14 @@
-<mat-form-field appearance="outline"
-    [ngStyle]="{
-    'width': usingSidenav ? '15rem' : '30rem'
-}">
-    <input matInput placeholder="Search by item name or rarity" type="text" [formControl]="searchTerm">
-    <button matSuffix mat-icon-button>
-        <mat-icon matSuffix>search</mat-icon>
-    </button>
-</mat-form-field>
+<form [formGroup]="searchForm" (ngSubmit)="searchBrItems()" class="searchbar-container">
+    <mat-icon class="info-icon" matTooltip="The API currently only supports searching for BR items!. Search for other gamemodes might be implemented later." >
+        info
+    </mat-icon>
+        <mat-form-field appearance="outline" [ngStyle]="{
+            'width': usingSidenav ? '15rem' : '20rem'
+        }">
+                <input matInput placeholder="Search BR items..." type="text" formControlName="searchTerm">
+                <mat-error>Enter at least 3 characters!</mat-error>
+            </mat-form-field>
+            <button class="search-btn" type="submit" [disabled]="searchForm.invalid" (click)="searchBrItems()" mat-icon-button>
+                <mat-icon matSuffix>search</mat-icon>
+            </button>
+</form>

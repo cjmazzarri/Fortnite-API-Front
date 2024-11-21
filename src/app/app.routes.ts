@@ -18,6 +18,10 @@ export const routes: Routes = [
             {
                 path: 'latest',
                 component: CosmeticsComponent
+            },
+            {
+                path: 'search',
+                component: CosmeticsComponent
             }
         ]
     },    

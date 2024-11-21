@@ -4,7 +4,7 @@
         <aside class="vertical-container">
             <div class="menu-item">
                 @if (sidenav.opened) {
-                <button mat-icon-button disableRipple="true" (click)="sidenav.close()">
+                <button type="button" mat-icon-button disableRipple="true" (click)="sidenav.close()">
                     <mat-icon>close</mat-icon>
                 </button>
                 }
@@ -24,7 +24,7 @@
     <mat-sidenav-content>
         <div class="vertical-container fixed">
             @if (!sidenav.opened) {
-            <button mat-icon-button disableRipple="true" class="bg" (click)="sidenav.open()">
+            <button type="button" mat-icon-button disableRipple="true" class="bg" (click)="sidenav.open()">
                 <mat-icon>menu</mat-icon>
             </button>
             }           

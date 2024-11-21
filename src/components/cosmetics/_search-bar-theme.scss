@@ -26,14 +26,38 @@
         border-color: white;
     }
     
-    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input,    
-    .mat-mdc-form-field-icon-suffix, mat-icon
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input    
     {
         color: white;
         caret-color: white;
     }
 
+    .mat-mdc-form-field-icon-suffix, mat-icon {
+        color: white;
+    }
+
+    
     input::placeholder {
         color: white !important;
+    }
+
+    .search-btn {
+        align-self: flex-start;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.6rem 0.3rem;
+        padding: 0;
+        border: 0.2rem solid white;
+        background-color: mat.get-theme-color($theme, secondary, 20) !important;
+    }
+
+    .search-btn.mat-mdc-button-disabled {
+        background-color: mat.get-theme-color($theme, primary, 40) !important;
+    }
+
+    .info-icon {
+        margin: 1rem 0.3rem;
+        align-self: flex-start;
     }
 }

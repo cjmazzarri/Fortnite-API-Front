@@ -2,14 +2,13 @@ import { NgClass, NgStyle } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Bean, BrItem, Car, Gamemode, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 import { CosmeticListComponent } from '../cosmetic-list/cosmetic-list.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-cosmetics',
@@ -20,31 +19,38 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     NgStyle,
     MatButtonToggleModule,
     NgClass,
-    CosmeticListComponent,    
+    CosmeticListComponent,
   ],
   templateUrl: './cosmetics.component.html',
   styleUrl: './cosmetics.component.scss',
 })
 
-export class CosmeticsComponent implements OnInit, OnDestroy {
+export class CosmeticsComponent implements OnInit {
   constructor(
     private cosmeticsService: CosmeticsService,
     private breakpointService: BreakpointService,
     public route: ActivatedRoute) {
-      breakpointService.useSidenav$.subscribe((useSidenav) => {
-        this.usingSidenav = useSidenav;
-      });
-      this.route.url.subscribe(params => {
-        this.currentRoute = params[0].path;
-        if (this.currentRoute == "latest") {
-          this.title = "Latest cosmetics"
-          this.description = "This page shows the latest items added to the API. This means they might or might not be in the game yet."
-        }
-        if (this.currentRoute == "all") {
-          this.title = "All cosmetics"
-          this.description = "This page shows every item in the API."
-        }
-      })
+    breakpointService.useSidenav$.subscribe((useSidenav) => {
+      this.usingSidenav = useSidenav;
+    });
+    this.route.url.subscribe(params => {
+      this.currentRoute = params[0].path;
+      switch (this.currentRoute) {
+        case "latest":
+          this.title = "Latest cosmetics";
+          this.description = "This page shows the latest items added to the API. This means they might or might not be in the game yet.";
+          break;
+
+        case "all":
+          this.title = "All cosmetics";
+          this.description = "This page shows every item in the API.";
+          break;
+
+        case "search":
+          this.title = "Search results";
+          this.description = "Any items found within your search are shown here.";
+      }     
+    })
   }
 
   title: string = "";
@@ -55,8 +61,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   instruments: Array<Instrument> = [];
   jamTracks: Array<JamTrack> = [];
   beans: Array<Bean> = [];
-  legoSkins: Array<LegoSkin> = [];
-  timeSub: Subscription = new Subscription; //Used to cycle images
+  legoSkins: Array<LegoSkin> = [];  
   allCosmetics: Array<BrItem | Car | JamTrack | Instrument> = [];
   allAux: Array<BrItem | Car | JamTrack | Instrument> = [];
   search: string | null = "";
@@ -65,22 +70,21 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
   usingSidenav: boolean = true;
 
   ngOnInit(): void {
-    switch(this.currentRoute) {
+    switch (this.currentRoute) {
       case 'latest':
         this.getNewItems();
         break;
-      
+
       case 'all':
         this.getAllItems();
+        break;
+
+      case 'search':
+        this.getSearchItems();
         break;
     }
   }
 
-  //TODO: inicializar arreglos?
-
-  ngOnDestroy(): void {
-    this.timeSub.unsubscribe();
-  }
 
   getNewItems() {
     this.cosmeticsService.getNewItems().subscribe(response => {
@@ -103,6 +107,12 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         //TODO: Dialog?
         console.log('Ocurrió un error');
       }
+    })
+  }
+
+  getSearchItems() {
+    this.cosmeticsService.searchResults$.subscribe((items) => {
+      this.allCosmetics = items;
     })
   }
 
@@ -130,7 +140,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
     })
   }
 
-  sortCosmetics(): void {    
+  sortCosmetics(): void {
     this.allCosmetics.sort((a, b) => {
       if (a.added < b.added) {
         return 1;
@@ -138,7 +148,7 @@ export class CosmeticsComponent implements OnInit, OnDestroy {
         return -1
       }
       return 0;
-    });    
+    });
   }
 
 }
