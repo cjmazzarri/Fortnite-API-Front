@@ -36,7 +36,9 @@
             <!-- Validation for undefined elements -->
             @if (cosmetic) {
             <!-- Validation for Placeholder items and jam tracks (which have the field 'title' instead of 'name') -->
-            <app-cosmetic-item [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
+            <app-cosmetic-item 
+                [id]="cosmetic.id"
+                [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
                         cosmetic.title ? cosmetic.title + ' - ' + cosmetic.artist : cosmetic.name" [image]="checkImageType(cosmetic)"
                 [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
                 [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
@@ -52,20 +54,27 @@
 <!--  -->
 @if (currentRoute == "all"){
     <div class="cosmetics-list">
-        @for (cosmetic of currentCosmetics; track $index) {
-            @if (cosmetic) {
-            <app-cosmetic-item [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
-                cosmetic.title ? cosmetic.title + ' - ' + cosmetic.artist : cosmetic.name" [image]="checkImageType(cosmetic)"
-                [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
-                [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
-                [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
-                [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
-                [type]="getCosmeticType(cosmetic)">
-            </app-cosmetic-item>
+        @if (currentCosmetics.length == 0) {
+            <h3>No items found!</h3>
+        } @else {
+            @for (cosmetic of currentCosmetics; track $index) {
+                @if (cosmetic) {
+                <app-cosmetic-item 
+                [id]="cosmetic.id"
+                [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
+                    cosmetic.title ? cosmetic.title + ' - ' + cosmetic.artist : cosmetic.name" [image]="checkImageType(cosmetic)"
+                    [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
+                    [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
+                    [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
+                    [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
+                    [type]="getCosmeticType(cosmetic)">
+                </app-cosmetic-item>
+                }
             }
         }
+        
     </div>
-    @if (currentCosmetics.length > 0) {
+    @if (currentCosmetics.length >= 0) {
         <div class="btn-container">
             <button type="button" mat-button (click)="loadMore()">
                 <mat-icon>add</mat-icon>

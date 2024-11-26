@@ -39,13 +39,14 @@ export class CosmeticListComponent implements OnChanges {
   @Input() allCosmetics: Array<BrItem | Car | JamTrack | Instrument> = [];
   @Input() allAux: Array<BrItem | Car | JamTrack | Instrument> = [];
   search: string | null = "";
-  typeFilters: Gamemode[] = [];
+  typeFilters: Gamemode[] = [Gamemode.BattleRoyale, Gamemode.Festival, Gamemode.RocketRacing];
   gamemode = Gamemode;
   usingSidenav: boolean = true;
   currentRoute: string = "";
   endIndex: number = 20;
   currentCosmetics: Array<BrItem | Car | JamTrack | Instrument> = []; //cosmetics shown on screen (not all)
   showLoadMoreButton: boolean = true;
+  loaded: boolean = false;
 
   constructor(
     private cosmeticsService: CosmeticsService,
@@ -227,6 +228,6 @@ export class CosmeticListComponent implements OnChanges {
 
   loadMore() {
     this.endIndex += 20;
-    this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);
+    this.currentCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1).slice(0, this.endIndex);    
   }
 }
