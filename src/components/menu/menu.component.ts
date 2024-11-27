@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MaterialModule } from '../../app/material-module/material.module';
 import { Suboption } from '../../model/menu/suboption.model';
