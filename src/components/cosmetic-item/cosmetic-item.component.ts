@@ -1,12 +1,13 @@
-import { NgStyle } from '@angular/common';
+import { NgStyle, SlicePipe } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_MENU_PANEL, MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
-import { BreakpointService } from '../../services/breakpoint.service';
-import {MatTooltipModule} from '@angular/material/tooltip';
 import { Type } from '../../model/cosmetics/cosmetic.model';
+import { BreakpointService } from '../../services/breakpoint.service';
 
 @Component({
   selector: 'app-cosmetic-item',
@@ -16,7 +17,8 @@ import { Type } from '../../model/cosmetics/cosmetic.model';
     MatMenuModule,
     NgStyle,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    SlicePipe
   ],
   providers: [
     {
@@ -31,6 +33,7 @@ import { Type } from '../../model/cosmetics/cosmetic.model';
 })
 
 export class CosmeticItemComponent implements OnInit, OnDestroy {
+  @Input() id: string = "";
   @Input() price: number = 0;
   @Input() itemName: string | undefined = "";
   @Input() image: string | undefined = "";
@@ -41,6 +44,8 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   @Input() usingSidenav: boolean = false;
   @Input() images: Array<string | undefined> = [];
   @Input() type: Type = new Type();
+  titleLimit: number = 50;
+  
   /* @Input() type: string | undefined = "";
   @Input() typeValue: string | undefined = ""; */
 
@@ -49,9 +54,13 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   timeSub: Subscription = new Subscription();
   index: number = 0;
 
-  constructor(breakpointService: BreakpointService) {
+  constructor(
+    breakpointService: BreakpointService,
+    private router: Router
+  ) {
     breakpointService.useSidenav$.subscribe((useSidenav) => {
       this.usingSidenav = useSidenav;
+      useSidenav ? this.titleLimit = 35 : this.titleLimit = 50;
     })
   }
 
@@ -119,5 +128,31 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
       }      
     }
     return tooltip;
+  }
+
+  goToDetail() {
+    this.router.navigate(['/cosmetics/' + this.id]);
+  }
+
+  hasLongName(itemName: string | undefined): boolean {
+    if (itemName) {
+      return itemName.length >= 25;
+    } else {
+      return false;
+    }
+  }
+
+  setFontSize(itemName: string | undefined) {
+    if (this.usingSidenav) {
+      if (this.hasLongName(itemName)) {
+        return '0.9rem';
+      } else {
+        return '1rem';
+      }
+    } else if (this.hasLongName(itemName)) {
+        return '1.1rem';
+      } else {
+        return '1.25rem';
+      }
   }
 }

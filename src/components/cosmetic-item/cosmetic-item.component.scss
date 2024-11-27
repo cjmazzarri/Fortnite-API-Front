@@ -45,6 +45,7 @@ p {
     justify-content: center;
     align-items: center;
     padding-top: 0.5rem;
+    height: 3rem;
 }
 
 .name p {
@@ -54,9 +55,10 @@ p {
 .name {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    max-height: 3rem;
 }
 
 .price {

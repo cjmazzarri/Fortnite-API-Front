@@ -15,7 +15,7 @@
         @if(loadingImg && !errorLoadingImg){
         <div class="spinner-container" [ngStyle]="{
                     'width': usingSidenav? '128px' : '264px',
-                    'heigth': usingSidenav? '128px' : '264px'
+                    'height': usingSidenav? '128px' : '264px'
                 }">
             <mat-spinner></mat-spinner>
         </div>
@@ -27,7 +27,8 @@
                     'linear-gradient(45deg, var(--' + rarity +'), transparent)',
                 'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : '',
                 'width': usingSidenav? '128px' : '264px'
-                }" alt="Cosmetic's picture">
+                }" alt="Cosmetic's picture"            
+        >
         <!-- If the item has a background img, sets is as background, if it doesn't, uses the color gradient -->
         <!-- If the item has a color gradient, uses the 1st color in it as the border color -->
         @if (price > 0) {
@@ -37,12 +38,13 @@
         </footer>
         }
     </div>
-    <div class="name-container" [ngStyle]="{'max-width': usingSidenav? '136px': '272px'}">
+    <div class="name-container" [ngStyle]="{'max-width': usingSidenav? '136px': '272px', 'height': usingSidenav? '3rem': '' }">
         <img class="type-icon" matTooltip= '{{validateTooltip()}}' src={{getTypeImg()}} alt="Cosmetic type icon"
-            [ngStyle]="{'width': usingSidenav? '1.5rem': '2rem'}"
-        >
+            [ngStyle]="{'width': usingSidenav? '1.5rem': '2rem'}">
         <div class="name">
-            <p [ngStyle]="{'font-size': usingSidenav? '1rem': '1.25rem'}">{{ itemName }}</p>
+            <p [ngStyle]="{'font-size': setFontSize(itemName) }">
+                {{ hasLongName(itemName)? (itemName | slice:0:titleLimit)+'...' : itemName }}
+            </p>
         </div>
     </div>
 </div>
