@@ -1,10 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ActivatedRoute } from '@angular/router';
-import { Bean, BrItem, Car, Gamemode, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
+import { Bean, BrItem, Car, Cosmetic, Gamemode, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticListComponent } from '../cosmetic-list/cosmetic-list.component';
+
+function filterNullNameItems(item: Cosmetic) {
+    if (item.gamemode == Gamemode.Festival) {
+      if (item.devname != 'null') {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (item.name != 'null') {
+      return true;
+    } else {
+      return false;
+    }
+}
 
 @Component({
   selector: 'app-cosmetics',
@@ -31,16 +45,19 @@ export class CosmeticsComponent implements OnInit {
         case "latest":
           this.title = "Latest cosmetics";
           this.description = "This page shows the latest items added to the API. This means they might or might not be in the game yet.";
+          this.orderText = "by newest first"
           break;
 
         case "all":
           this.title = "All cosmetics";
           this.description = "This page shows every item in the API.";
+          this.orderText = "alphabetically"
           break;
 
         case "search":
           this.title = "Search results";
           this.description = "Any items found within your search are shown here.";
+          this.orderText = "by newest first"
       }     
     })
   }
@@ -60,6 +77,7 @@ export class CosmeticsComponent implements OnInit {
   typeFilters: Gamemode[] = [];
   gamemode = Gamemode;
   usingSidenav: boolean = true;
+  orderText: string = "";
 
   ngOnInit(): void {
     switch (this.currentRoute) {
@@ -94,7 +112,7 @@ export class CosmeticsComponent implements OnInit {
         this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
         this.allCosmetics = this.allCosmetics.filter((item) => item !== undefined); //remove undefined values from the array
         this.allAux = this.allCosmetics;
-        this.sortCosmetics();
+        this.sortCosmeticsByDate();
       } else {
         //TODO: Dialog?
         console.log('Ocurrió un error');
@@ -124,7 +142,7 @@ export class CosmeticsComponent implements OnInit {
         this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
         this.allCosmetics = this.allCosmetics.filter((item) => item !== undefined); //remove undefined values from the array
         this.allAux = this.allCosmetics;
-        this.sortCosmetics();
+        this.sortCosmeticsAlphabetically();
       } else {
         //TODO: Dialog?
         console.log('Ocurrió un error');
@@ -132,7 +150,8 @@ export class CosmeticsComponent implements OnInit {
     })
   }
 
-  sortCosmetics(): void {
+  //Most recent first
+  sortCosmeticsByDate(): void {
     this.allCosmetics.sort((a, b) => {
       if (a.added < b.added) {
         return 1;
@@ -141,6 +160,18 @@ export class CosmeticsComponent implements OnInit {
       }
       return 0;
     });
+  }
+
+  sortCosmeticsAlphabetically(): void {
+    this.allCosmetics.sort((a, b) => {
+      if (a.name! < b.name!) {
+        return -1;
+      } else if (a.name! > b.name!) {
+        return 1
+      }
+      return 0;
+    });
+    this.allCosmetics = this.allCosmetics.filter(filterNullNameItems);
   }
 
 }
