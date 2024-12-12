@@ -99,16 +99,13 @@ export class CosmeticsComponent implements OnInit {
   getNewItems() {
     this.cosmeticsService.getNewItems().subscribe(response => {
       if (response.status == 200) {
-        this.brItems = response.data.items.br;
-        this.brItems.forEach(item => item.gamemode = Gamemode.BattleRoyale);
-        this.cars = response.data.items.cars;
-        this.cars.forEach(item => item.gamemode = Gamemode.RocketRacing);
-        this.instruments = response.data.items.instruments;
-        this.instruments.forEach(item => item.gamemode = Gamemode.Festival);
-        this.jamTracks = response.data.items.tracks;
-        this.jamTracks.forEach(item => item.gamemode = Gamemode.Festival);
+        this.brItems = response.data.items.br;        
+        this.cars = response.data.items.cars;        
+        this.instruments = response.data.items.instruments;        
+        this.jamTracks = response.data.items.tracks;      
         this.legoSkins = response.data.items.lego;
         this.beans = response.data.items.beans;
+        this.assignGamemodes();
         this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
         this.allCosmetics = this.allCosmetics.filter((item) => item !== undefined); //remove undefined values from the array
         this.allAux = this.allCosmetics;
@@ -120,9 +117,20 @@ export class CosmeticsComponent implements OnInit {
     })
   }
 
+  assignGamemodes() {
+    this.brItems != undefined ? this.brItems.forEach(item => item.gamemode = Gamemode.BattleRoyale) : '';
+    this.cars != undefined ? this.cars.forEach(item => item.gamemode = Gamemode.RocketRacing) : '';
+    this.instruments != undefined ? this.instruments.forEach(item => item.gamemode = Gamemode.Festival) : '';
+    this.jamTracks != undefined ? this.jamTracks.forEach(item => item.gamemode = Gamemode.Festival) : '';
+  }
+
   getSearchItems() {
-    this.cosmeticsService.searchResults$.subscribe((items) => {
-      this.allCosmetics = items;
+    this.cosmeticsService.searchResults$.subscribe(response => {
+      if (response.status == 200) {
+        this.allCosmetics = response.data;        
+        this.allCosmetics = this.allCosmetics.concat(this.brItems, this.cars, this.jamTracks, this.instruments);
+        this.allCosmetics = this.allCosmetics.filter((item) => item !== undefined); //remove undefined values from the array
+      }
     })
   }
 
