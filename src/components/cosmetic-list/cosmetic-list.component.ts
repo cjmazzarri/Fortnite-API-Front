@@ -151,7 +151,7 @@ export class CosmeticListComponent implements OnChanges {
             if (item.images.large) {
               imgPath = item.images.large;
             } else {
-              item.images.small;
+              imgPath = item.images.small;
             }
           }
           break;
@@ -217,17 +217,24 @@ export class CosmeticListComponent implements OnChanges {
   filterCosmetics(selectedFiltersChange: MatButtonToggleChange): void {
     this.typeFilters = selectedFiltersChange.value;
     if (this.currentRoute == 'latest') {
-      this.allCosmetics = this.allAux;
+      //this.allCosmetics = this.allAux;
       this.allCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
     }
-    if (this.currentRoute == 'all') {
-      this.currentCosmetics = this.allAux.slice(0, this.endIndex);
+    if (this.currentRoute == 'all' || this.currentRoute == 'search') {
+      this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);
       this.currentCosmetics = this.currentCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
     }
   }
 
   loadMore() {
     this.endIndex += 20;
-    this.currentCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1).slice(0, this.endIndex);    
+    if (!this.atSearch()) {
+      this.currentCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
+    }    
+    this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);    
+  }
+
+  atSearch(): boolean {
+    return this.currentRoute == "search";
   }
 }

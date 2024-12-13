@@ -4,13 +4,13 @@
 <div class="gamemode-filter-container">
     <mat-button-toggle-group name="typeFilters" [hideMultipleSelectionIndicator]="true" multiple
         (change)="filterCosmetics($event)">
-        <mat-button-toggle value="{{gamemode.BattleRoyale}}" checked="true">
+        <mat-button-toggle value="{{gamemode.BattleRoyale}}" [checked]="true" [disabled]="atSearch()" >
             <img class="gamemode-logo" src="/assets/gamemodes/brlogo.png" alt="Battle Royale logo">
         </mat-button-toggle>
-        <mat-button-toggle value="{{gamemode.RocketRacing}}" checked="true">
+        <mat-button-toggle value="{{gamemode.RocketRacing}}" [checked]="!atSearch()" [disabled]="atSearch()">
             <img class="gamemode-logo" src="/assets/gamemodes/rocketracinglogo.PNG" alt="Rocket Racing logo">
         </mat-button-toggle>
-        <mat-button-toggle value="{{gamemode.Festival}}" checked="true">
+        <mat-button-toggle value="{{gamemode.Festival}}" [checked]="!atSearch()" [disabled]="atSearch()" >
             <img class="gamemode-logo" src="/assets/gamemodes/festivallogo2.png" alt="Festival logo">
         </mat-button-toggle>
         <!-- <mat-button-toggle>Outfits</mat-button-toggle>
@@ -27,7 +27,7 @@
     </mat-button-toggle-group>
 </div>
 
-@if (currentRoute == "latest" || currentRoute == "search") {
+@if (currentRoute == "latest") {
 <div class="cosmetics-list">
     @if (allCosmetics.length == 0) {
         <h3>No items found!</h3>
@@ -44,15 +44,15 @@
                 [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
                 [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
                 [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
-                [type]="getCosmeticType(cosmetic)">
+                [type]="getCosmeticType(cosmetic)" [BrItem]="isBrItem(cosmetic)">
             </app-cosmetic-item>
             }
             }
     }
 </div>
 }
-<!--  -->
-@if (currentRoute == "all"){
+
+@if (currentRoute == "all" || currentRoute == "search"){
     <div class="cosmetics-list">
         @if (currentCosmetics.length == 0) {
             <h3>No items found!</h3>
@@ -67,14 +67,14 @@
                     [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
                     [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
                     [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
-                    [type]="getCosmeticType(cosmetic)">
+                    [type]="getCosmeticType(cosmetic)" [BrItem]="isBrItem(cosmetic)">
                 </app-cosmetic-item>
                 }
             }
         }
         
     </div>
-    @if (currentCosmetics.length >= 0) {
+    @if (currentCosmetics.length < allCosmetics.length) {
         <div class="btn-container">
             <button type="button" mat-button (click)="loadMore()">
                 <mat-icon>add</mat-icon>

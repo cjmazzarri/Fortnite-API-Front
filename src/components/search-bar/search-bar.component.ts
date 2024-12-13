@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { BrItem } from '../../model/cosmetics/cosmetic.model';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
+import { ResponseDto } from '../../model/api/responseDto.model';
 
 @Component({
   selector: 'app-search-bar',
@@ -47,14 +48,14 @@ export class SearchBarComponent {
 
   searchBrItems(): void {
     let search = this.searchForm.controls["searchTerm"].value!;
-    this.cosmeticsService.searchBrItems(search).subscribe(response => {
+    this.cosmeticsService.searchBrItemsByName(search).subscribe(response => {
       if (response.status == 200) {
-        this.cosmeticsService.searchResultsSubj.next(response.data);
+        this.cosmeticsService.searchResultsSubj.next(response);
         this.router.navigate(["cosmetics/search"]);
       }
     }, (error) => {
       if (error.status == 404) {
-        this.cosmeticsService.searchResultsSubj.next([]);
+        this.cosmeticsService.searchResultsSubj.next(error);
         this.router.navigate(["cosmetics/search"]);
       }
     })
