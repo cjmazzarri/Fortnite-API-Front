@@ -1,0 +1,89 @@
+<div class="detail-container">
+    <div class="inner-container flex-col" [ngStyle]="{'width': usingSidenav? '95%' : '85%'}">
+        <div class="info-container">
+            <section class="details">
+                <h1>{{ cosmetic.name }}</h1>
+                <div class="flex-row">
+                    <img class="type-icon" src="/assets/item-types/outfit.PNG" alt="Cosmetic type">
+                    @if (cosmetic.series) {
+                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.type.displayValue }} - {{ cosmetic.series.value }}</p>
+                    } @else {
+                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.type.displayValue }} - {{ cosmetic.rarity.value }}</p>
+                    }
+                </div>
+                <div class="details-area" 
+                    [ngStyle]="{'justify-content': usingSidenav? 'center': 'flex-start', 'column-gap': usingSidenav? '1rem' : '2rem'}">
+                    <div class="img">
+                        @if (cosmetic.images.icon) {
+                        <img class="icon" src={{cosmetic.images.icon}} alt="Icon" [ngStyle]="{'width': usingSidenav? '9rem': '15rem'}" >
+                        } @else if (cosmetic.images.smallIcon) {
+                        <img class="small-icon" src={{cosmetic.images.smallIcon}} alt="Small icon">
+                        }
+                    </div>
+                    <div class="flex-col">
+                        <h2>Description</h2>
+                        <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.description }}</p>
+                        <h2>Introduction</h2>
+                        <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.introduction?.text }}</p>
+                    </div>                    
+                </div>
+            </section>          
+        </div>
+
+        @if (cosmetic.images.featured) {
+            <section [ngClass]="{'featured-area': !usingSidenav}" class="flex-col">
+                <h2>Featured image</h2>
+                <div class="flex-row centered">
+                    <img class="featured" src={{cosmetic.images.featured}} alt="Featured image">
+                </div>
+            </section>
+        }
+    
+        @if (cosmetic.variants) {
+            <section class="flex-col" [ngClass]="{'variant-area': !usingSidenav}">
+                <h2>Variants</h2>
+                <div class="flex-row gap centered">                
+                @for (variant of cosmetic.variants; track $index) {
+                    @for (option of variant.options; track $index) {
+                        <div class="flex-col centered">
+                            <img src={{option.image}} alt="">
+                            <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{option.name}}</p>
+                        </div>
+                    }
+                }
+                </div>
+            </section>
+        }
+    
+        @if (cosmetic.set) {
+        <section class="flex-col" [ngClass]="{'set-area': !usingSidenav}">
+            <h2>Set</h2>
+            <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.set?.text }}</p>
+            <div class="flex-row gap centered">
+                @for (item of set; track $index) {
+                @if (item.images.icon) {
+                <div class="flex-col centered">
+                    <img class="related-item-img" src={{item.images.icon}} alt="">
+                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{item.name}}</p>
+                </div>
+                } @else if (item.images.icon) {
+                <div class="flex-col centered">
+                    <img class="related-item-img" src={{item.images.smallIcon}} alt="">
+                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}" [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{item.name}}</p>
+                </div>
+                }
+                }
+            </div>
+        </section>
+        }
+    
+        @if (cosmetic.showcaseVideo) {
+        <section class="pad-2 flex-col" [ngClass]="{'video-area': !usingSidenav}">
+            <h2>Showcase video</h2>
+            <div class="flex-row centered">
+                <youtube-player [width]="usingSidenav? 320 : 720" #player [videoId]="cosmetic.showcaseVideo"></youtube-player>
+            </div>
+        </section>
+        }
+    </div>
+</div>

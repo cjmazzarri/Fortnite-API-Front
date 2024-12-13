@@ -44,6 +44,7 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   @Input() usingSidenav: boolean = false;
   @Input() images: Array<string | undefined> = [];
   @Input() type: Type = new Type();
+  @Input() BrItem: boolean = false;
   titleLimit: number = 50;
   
   /* @Input() type: string | undefined = "";
@@ -131,7 +132,9 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   }
 
   goToDetail() {
-    this.router.navigate(['/cosmetics/' + this.id]);
+    if (this.BrItem) {
+      this.router.navigate(['/cosmetics/' + this.id]);
+    }
   }
 
   hasLongName(itemName: string | undefined): boolean {
