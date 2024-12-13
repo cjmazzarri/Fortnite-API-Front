@@ -1,8 +1,8 @@
 
-import { NgClass, NgStyle } from '@angular/common';
 import { Component, Input, OnChanges } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleChange, MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Bean, BrItem, Car, Cosmetic, Gamemode, Instrument, JamTrack, LegoSkin, Type } from '../../model/cosmetics/cosmetic.model';
@@ -10,14 +10,11 @@ import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-cosmetic-list',
   standalone: true,
   imports: [
-    NgStyle,
-    NgClass,
     SearchBarComponent,
     MatButtonToggleModule,
     SearchBarComponent,
