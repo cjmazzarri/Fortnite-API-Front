@@ -10,7 +10,7 @@ import { BrItem, Cosmetic, CosmeticList, Items } from '../model/cosmetics/cosmet
 export class CosmeticsService {
   constructor(private http: HttpClient) { }
   baseUrl: string = "https://fortnite-api.com/v2/cosmetics/";
-  searchResultsSubj = new BehaviorSubject<Array<BrItem>>([]);
+  searchResultsSubj = new BehaviorSubject<ResponseDto<Array<BrItem>>>(new ResponseDto());
   searchResults$ = this.searchResultsSubj.asObservable();
 
   getNewItems(): Observable<ResponseDto<CosmeticList>> {
@@ -21,12 +21,21 @@ export class CosmeticsService {
     return this.http.get<ResponseDto<Items>>(this.baseUrl);
   }
 
-  searchBrItems(searchTerm: string): Observable<ResponseDto<Array<BrItem>>> {
+  searchBrItemsByName(searchTerm: string): Observable<ResponseDto<Array<BrItem>>> {
     return this.http.get<ResponseDto<Array<Cosmetic>>>(this.baseUrl + "br/search/all", 
       {
         params: {name: searchTerm, matchMethod: 'contains'}
       });
   }
 
+  searchBrItemsBySet(setName: string): Observable<ResponseDto<Array<BrItem>>> {
+    return this.http.get<ResponseDto<Array<Cosmetic>>>(this.baseUrl + "br/search/all", 
+      {
+        params: {set: setName, matchMethod: 'full'}
+      });
+  }
 
+  getBrCosmeticDetail(id: string | null): Observable<ResponseDto<BrItem>> {
+    return this.http.get<ResponseDto<BrItem>>(this.baseUrl + "br/" + id);
+  }
 }
