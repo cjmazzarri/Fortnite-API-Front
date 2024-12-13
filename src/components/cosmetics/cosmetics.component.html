@@ -17,55 +17,5 @@
             [instruments]="instruments"
             [jamTracks]="jamTracks"            
         ></app-cosmetic-list>
-        <!-- <div class="search-container">
-            <app-search-bar (searchValueChange)="getSearchChange($event)"></app-search-bar>
-        </div>  -->
-        <!-- <div class="gamemode-filter-container">
-                <mat-button-toggle-group                    
-                            name="typeFilters"
-                            [hideMultipleSelectionIndicator]="true"
-                            multiple
-                            (change)="filterCosmetics($event)"                    
-                            >
-                            <mat-button-toggle value="{{gamemode.BattleRoyale}}" checked="true">
-                                <img class="gamemode-logo" src="/assets/gamemodes/brlogo.png" alt="Battle Royale logo">
-                            </mat-button-toggle>
-                            <mat-button-toggle value="{{gamemode.RocketRacing}}" checked="true">
-                                <img class="gamemode-logo" src="/assets/gamemodes/rocketracinglogo.PNG" alt="Rocket Racing logo">
-                            </mat-button-toggle>
-                            <mat-button-toggle value="{{gamemode.Festival}}" checked="true" >
-                                <img class="gamemode-logo" src="/assets/gamemodes/festivallogo2.png" alt="Festival logo">
-                            </mat-button-toggle>
-                            <mat-button-toggle>Outfits</mat-button-toggle>
-                            <mat-button-toggle>Back blings</mat-button-toggle>
-                            <mat-button-toggle>Pickaxes</mat-button-toggle>
-                            <mat-button-toggle>Emotes</mat-button-toggle>
-                            <mat-button-toggle>Gliders</mat-button-toggle>
-                            <mat-button-toggle>Contrails</mat-button-toggle>
-                            <mat-button-toggle>Wraps</mat-button-toggle>
-                            <mat-button-toggle>Sprays</mat-button-toggle>
-                            <mat-button-toggle>Lobby music packs</mat-button-toggle>
-                            <mat-button-toggle>Banners</mat-button-toggle>
-                            <mat-button-toggle>Emojis</mat-button-toggle>
-                        </mat-button-toggle-group>
-            </div> -->
-
-        <!-- 
-        <div class="cosmetics-list">
-            @for (cosmetic of allCosmetics; track $index) { -->
-            <!-- Validation for undefined elements -->
-            <!-- @if (cosmetic) { -->
-                <!-- Validation for Placeholder items and jam tracks (which have the field 'title' instead of 'name') -->
-                <!-- <app-cosmetic-item [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
-                cosmetic.title ? cosmetic.title : cosmetic.name" [image]="checkImageType(cosmetic)"
-                    [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
-                    [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
-                    [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
-                    [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
-                    [type]="getCosmeticType(cosmetic)">
-                </app-cosmetic-item> -->
-            <!--     }
-            }
-        </div> -->
     </section>
 </main>
