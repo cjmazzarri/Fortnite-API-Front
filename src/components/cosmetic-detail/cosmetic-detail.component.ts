@@ -1,11 +1,11 @@
+import { NgClass, NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { YouTubePlayerModule } from "@angular/youtube-player";
 import { BrItem } from '../../model/cosmetics/cosmetic.model';
-import { CosmeticsService } from '../../services/cosmetics.service';
 import { BreakpointService } from '../../services/breakpoint.service';
-import { NgStyle } from '@angular/common';
-import { NgClass } from '@angular/common';
+import { CosmeticsService } from '../../services/cosmetics.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cosmetic-detail',
@@ -28,17 +28,22 @@ export class CosmeticDetailComponent implements OnInit {
   constructor (
     private route: ActivatedRoute,
     private cosmeticsService: CosmeticsService,
-    private breakpointService: BreakpointService
+    private breakpointService: BreakpointService,
+    private title: Title
   ) {
       breakpointService.useSidenav$.subscribe((useSidenav) => {
         this.usingSidenav = useSidenav;
-      })
+      });      
     }
 
   ngOnInit(): void {
     this.itemId = this.route.snapshot.paramMap.get('id');
     this.getCosmeticDetail(this.itemId);
     this.initVideoPlayer();
+  }
+
+  setTitle() {
+    this.title.setTitle(this.cosmetic.name + ' - Fortnite API Front');
   }
 
   initVideoPlayer() {
@@ -51,6 +56,7 @@ export class CosmeticDetailComponent implements OnInit {
     this.cosmeticsService.getBrCosmeticDetail(id).subscribe(response => {
       if (response.status == 200) {
         this.cosmetic = response.data;
+        this.setTitle();
         if (this.cosmetic.showcaseVideo) {
           this.videoUrl += this.cosmetic.showcaseVideo;
         }
