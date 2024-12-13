@@ -50,21 +50,23 @@ class Option {
     tag: string;
     name: string;
     image: string;
+    unlockRequirements: string
 
     constructor() {
         this.tag = "";
         this.name = "";
         this.image = "";
+        this.unlockRequirements = "";
     }
 }
 
-class Channel {
-    parts: string;
+class Variant {
+    channel: string;
     type: string;
     options: Array<Option>
 
     constructor() {
-        this.parts = "";
+        this.channel = "";
         this.type = "";
         this.options = [];
     }
@@ -81,6 +83,32 @@ class Series {
         this.colors = [];
         this.image = "";
         this.value = "";
+    }
+}
+
+class Set {
+    backendValue: string;
+    value: string; //Set name
+    text: string; //Description "part of x set"
+
+    constructor() {
+        this.backendValue = "";
+        this.value = "";
+        this.text = "";
+    }
+}
+
+class Introduction {
+    chapter: string;
+    season: string;
+    text: string; //"Introduced in chapter x, season y"
+    backendValue: number;
+
+    constructor() {
+        this.chapter = "";
+        this.season = "";
+        this.text = "";
+        this.backendValue = 0;
     }
 }
 
@@ -103,13 +131,16 @@ export interface Cosmetic {
     rarity: Type;
     albumArt?: string;
     title?: string;
-    variants?: Array<Channel>;
+    variants?: Array<Variant>;
     series?: Series;
+    set?: Set;
+    introduction?: Introduction;
     //shop, no cosmetics
     /* regularPrice: number;
     finalPrice: number; */
     images: Images;
     gamemode: Gamemode;
+    showcaseVideo?: string;
 }
 
 export class BrItem implements Cosmetic {
@@ -121,8 +152,12 @@ export class BrItem implements Cosmetic {
     type: Type;
     rarity: Type;
     images: Images;
-    variants?: Channel[] | undefined;
+    variants?: Variant[] | undefined;
     gamemode: Gamemode;
+    set?: Set;
+    introduction?: Introduction;
+    series?: Series | undefined;
+    showcaseVideo?: string | undefined;
     
     constructor() {
         this.id = "";
@@ -135,6 +170,10 @@ export class BrItem implements Cosmetic {
         this.images = new Images();
         this.variants = [];
         this.gamemode = Gamemode.BattleRoyale;
+        this.set = new Set();
+        this.introduction = new Introduction();
+        this.series = new Series();
+        this.showcaseVideo = "";
     }
     added: string;    
     albumArt?: string | undefined;
