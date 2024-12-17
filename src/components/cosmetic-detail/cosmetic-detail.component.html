@@ -47,7 +47,7 @@
             <h2>Variants</h2>
             <div class="flex-row gap centered">
                 @for (variant of cosmetic.variants; track $index) {
-                <div class="flex-row gap centered">
+                <div class="gap centered" [ngClass]="{'flex-row': !usingSidenav, 'flex-col': usingSidenav}">
                     <h3>{{variant.type}}</h3>
                     @for (option of variant.options; track $index) {
                     <div class="flex-col centered">
@@ -58,25 +58,27 @@
                 </div>
                 }
 
-                @if (cosmetic.images.lego) {
-                <div class="flex-row centered gap">
+                @if (cosmetic.images.lego || cosmetic.images.bean) {
+                <div class="centered gap" [ngClass]="{'flex-row': !usingSidenav, 'flex-col': usingSidenav}">
+                    @if (cosmetic.images.lego) {
                     <h3>LEGO</h3>
                     <div class="flex-col centered">
                         <img src={{cosmetic.images.lego.small}} alt="">
                         <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">LEGO style</p>
                     </div>
-                </div>
-                }
+                    }
 
-                @if (cosmetic.images.bean) {
-                <div class="flex-row centered gap">
+                    @if (cosmetic.images.bean) {
                     <h3>Fall Guys</h3>
                     <div class="flex-col centered">
                         <img src={{cosmetic.images.bean.small}} alt="">
                         <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">Bean style</p>
                     </div>
+                    }
                 </div>
                 }
+
+                
 
             </div>
         </section>
