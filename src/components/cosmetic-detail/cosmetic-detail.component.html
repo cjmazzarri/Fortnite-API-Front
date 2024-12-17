@@ -47,39 +47,41 @@
             <h2>Variants</h2>
             <div class="flex-row gap centered">
                 @for (variant of cosmetic.variants; track $index) {
-                <div class="gap centered" [ngClass]="{'flex-row': !usingSidenav, 'flex-col': usingSidenav}">
+                <div class="flex-row gap centered">
                     <h3>{{variant.type}}</h3>
-                    @for (option of variant.options; track $index) {
-                    <div class="flex-col centered">
-                        <img src={{option.image}} alt="">
-                        <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{option.name}}</p>
+                    <div class="flex-row">
+                        @for (option of variant.options; track $index) {
+                        <div class="flex-col centered">
+                            <img src={{option.image}} alt="">
+                            <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{option.name}}</p>
+                        </div>
+                        }
                     </div>
-                    }
                 </div>
                 }
 
                 @if (cosmetic.images.lego || cosmetic.images.bean) {
-                <div class="centered gap" [ngClass]="{'flex-row': !usingSidenav, 'flex-col': usingSidenav}">
-                    @if (cosmetic.images.lego) {
-                    <h3>LEGO</h3>
+                <div class="flex-row centered gap">
                     <div class="flex-col centered">
-                        <img src={{cosmetic.images.lego.small}} alt="">
-                        <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">LEGO style</p>
-                    </div>
-                    }
+                        <h3>Other gamemodes</h3>
+                        <div class="flex-row gap">
+                            @if (cosmetic.images.lego) {
+                                <div class="flex-col centered">
+                                    <img src={{cosmetic.images.lego.small}} alt="">
+                                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">LEGO style</p>
+                                </div>
+                            }
 
-                    @if (cosmetic.images.bean) {
-                    <h3>Fall Guys</h3>
-                    <div class="flex-col centered">
-                        <img src={{cosmetic.images.bean.small}} alt="">
-                        <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">Bean style</p>
+                            @if (cosmetic.images.bean) {
+                                <div class="flex-col centered">
+                                    <img src={{cosmetic.images.bean.small}} alt="">
+                                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">Bean style</p>
+                                </div>
+                            }
+                        </div>
                     </div>
-                    }
                 </div>
                 }
-
-                
-
             </div>
         </section>
         }
