@@ -48,14 +48,16 @@
             <div class="flex-row gap centered">
                 @for (variant of cosmetic.variants; track $index) {
                 <div class="flex-row gap centered">
-                    <h3>{{variant.type}}</h3>
-                    <div class="flex-row">
+                    <div class="flex-col centered">
+                        <h3>{{variant.type}}</h3>
+                    <div class="flex-row gap">
                         @for (option of variant.options; track $index) {
                         <div class="flex-col centered">
                             <img src={{option.image}} alt="">
                             <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{option.name}}</p>
                         </div>
                         }
+                    </div>
                     </div>
                 </div>
                 }
