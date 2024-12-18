@@ -91,7 +91,7 @@
         @if (cosmetic.set) {
         <section class="flex-col" [ngClass]="{'set-area': !usingSidenav}">
             <h2>Set</h2>
-            <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.set?.text }}</p>
+            <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.set.text }}</p>
             <div class="flex-row gap centered">
                 @for (item of set; track $index) {
                 @if (item.images.icon) {

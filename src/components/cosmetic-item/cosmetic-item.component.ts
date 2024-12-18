@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { Type } from '../../model/cosmetics/cosmetic.model';
 import { BreakpointService } from '../../services/breakpoint.service';
+import { Utils } from '../../util/utils';
 
 @Component({
   selector: 'app-cosmetic-item',
@@ -57,7 +58,7 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
 
   constructor(
     breakpointService: BreakpointService,
-    private router: Router
+    private router: Router,
   ) {
     breakpointService.useSidenav$.subscribe((useSidenav) => {
       this.usingSidenav = useSidenav;
@@ -87,11 +88,7 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   }
 
   getGradientColors() {
-    if (this.colorGradient.length > 0) {
-      let addedHashtag = this.colorGradient.map(color => '#' + color);
-      let gradientString = addedHashtag.join(',');
-      return gradientString;
-    } else return '';
+    Utils.getGradientColors(this.colorGradient);
   }
 
   onLoadImg() {
