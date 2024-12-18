@@ -88,7 +88,15 @@ export class CosmeticListComponent implements OnChanges {
   //other types of items don't have them
   isBrItem(item: BrItem | Car | Instrument | JamTrack) {
     if (item.type && item.type.value) {
-      return item.type.value === 'outfit' || item.type.value === 'backpack' || item.type.value === 'pickaxe' || item.type.value === 'wrap'
+      return item.type.value === 'outfit' || 
+        item.type.value === 'backpack' || 
+        item.type.value === 'pickaxe' || 
+        item.type.value === 'wrap' || 
+        item.type.value === 'emote' || 
+        item.type.value === 'glider' || 
+        item.type.value === 'contrail' || 
+        item.type.value === 'emoji' || 
+        item.type.value === 'loadingscreen'
     } else return false;
   }
 
