@@ -10,6 +10,7 @@ import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { Utils } from '../../util/utils';
 
 @Component({
   selector: 'app-cosmetic-list',
@@ -189,20 +190,12 @@ export class CosmeticListComponent implements OnChanges {
 
   //Items from certain series might have a set of colors for a background gradient
   getItemColorGradient(item: Cosmetic): Array<string> {
-    if (item.series) {
-      return item.series.colors;
-    } else {
-      return [];
-    }
+    return Utils.getItemColorGradient(item);
   }
 
   //Items from certain series might have a background image
   getItemSeriesBackground(item: Cosmetic): string {
-    if (item.series && item.series.image) {
-      return 'url(' + item.series.image + ')';
-    } else {
-      return '';
-    }
+    return Utils.getItemSeriesBackground(item);
   }
 
   //Previously used to filter through the current array

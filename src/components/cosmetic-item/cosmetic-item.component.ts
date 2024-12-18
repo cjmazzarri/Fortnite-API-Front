@@ -88,7 +88,7 @@ export class CosmeticItemComponent implements OnInit, OnDestroy {
   }
 
   getGradientColors() {
-    Utils.getGradientColors(this.colorGradient);
+    Utils.formatGradientColors(this.colorGradient);
   }
 
   onLoadImg() {
