@@ -6,21 +6,51 @@
                 <div class="flex-row">
                     <img class="type-icon" src="/assets/item-types/outfit.PNG" alt="Cosmetic type">
                     @if (cosmetic.series) {
-                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.type.displayValue }} - {{
+                    <p [ngStyle]="{
+                        'font-size': usingSidenav? '' : '1.25rem',
+                        'background-image': seriesBackground? seriesBackground : 
+                                    colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + formattedGradient + ')' : 
+                                    'linear-gradient(45deg, var(--' + cosmetic.rarity.value +'), transparent)',
+                        'border': '0.18rem solid',
+                        'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : 'var(--'+cosmetic.rarity.value+')',                        
+                        'border-radius': '0.6rem'
+                    }">{{ cosmetic.type.displayValue }} - {{
                         cosmetic.series.value }}</p>
                     } @else {
-                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{ cosmetic.type.displayValue }} - {{
-                        cosmetic.rarity.value }}</p>
+                    <p [ngStyle]="{
+                        'font-size': usingSidenav? '' : '1.25rem',
+                        'background-image': seriesBackground? seriesBackground : 
+                                    colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + formattedGradient + ')' : 
+                                    'linear-gradient(45deg, var(--' + cosmetic.rarity.value +'), transparent)',
+                        'border': '0.18rem solid',
+                        'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : 'var(--'+cosmetic.rarity.value+')',                        
+                        'border-radius': '0.6rem'
+                        }">
+                        {{ cosmetic.type.displayValue }} - {{cosmetic.rarity.value }}
+                    </p>
                     }
                 </div>
                 <div class="details-area"
                     [ngStyle]="{'justify-content': usingSidenav? 'center': 'flex-start', 'column-gap': usingSidenav? '1rem' : '2rem'}">
                     <div class="img">
                         @if (cosmetic.images.icon) {
-                        <img class="icon" src={{cosmetic.images.icon}} alt="Icon"
-                            [ngStyle]="{'width': usingSidenav? '9rem': '15rem'}">
+                        <img [className]="this.colorGradient.length == 0 ? 'item-img ' +cosmetic.rarity.value+'-img' : 'item-img'"
+                            class="item-img" src={{cosmetic.images.icon}} alt="Icon" [ngStyle]="{
+                                'background-image': seriesBackground? seriesBackground : 
+                                    colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + formattedGradient + ')' : 
+                                    'linear-gradient(45deg, var(--' + cosmetic.rarity.value +'), transparent)',
+                                'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : '',
+                                'width': usingSidenav? '9rem': '15rem',
+                            }">
                         } @else if (cosmetic.images.smallIcon) {
-                        <img class="small-icon" src={{cosmetic.images.smallIcon}} alt="Small icon">
+                        <img [className]="this.colorGradient.length == 0 ? 'item-img ' +cosmetic.rarity.value+'-img' : 'item-img'"
+                            class="item-img" src={{cosmetic.images.smallIcon}} alt="Small icon" [ngStyle]="{
+                        'background-image': seriesBackground? seriesBackground : 
+                            colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + formattedGradient + ')' : 
+                            'linear-gradient(45deg, var(--' + cosmetic.rarity.value +'), transparent)',
+                        'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : '',
+                        'width': usingSidenav? '9rem': '15rem',
+                    }">
                         }
                     </div>
                     <div class="flex-col">
@@ -50,14 +80,14 @@
                 <div class="flex-row gap centered">
                     <div class="flex-col centered">
                         <h3>{{variant.type}}</h3>
-                    <div class="flex-row gap">
-                        @for (option of variant.options; track $index) {
-                        <div class="flex-col centered">
-                            <img src={{option.image}} alt="">
-                            <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{option.name}}</p>
+                        <div class="flex-row gap centered">
+                            @for (option of variant.options; track $index) {
+                            <div class="flex-col centered">
+                                <img src={{option.image}} alt="">
+                                <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{option.name}}</p>
+                            </div>
+                            }
                         </div>
-                        }
-                    </div>
                     </div>
                 </div>
                 }
@@ -68,17 +98,17 @@
                         <h3>Other gamemodes</h3>
                         <div class="flex-row gap">
                             @if (cosmetic.images.lego) {
-                                <div class="flex-col centered">
-                                    <img src={{cosmetic.images.lego.small}} alt="">
-                                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">LEGO style</p>
-                                </div>
+                            <div class="flex-col centered">
+                                <img src={{cosmetic.images.lego.small}} alt="">
+                                <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">LEGO style</p>
+                            </div>
                             }
 
                             @if (cosmetic.images.bean) {
-                                <div class="flex-col centered">
-                                    <img src={{cosmetic.images.bean.small}} alt="">
-                                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">Bean style</p>
-                                </div>
+                            <div class="flex-col centered">
+                                <img src={{cosmetic.images.bean.small}} alt="">
+                                <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">Bean style</p>
+                            </div>
                             }
                         </div>
                     </div>
@@ -96,12 +126,24 @@
                 @for (item of set; track $index) {
                 @if (item.images.icon) {
                 <div class="flex-col centered">
-                    <img class="related-item-img" src={{item.images.icon}} alt="">
+                    <img src={{item.images.icon}} [className]="this.colorGradient.length == 0 ? 'item-img ' +cosmetic.rarity.value+'-img related-item-img' : 'item-img related-item-img'" alt={{item.name}} 
+                        [ngStyle]="{
+                            'background-image': seriesBackground? seriesBackground : 
+                                colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + formattedGradient + ')' : 
+                            'linear-gradient(45deg, var(--' + cosmetic.rarity.value +'), transparent)',
+                            'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : ''
+                        }">
                     <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{item.name}}</p>
                 </div>
-                } @else if (item.images.icon) {
+                } @else if (item.images.smallIcon) {
                 <div class="flex-col centered">
-                    <img class="related-item-img" src={{item.images.smallIcon}} alt="">
+                    <img src={{item.images.smallIcon}} [className]="this.colorGradient.length == 0 ? 'item-img ' +cosmetic.rarity.value+'-img related-item-img' : 'item-img related-item-img'" alt={{item.name}} 
+                        [ngStyle]="{
+                            'background-image': seriesBackground? seriesBackground : 
+                                colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + formattedGradient + ')' : 
+                            'linear-gradient(45deg, var(--' + cosmetic.rarity.value +'), transparent)',
+                            'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : ''
+                        }">
                     <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}"
                         [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{item.name}}</p>
                 </div>

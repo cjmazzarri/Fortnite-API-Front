@@ -195,7 +195,7 @@ export class CosmeticListComponent implements OnChanges {
 
   //Items from certain series might have a background image
   getItemSeriesBackground(item: Cosmetic): string {
-    return Utils.getItemSeriesBackground(item);
+    return Utils.formatItemSeriesBackground(item);
   }
 
   //Previously used to filter through the current array

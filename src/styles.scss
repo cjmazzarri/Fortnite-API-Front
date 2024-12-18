@@ -76,14 +76,72 @@ body {
     background-color: var(--bg);
 }
 
+.item-img {
+    border: 0.25rem solid;
+    border-radius: 0.9rem;    
+}
 
-div.cdk-virtual-scroll-content-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
+.common-img {
+    border-color: var(--common);
+}
+
+.uncommon-img {
+    border-color: var(--uncommon);
+}
+
+.rare-img {
+    border-color: var(--rare);
+}
+
+.epic-img {
+    border-color: var(--epic);  
+}
+
+
+.legendary-img {
+    border-color: var(--legendary);
+}
+
+
+.shadow-img {
+    border-color: var(--shadow);
+}
+
+
+.gaminglegends-img {
+    border-color: var(--gaming);
+}
+
+.slurp-img {
+    border-color: var(--slurp);
+}
+
+.starwars-img {
+    border-color: var(--starwars);
+}
+
+.dc-img {
+    border-color: var(--dc);
+}
+
+.dark-img {
+    border-color: var(--dark);
+}
+
+.lava-img {
+    border-color: var(--lava);
+}
+
+.mclaren-img {
+    border-color: var(--mclaren);
+}
+
+.lamborghini-img {
+    border-color: var(--lamborghini);
+}
+
+.frozen-img {
+    border-color: var(--frozen);
 }
 
 /* .backgrounded-field .mdc-text-field--outlined .mdc-notched-outline {

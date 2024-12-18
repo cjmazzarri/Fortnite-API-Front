@@ -6,6 +6,8 @@ import { BrItem } from '../../model/cosmetics/cosmetic.model';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { Utils } from '../../util/utils';
 
 @Component({
   selector: 'app-cosmetic-detail',
@@ -24,12 +26,16 @@ export class CosmeticDetailComponent implements OnInit {
   videoUrl: string = "https://youtu.be/";
   set: BrItem[] = []; //The item's associated set, if any
   usingSidenav: boolean = true;
+  seriesBackground: string = "";
+  colorGradient: string[] = [];
+  formattedGradient: string = "";
   
   constructor (
     private route: ActivatedRoute,
     private cosmeticsService: CosmeticsService,
     private breakpointService: BreakpointService,
-    private title: Title
+    private title: Title,
+    private router: Router
   ) {
       breakpointService.useSidenav$.subscribe((useSidenav) => {
         this.usingSidenav = useSidenav;
@@ -57,6 +63,9 @@ export class CosmeticDetailComponent implements OnInit {
       if (response.status == 200) {
         this.cosmetic = response.data;
         this.setTitle();
+        this.seriesBackground = Utils.formatItemSeriesBackground(this.cosmetic);
+        this.colorGradient = Utils.getItemColorGradient(this.cosmetic);
+        this.formattedGradient = Utils.formatGradientColors(this.colorGradient);
         if (this.cosmetic.showcaseVideo) {
           this.videoUrl += this.cosmetic.showcaseVideo;
         }
@@ -73,5 +82,11 @@ export class CosmeticDetailComponent implements OnInit {
         }
       })
     }    
+  }
+
+  //TODO: revisar
+  goToDetail(id: string) {
+    console.log('go')
+    this.router.navigate(['/cosmetics/' + id], {onSameUrlNavigation: 'reload' });
   }
 }

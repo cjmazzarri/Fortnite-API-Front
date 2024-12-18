@@ -19,7 +19,7 @@ export class Utils {
         }
     }
 
-    static getItemSeriesBackground(item: Cosmetic): string {
+    static formatItemSeriesBackground(item: Cosmetic): string {
         if (item.series && item.series.image) {
             return 'url(' + item.series.image + ')';
         } else {
