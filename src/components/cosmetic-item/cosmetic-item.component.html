@@ -20,13 +20,14 @@
             <mat-spinner></mat-spinner>
         </div>
         }
-        <img [className]="this.colorGradient.length == 0 ? 'item-img ' +rarity+'-img ' : 'item-img'" class="item-img"
+        <img [className]="this.colorGradient.length == 0 ? 'item-img ' +rarity+'-img' : 'item-img'"
             [hidden]="loadingImg" (load)="onLoadImg()" (error)="onLoadImgError()" src={{image}} [ngStyle]="{
                 'background-image': seriesBackground? seriesBackground : 
                     this.colorGradient.length > 0 ? 'linear-gradient' + '(-45deg,' + getGradientColors() + ')' : 
                     'linear-gradient(45deg, var(--' + rarity +'), transparent)',
                 'border-color': this.colorGradient.length > 0 ? '#' + this.colorGradient[0] : '',
-                'width': usingSidenav? '128px' : '264px'
+                'width': usingSidenav? '128px' : '264px',
+                'cursor': BrItem? 'pointer': ''
                 }" alt="Cosmetic's picture" (click)="goToDetail()"
         >
         <!-- If the item has a background img, sets is as background, if it doesn't, uses the color gradient -->
@@ -42,7 +43,11 @@
         <img class="type-icon" matTooltip= '{{validateTooltip()}}' src={{getTypeImg()}} alt="Cosmetic type icon"
             [ngStyle]="{'width': usingSidenav? '1.5rem': '2rem'}">
         <div class="name">
-            <p [ngStyle]="{'font-size': setFontSize(itemName) }">
+            <p (click)="goToDetail()"
+                [ngStyle]="{
+                    'font-size': setFontSize(itemName),
+                    'cursor': BrItem? 'pointer': ''
+                }">
                 {{ hasLongName(itemName)? (itemName | slice:0:titleLimit)+'...' : itemName }}
             </p>
         </div>
