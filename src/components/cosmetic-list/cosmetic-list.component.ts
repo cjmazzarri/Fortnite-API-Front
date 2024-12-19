@@ -97,7 +97,8 @@ export class CosmeticListComponent implements OnChanges {
         item.type.value === 'glider' || 
         item.type.value === 'contrail' || 
         item.type.value === 'emoji' || 
-        item.type.value === 'loadingscreen'
+        item.type.value === 'loadingscreen' || 
+        item.type.value === 'shoe'
     } else return false;
   }
 
