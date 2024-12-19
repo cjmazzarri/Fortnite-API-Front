@@ -2,7 +2,7 @@ import { NgClass, NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { YouTubePlayerModule } from "@angular/youtube-player";
-import { BrItem } from '../../model/cosmetics/cosmetic.model';
+import { BrItem, Cosmetic } from '../../model/cosmetics/cosmetic.model';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
 import { Title } from '@angular/platform-browser';
@@ -82,6 +82,18 @@ export class CosmeticDetailComponent implements OnInit {
         }
       })
     }    
+  }
+
+  getGradientColors(cosmetic: Cosmetic): Array<string> {
+    return Utils.getItemColorGradient(cosmetic);
+  }
+
+  formatGradientColors(gradient: string[]): string {
+    return Utils.formatGradientColors(gradient);
+  }
+
+  formatSeriesBackground(item: Cosmetic): string {
+    return Utils.formatItemSeriesBackground(item);
   }
 
   //TODO: revisar
