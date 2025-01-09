@@ -15,7 +15,7 @@ import { Utils } from '../../util/utils';
   imports: [
     YouTubePlayerModule,
     NgStyle,
-    NgClass
+    NgClass,
   ],
   templateUrl: './cosmetic-detail.component.html',
   styleUrl: './cosmetic-detail.component.scss'
@@ -29,18 +29,18 @@ export class CosmeticDetailComponent implements OnInit {
   seriesBackground: string = "";
   colorGradient: string[] = [];
   formattedGradient: string = "";
-  
-  constructor (
+
+  constructor(
     private route: ActivatedRoute,
     private cosmeticsService: CosmeticsService,
     private breakpointService: BreakpointService,
     private title: Title,
     private router: Router
   ) {
-      breakpointService.useSidenav$.subscribe((useSidenav) => {
-        this.usingSidenav = useSidenav;
-      });      
-    }
+    breakpointService.useSidenav$.subscribe((useSidenav) => {
+      this.usingSidenav = useSidenav;
+    });
+  }
 
   ngOnInit(): void {
     this.itemId = this.route.snapshot.paramMap.get('id');
@@ -81,7 +81,7 @@ export class CosmeticDetailComponent implements OnInit {
           this.set = response.data;
         }
       })
-    }    
+    }
   }
 
   getGradientColors(cosmetic: Cosmetic): Array<string> {
@@ -99,6 +99,6 @@ export class CosmeticDetailComponent implements OnInit {
   //TODO: revisar
   goToDetail(id: string) {
     console.log('go')
-    this.router.navigate(['/cosmetics/' + id], {onSameUrlNavigation: 'reload' });
+    this.router.navigate(['/cosmetics/' + id], { onSameUrlNavigation: 'reload' });
   }
 }
