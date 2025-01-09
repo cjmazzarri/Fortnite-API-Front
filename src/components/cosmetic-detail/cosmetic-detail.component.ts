@@ -95,8 +95,7 @@ export class CosmeticDetailComponent implements OnInit {
   formatSeriesBackground(item: Cosmetic): string {
     return Utils.formatItemSeriesBackground(item);
   }
-
-  //TODO: revisar
+  
   goToDetail(id: string) {
     this.router.navigate(['/cosmetics/' + id]);
     this.getCosmeticDetail(id);

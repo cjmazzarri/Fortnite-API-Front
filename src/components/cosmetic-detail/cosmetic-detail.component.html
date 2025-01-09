@@ -141,7 +141,7 @@
                                 getGradientColors(item).length > 0 ? 'linear-gradient' + '(-45deg,' + formatGradientColors(getGradientColors(item)) + ')' : 
                             'linear-gradient(45deg, var(--' + item.rarity.value +'), transparent)',
                             'border-color': getGradientColors(item).length > 0 ? '#' + getGradientColors(item)[0] : ''
-                        }">
+                        }" (click)="goToDetail(item.id)">
                     }
                     <p class="set-item-name" [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{item.name}}</p>
                 </div>
