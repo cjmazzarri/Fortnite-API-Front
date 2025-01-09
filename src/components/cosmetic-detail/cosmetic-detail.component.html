@@ -143,7 +143,7 @@
                             'border-color': getGradientColors(item).length > 0 ? '#' + getGradientColors(item)[0] : ''
                         }">
                     }
-                    <p [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{item.name}}</p>
+                    <p class="set-item-name" [ngStyle]="{'font-size': usingSidenav? '' : '1.25rem'}">{{item.name}}</p>
                 </div>
                 
                 }
