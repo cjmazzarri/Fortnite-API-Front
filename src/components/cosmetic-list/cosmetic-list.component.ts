@@ -99,7 +99,8 @@ export class CosmeticListComponent implements OnChanges {
         item.type.value === 'emoji' || 
         item.type.value === 'loadingscreen' || 
         item.type.value === 'spray' ||
-        item.type.value === 'shoe'
+        item.type.value === 'shoe' || 
+        item.type.value === 'petcarrier'
     } else return false;
   }
 
@@ -138,6 +139,8 @@ export class CosmeticListComponent implements OnChanges {
         case 'banner':
         case 'aura':
         case 'shoe':
+        case 'petcarrier':
+        case 'pet':
           if (item.images.icon) {
             imgPath = item.images.icon
           } else {
