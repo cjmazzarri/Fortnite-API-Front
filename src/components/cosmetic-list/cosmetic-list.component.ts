@@ -100,7 +100,8 @@ export class CosmeticListComponent implements OnChanges {
         item.type.value === 'loadingscreen' || 
         item.type.value === 'spray' ||
         item.type.value === 'shoe' || 
-        item.type.value === 'petcarrier'
+        item.type.value === 'petcarrier' ||
+        item.type.value === 'pet'
     } else return false;
   }
 
