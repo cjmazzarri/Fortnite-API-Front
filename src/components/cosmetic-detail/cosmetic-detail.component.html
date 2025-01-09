@@ -127,15 +127,15 @@
                 
                 <div class="flex-col centered">
                     @if (item.images.icon) {
-                        <img src={{item.images.icon}} [className]="getGradientColors(item).length == 0 ? 'item-img ' +item.rarity.value+'-img related-item-img' : 'item-img related-item-img'" alt={{item.name}} 
+                        <img src={{item.images.icon}} [className]="getGradientColors(item).length == 0 ? 'item-img ' +item.rarity.value+'-img related-item-img cursor' : 'item-img related-item-img cursor'" alt={{item.name}} 
                         [ngStyle]="{
                             'background-image': item.series?.image ? formatSeriesBackground(item) : 
                                 getGradientColors(item).length > 0 ? 'linear-gradient' + '(-45deg,' + formatGradientColors(getGradientColors(item)) + ')' : 
                             'linear-gradient(45deg, var(--' + item.rarity.value +'), transparent)',
                             'border-color': getGradientColors(item).length > 0 ? '#' + getGradientColors(item)[0] : ''
-                        }">
+                        }" (click)="goToDetail(item.id)">
                     } @else if (item.images.smallIcon) {
-                        <img src={{item.images.smallIcon}} [className]="getGradientColors(item).length == 0 ? 'item-img ' +item.rarity.value+'-img related-item-img' : 'item-img related-item-img'" alt={{item.name}} 
+                        <img src={{item.images.smallIcon}} [className]="getGradientColors(item).length == 0 ? 'item-img ' +item.rarity.value+'-img related-item-img cursor' : 'item-img related-item-img cursor'" alt={{item.name}} 
                         [ngStyle]="{
                             'background-image': item.series?.image ? formatSeriesBackground(item) : 
                                 getGradientColors(item).length > 0 ? 'linear-gradient' + '(-45deg,' + formatGradientColors(getGradientColors(item)) + ')' : 

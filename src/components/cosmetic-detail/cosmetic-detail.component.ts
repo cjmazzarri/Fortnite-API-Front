@@ -98,7 +98,7 @@ export class CosmeticDetailComponent implements OnInit {
 
   //TODO: revisar
   goToDetail(id: string) {
-    console.log('go')
-    this.router.navigate(['/cosmetics/' + id], { onSameUrlNavigation: 'reload' });
+    this.router.navigate(['/cosmetics/' + id]);
+    this.getCosmeticDetail(id);
   }
 }
