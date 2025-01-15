@@ -4,6 +4,7 @@ import { MaterialModule } from '../../app/material-module/material.module';
 import { Suboption } from '../../model/menu/suboption.model';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { MenuOptionComponent } from './menu-option/menu-option.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +12,8 @@ import { MenuOptionComponent } from './menu-option/menu-option.component';
   imports: [
     MaterialModule,
     RouterOutlet,
-    MenuOptionComponent
+    MenuOptionComponent,
+    RouterLink
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
