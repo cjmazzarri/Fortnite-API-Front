@@ -3,7 +3,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Suboption } from '../../../model/menu/suboption.model';
 import { RouterLink } from '@angular/router';
-import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-menu-option',
@@ -12,7 +11,6 @@ import { RouterLinkActive } from '@angular/router';
     MatIconModule,
     MatMenuModule,
     RouterLink,
-    RouterLinkActive
   ],
   templateUrl: './menu-option.component.html',
   styleUrl: './menu-option.component.scss'
