@@ -1,0 +1,21 @@
+<article class="entry-container" [ngClass]="allItems.length > 1 ? 'multiple' : ''">
+    @for (cosmetic of allItems; track $index) {
+        @if (cosmetic) {
+        <app-cosmetic-item 
+        [id]="cosmetic.id"
+        [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
+            cosmetic.title ? cosmetic.title + ' - ' + cosmetic.artist : cosmetic.name" [image]="checkImageType(cosmetic)"
+            [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
+            [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
+            [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
+            [seriesBackground]="formatItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
+            [type]="getCosmeticType(cosmetic)" [BrItem]="isBrItem(cosmetic)"                    
+            >                    
+        </app-cosmetic-item>
+        }
+    }
+</article>
+<footer class="price-area">
+    <img class="vbucks" src="assets/vbucks.png" alt="V-Bucks icon">
+    <p class="price">{{ entry.finalPrice }}</p>
+</footer>
