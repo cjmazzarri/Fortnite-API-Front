@@ -41,7 +41,7 @@
                 [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
                         cosmetic.title ? cosmetic.title + ' - ' + cosmetic.artist : cosmetic.name" [image]="checkImageType(cosmetic)"
                 [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
-                [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
+                [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic, this.legoSkins, this.beans) : [] "
                 [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
                 [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
                 [type]="getCosmeticType(cosmetic)" [BrItem]="isBrItem(cosmetic)">
@@ -64,7 +64,7 @@
                 [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
                     cosmetic.title ? cosmetic.title + ' - ' + cosmetic.artist : cosmetic.name" [image]="checkImageType(cosmetic)"
                     [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
-                    [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
+                    [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic, this.legoSkins, this.beans) : [] "
                     [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
                     [seriesBackground]="getItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
                     [type]="getCosmeticType(cosmetic)" [BrItem]="isBrItem(cosmetic)">
@@ -82,4 +82,20 @@
             </button>
         </div>
     }
+}
+
+@if (currentRoute == "shop") {
+    <div class="cosmetics-list">
+        @if (allCosmetics.length == 0) {
+            <h3>No items found!</h3>
+        } @else {
+                @for (entry of shopEntries; track $index) {
+                    <app-shop-entry 
+                        [entry]="entry" 
+                        [legoSkins]="legoSkins" 
+                        [beans]="beans">
+                    </app-shop-entry>
+                }
+        }
+    </div>
 }
