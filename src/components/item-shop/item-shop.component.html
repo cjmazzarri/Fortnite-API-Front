@@ -1,1 +1,23 @@
-<p>item-shop works!</p>
+<main class="main-container">
+    <section class="cosmetics-container">
+        <div class="text-container">
+            <h1>Item shop</h1>
+            <h3>Resets in: </h3>
+        </div>
+
+        <div class="text-container">
+            <h3>Today's item shop</h3>
+        </div>
+        
+        <app-cosmetic-list
+            [allCosmetics]="allCosmetics"            
+            [brItems]="brItems"
+            [beans]="beans"
+            [legoSkins]="legoSkins"
+            [cars]="cars"
+            [instruments]="instruments"
+            [jamTracks]="jamTracks"
+            [shopEntries]="entries"       
+        ></app-cosmetic-list>
+    </section>
+</main>

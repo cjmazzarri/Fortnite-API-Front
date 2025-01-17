@@ -32,12 +32,7 @@
         >
         <!-- If the item has a background img, sets is as background, if it doesn't, uses the color gradient -->
         <!-- If the item has a color gradient, uses the 1st color in it as the border color -->
-        @if (price > 0) {
-        <footer class="price-area">
-            <img class="vbucks" src="assets/vbucks.png" alt="V-Bucks icon">
-            <p [className]="'price '+ rarity+'-p'">{{ price }}</p>
-        </footer>
-        }
+        
     </div>
     <div class="name-container" [ngStyle]="{'max-width': usingSidenav? '136px': '272px', 'height': usingSidenav? '3rem': '' }">
         <img class="type-icon" matTooltip= '{{validateTooltip()}}' src={{getTypeImg()}} alt="Cosmetic type icon"
