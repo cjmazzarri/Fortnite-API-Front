@@ -6,12 +6,12 @@ import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Bean, BrItem, Car, Cosmetic, Gamemode, Instrument, JamTrack, LegoSkin, Type } from '../../model/cosmetics/cosmetic.model';
+import { ShopEntry } from '../../model/cosmetics/shop.model';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CosmeticsService } from '../../services/cosmetics.service';
+import { Utils } from '../../util/utils';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { Utils } from '../../util/utils';
-import { ShopEntry } from '../../model/cosmetics/shop.model';
 import { ShopEntryComponent } from '../shop-entry/shop-entry.component';
 
 @Component({
@@ -66,6 +66,9 @@ export class CosmeticListComponent implements OnChanges {
   //Waits until allCosmetics has received the values via @Input
   ngOnChanges(): void {
     this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);
+    if (this.shopEntries) {
+      this.prioritySort();
+    }
   }
 
   ngOnDestroy(): void {
@@ -145,5 +148,16 @@ export class CosmeticListComponent implements OnChanges {
 
   atSearch(): boolean {
     return this.currentRoute == "search";
+  }
+
+  prioritySort() {
+    this.shopEntries?.sort((a, b) => {
+      if (a.sortPriority > b.sortPriority) {
+        return -1;
+      } else if (a.sortPriority < b.sortPriority) { 
+        return 1;
+      }
+      return 0;
+    })
   }
 }

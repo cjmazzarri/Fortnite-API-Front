@@ -86,7 +86,7 @@
 
 @if (currentRoute == "shop") {
     <div class="cosmetics-list">
-        @if (allCosmetics.length == 0) {
+        @if (shopEntries?.length == 0) {
             <h3>No items found!</h3>
         } @else {
                 @for (entry of shopEntries; track $index) {
