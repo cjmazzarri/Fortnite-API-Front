@@ -1,3 +1,6 @@
+@if (entry.bundle) {
+    <h2 class="bundle-name">{{ entry.bundle.name }}</h2>
+}
 <article class="entry-container" [ngClass]="allItems.length > 1 ? 'multiple' : ''">
     @for (cosmetic of allItems; track $index) {
         @if (cosmetic) {
