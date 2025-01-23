@@ -10,7 +10,7 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [
     NgClass,
-    CosmeticItemComponent
+    CosmeticItemComponent,
   ],
   templateUrl: './shop-entry.component.html',
   styleUrl: './shop-entry.component.scss'
@@ -26,8 +26,8 @@ export class ShopEntryComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.allItems = this.allItems.concat(
-      this.entry.brItems, 
-      this.entry.cars,  
+      this.entry.brItems,
+      this.entry.cars,
       this.entry.instruments,
       this.entry.tracks,
     );
