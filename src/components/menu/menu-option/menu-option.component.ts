@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Suboption } from '../../../model/menu/suboption.model';
 import { RouterLink } from '@angular/router';
+import { Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu-option',
@@ -22,8 +23,13 @@ export class MenuOptionComponent {
   @Input() icon: string = '';
   @Input() route: string = '';
   @Input() useSidenav: boolean = false;
+  @Output() clicked = new EventEmitter;
 
   hasSuboptions(): boolean {
     return this.suboptions.length > 0;
+  }
+
+  clickedOption() {
+    this.clicked.emit();
   }
 }

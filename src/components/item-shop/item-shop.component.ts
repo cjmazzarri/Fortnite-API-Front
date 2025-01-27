@@ -37,8 +37,7 @@ export class ItemShopComponent implements OnInit {
     this.resetTime.setUTCDate(this.resetTime.getDate() + 1)
     this.resetTime.setUTCHours(0, 0, 0, 0);    
   }
-  ngOnInit(): void {
-    this.calculateReset();
+  ngOnInit(): void {    
     this.getItems();
   }
 
@@ -57,6 +56,7 @@ export class ItemShopComponent implements OnInit {
     })
   }
 
+  //TODO: Fix
   calculateReset() {
     this.clock = interval(1000).subscribe(() => {
       let now = new Date();

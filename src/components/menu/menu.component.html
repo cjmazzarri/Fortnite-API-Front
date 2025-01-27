@@ -11,13 +11,13 @@
             </div>
 
             <app-menu-option [text]="'Cosmetics'" [icon]="'dry_cleaning'" [useSidenav]="useSidenav"
-                [suboptions]="cosmeticSuboptions"></app-menu-option>
-            <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'" [route]="'/shop'" [useSidenav]="useSidenav"></app-menu-option>
+                [suboptions]="cosmeticSuboptions" (clicked)="sidenav.close()"></app-menu-option>
+            <app-menu-option [text]="'Item shop'" [icon]="'shopping_cart'" [route]="'/shop'" [useSidenav]="useSidenav" (clicked)="sidenav.close()"></app-menu-option>
             <!-- [route]="'/shop'" -->
-            <app-menu-option [text]="'Player stats'" [icon]="'group'" [useSidenav]="useSidenav"></app-menu-option>
-            <app-menu-option [text]="'News'" [icon]="'newspaper'" [useSidenav]="useSidenav"></app-menu-option>
-            <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'" [useSidenav]="useSidenav"></app-menu-option>
-            <app-menu-option [text]="'Minimap'" [icon]="'map'" [useSidenav]="useSidenav"></app-menu-option>
+            <app-menu-option [text]="'Player stats'" [icon]="'group'" [useSidenav]="useSidenav" (clicked)="sidenav.close()"></app-menu-option>
+            <app-menu-option [text]="'News'" [icon]="'newspaper'" [useSidenav]="useSidenav" (clicked)="sidenav.close()"></app-menu-option>
+            <app-menu-option [text]="'Playlists'" [icon]="'sports_esports'" [useSidenav]="useSidenav" (clicked)="sidenav.close()"></app-menu-option>
+            <app-menu-option [text]="'Minimap'" [icon]="'map'" [useSidenav]="useSidenav" (clicked)="sidenav.close()"></app-menu-option>
         </aside>
     </mat-sidenav>
 
