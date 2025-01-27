@@ -160,4 +160,11 @@ html {
   @include searchbar.colors($light-theme);
   @include button.style($light-theme);
   @include card.card-background($light-theme);
+  @include mat.expansion-overrides((
+            container-background-color: transparent,
+            container-text-color: mat.get-theme-color($light-theme, primary, 100),
+            header-text-color: mat.get-theme-color($light-theme, primary, 100),
+            header-text-font: 'Karla, serif',
+            container-text-font: 'Karla, serif'
+        ));
 }

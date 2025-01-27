@@ -13,6 +13,7 @@ import { Utils } from '../../util/utils';
 import { CosmeticItemComponent } from '../cosmetic-item/cosmetic-item.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { ShopEntryComponent } from '../shop-entry/shop-entry.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-cosmetic-list',
@@ -24,7 +25,8 @@ import { ShopEntryComponent } from '../shop-entry/shop-entry.component';
     CosmeticItemComponent,
     MatButtonModule,
     MatIcon,
-    ShopEntryComponent
+    ShopEntryComponent,
+    MatExpansionModule
   ],
   templateUrl: './cosmetic-list.component.html',
   styleUrl: './cosmetic-list.component.scss'
@@ -40,6 +42,7 @@ export class CosmeticListComponent implements OnChanges {
   @Input() allCosmetics: Array<BrItem | Car | JamTrack | Instrument> = [];
   @Input() allAux: Array<BrItem | Car | JamTrack | Instrument> = [];
   @Input() shopEntries?: Array<ShopEntry> = [];
+  standaloneTracks: Array<ShopEntry> = [];
   search: string | null = "";
   typeFilters: Gamemode[] = [Gamemode.BattleRoyale, Gamemode.Festival, Gamemode.RocketRacing];
   gamemode = Gamemode;
@@ -60,19 +63,34 @@ export class CosmeticListComponent implements OnChanges {
     });
     this.route.url.subscribe(params => {
       this.currentRoute = params[0].path;
-    });    
+    });
   }
 
   //Waits until allCosmetics has received the values via @Input
   ngOnChanges(): void {
     this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);
+    
     if (this.shopEntries) {
       this.prioritySort();
+      /* for (let entry of this.shopEntries) {
+        console.log(entry.tracks);        
+        if (entry.tracks && !entry.brItems && !entry.cars && !entry.instruments) {          
+          console.log('moved ', entry.devName)
+          this.standaloneTracks.push(entry);
+          let index = this.shopEntries.indexOf(entry);
+          this.shopEntries.splice(index, 1);
+        }
+      } */
     }
   }
 
   ngOnDestroy(): void {
     this.timeSub.unsubscribe();
+  }
+
+  //Returns true if the shop entry contains only a Jam Track
+  validateShopJamTrack(entry: ShopEntry) {
+    return entry.offerTag && entry.offerTag.id == 'sparksjamloop';
   }
 
   getBrItemImages(item: BrItem | Cosmetic, legoSkins: Array<LegoSkin>, beans: Array<Bean>) {
@@ -124,7 +142,7 @@ export class CosmeticListComponent implements OnChanges {
       );
       this.allCosmetics = filtered;      
     }
-  } */  
+  } */
 
   filterCosmetics(selectedFiltersChange: MatButtonToggleChange): void {
     this.typeFilters = selectedFiltersChange.value;
@@ -142,8 +160,8 @@ export class CosmeticListComponent implements OnChanges {
     this.endIndex += 20;
     if (!this.atSearch()) {
       this.currentCosmetics = this.allCosmetics.filter((item) => this.typeFilters.indexOf(item.gamemode) > -1);
-    }    
-    this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);    
+    }
+    this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);
   }
 
   atSearch(): boolean {
@@ -154,7 +172,7 @@ export class CosmeticListComponent implements OnChanges {
     this.shopEntries?.sort((a, b) => {
       if (a.sortPriority > b.sortPriority) {
         return -1;
-      } else if (a.sortPriority < b.sortPriority) { 
+      } else if (a.sortPriority < b.sortPriority) {
         return 1;
       }
       return 0;

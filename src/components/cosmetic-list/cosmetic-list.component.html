@@ -90,12 +90,37 @@
             <h3>No items found!</h3>
         } @else {
                 @for (entry of shopEntries; track $index) {
+                    @if (!validateShopJamTrack(entry)) {
                     <app-shop-entry 
                         [entry]="entry" 
                         [legoSkins]="legoSkins" 
                         [beans]="beans">
                     </app-shop-entry>
+                    }
                 }
+
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h2>Jam tracks</h2>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <ng-template matExpansionPanelContent>
+                            <div class="cosmetics-list">
+                                @for (entry of shopEntries; track $index) {
+                                    @if (validateShopJamTrack(entry)) {
+                                        <app-shop-entry
+                                            [entry]="entry">
+                                        </app-shop-entry>
+                                    }
+                                }
+                            </div>
+                        </ng-template>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
         }
     </div>
 }
