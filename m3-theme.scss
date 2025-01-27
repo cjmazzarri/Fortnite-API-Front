@@ -165,6 +165,7 @@ html {
             container-text-color: mat.get-theme-color($light-theme, primary, 100),
             header-text-color: mat.get-theme-color($light-theme, primary, 100),
             header-text-font: 'Karla, serif',
-            container-text-font: 'Karla, serif'
+            container-text-font: 'Karla, serif',
+            header-indicator-color: mat.get-theme-color($light-theme, primary, 100)
         ));
 }
