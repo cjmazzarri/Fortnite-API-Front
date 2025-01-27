@@ -165,3 +165,8 @@ body {
     justify-content: space-between;
     align-items: baseline; /* bc of font size differences between h1 and h3, center wasn't looking right */
 }
+
+mat-accordion {
+    border: 0.25rem solid white;
+    border-radius: 0.5rem;
+}
