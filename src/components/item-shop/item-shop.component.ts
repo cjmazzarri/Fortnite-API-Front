@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
+import { interval, map, Subscription, takeWhile } from 'rxjs';
 import { Bean, BrItem, Car, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
 import { ShopEntry } from '../../model/cosmetics/shop.model';
 import { ShopService } from '../../services/shop.service';
@@ -25,20 +25,21 @@ export class ItemShopComponent implements OnInit {
   jamTracks: Array<JamTrack> = [];
   beans: Array<Bean> = [];
   legoSkins: Array<LegoSkin> = [];
-  allCosmetics: Array<BrItem | Car | JamTrack | Instrument> = [];
-  resetTime: Date = new Date();
-  clock: Subscription = new Subscription();
-  timeUntilReset: number = 0;
-  shopReset: string = "";
+  allCosmetics: Array<BrItem | Car | JamTrack | Instrument> = [];  
+  timeLeft: string = '';
 
   constructor(
     private shopService: ShopService
-  ) {
-    this.resetTime.setUTCDate(this.resetTime.getDate() + 1)
-    this.resetTime.setUTCHours(0, 0, 0, 0);    
-  }
+  ) { }
   ngOnInit(): void {    
     this.getItems();
+    interval(1000)
+      .pipe(
+        map(() => this.calculateReset()),
+      )
+      .subscribe(time => {
+        this.timeLeft = `${time.hours}h ${time.minutes}m ${time.seconds}s`;
+      });
   }
 
   getItems() {
@@ -56,22 +57,17 @@ export class ItemShopComponent implements OnInit {
     })
   }
 
-  //TODO: Fix
   calculateReset() {
-    this.clock = interval(1000).subscribe(() => {
-      let now = new Date();
-      /* this.timeUntilReset = this.resetTime.getTime() - now.getTime(); */
-      let today = new Date();
-      let resta = 0;
-      resta = this.resetTime.getTime() - today.getTime();
-      let difHrs = Math.floor(resta / (1000 * 60 * 60))
-      let difMins = Math.floor(resta / (1000 * 60))
-      let difSecs = Math.floor(resta / 1000);
-      let displayMins = 0;
-      displayMins = Math.floor(((difMins / 60) - difHrs) * 60)
-      let displaySecs = 0;
-      displaySecs = Math.floor(((difSecs / 60) - difMins) * 60)
-      this.shopReset = difHrs + ':' + displayMins + ':' + displaySecs;
-    });
+    const now = new Date();
+    const utcNow = new Date(now.toUTCString());    
+    const nextReset = new Date(utcNow);
+    nextReset.setUTCDate(nextReset.getUTCDate() + 1);
+    nextReset.setUTCHours(0, 0, 0, 0);
+    const difference = nextReset.getTime() - utcNow.getTime(); //diff in milliseconds
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    
+    return { total: difference, hours, minutes, seconds };
   }
 }
