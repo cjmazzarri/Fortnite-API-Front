@@ -46,11 +46,28 @@ class Colors {
     }
 }
 
+class Layout {
+    id: string;
+    name: string;
+    category: string;
+    index: number;
+    rank: number;
+
+    constructor() {
+        this.id = '';
+        this.name = '';
+        this.category = '';
+        this.index = 0;
+        this.rank = 0;
+    }
+}
+
 export class ShopEntry {
     regularPrice: number;
     finalPrice: number;
     devName: string;
     offerId: string;
+    inDate: string;
     outDate: string;
     bundle?: Bundle;
     banner?: Banner;
@@ -58,8 +75,8 @@ export class ShopEntry {
     giftable: boolean;
     refundable: boolean;
     sortPriority: number;
-    //layoutId: string;
-    //layout
+    layoutId: string;
+    layout: Layout;
     colors: Colors;
     //tileSize
     //displayAssetPath 
@@ -76,11 +93,14 @@ export class ShopEntry {
         this.finalPrice = 0;
         this.devName = "";
         this.offerId = "";
+        this.inDate = "";
         this.outDate = "";
         this.offerTag = new OfferTag();
         this.giftable = false;
         this.refundable = false;
         this.sortPriority = 0;
+        this.layoutId = '';
+        this.layout = new Layout();
         this.colors = new Colors();
         this.brItems = [];
         this.tracks = [];
