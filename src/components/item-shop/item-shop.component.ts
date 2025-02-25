@@ -1,6 +1,5 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { interval, map, Subscription, takeWhile } from 'rxjs';
+import { interval, map } from 'rxjs';
 import { Bean, BrItem, Car, Instrument, JamTrack, LegoSkin } from '../../model/cosmetics/cosmetic.model';
 import { ShopEntry } from '../../model/cosmetics/shop.model';
 import { ShopService } from '../../services/shop.service';
@@ -10,7 +9,6 @@ import { CosmeticListComponent } from '../cosmetic-list/cosmetic-list.component'
     selector: 'app-item-shop',
     imports: [
         CosmeticListComponent,
-        DatePipe
     ],
     templateUrl: './item-shop.component.html',
     styleUrl: './item-shop.component.scss'
