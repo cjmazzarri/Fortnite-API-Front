@@ -10,15 +10,14 @@ import { Router } from '@angular/router';
 import { Utils } from '../../util/utils';
 
 @Component({
-  selector: 'app-cosmetic-detail',
-  standalone: true,
-  imports: [
-    YouTubePlayerModule,
-    NgStyle,
-    NgClass,
-  ],
-  templateUrl: './cosmetic-detail.component.html',
-  styleUrl: './cosmetic-detail.component.scss'
+    selector: 'app-cosmetic-detail',
+    imports: [
+        YouTubePlayerModule,
+        NgStyle,
+        NgClass,
+    ],
+    templateUrl: './cosmetic-detail.component.html',
+    styleUrl: './cosmetic-detail.component.scss'
 })
 export class CosmeticDetailComponent implements OnInit {
   itemId: string | null = "";

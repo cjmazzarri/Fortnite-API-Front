@@ -21,14 +21,13 @@ function filterNullNameItems(item: Cosmetic) {
 }
 
 @Component({
-  selector: 'app-cosmetics',
-  standalone: true,
-  imports: [    
-    MatButtonToggleModule,
-    CosmeticListComponent,
-  ],
-  templateUrl: './cosmetics.component.html',
-  styleUrl: './cosmetics.component.scss',
+    selector: 'app-cosmetics',
+    imports: [
+        MatButtonToggleModule,
+        CosmeticListComponent,
+    ],
+    templateUrl: './cosmetics.component.html',
+    styleUrl: './cosmetics.component.scss'
 })
 
 export class CosmeticsComponent implements OnInit {

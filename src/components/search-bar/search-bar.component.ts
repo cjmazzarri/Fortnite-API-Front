@@ -13,20 +13,19 @@ import { CosmeticsService } from '../../services/cosmetics.service';
 import { ResponseDto } from '../../model/api/responseDto.model';
 
 @Component({
-  selector: 'app-search-bar',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    NgStyle,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatTooltipModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss'
+    selector: 'app-search-bar',
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        NgStyle,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatTooltipModule,
+        ReactiveFormsModule
+    ],
+    templateUrl: './search-bar.component.html',
+    styleUrl: './search-bar.component.scss'
 })
 
 export class SearchBarComponent {

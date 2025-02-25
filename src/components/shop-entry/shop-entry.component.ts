@@ -6,14 +6,13 @@ import { Utils } from '../../util/utils';
 import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-shop-entry',
-  standalone: true,
-  imports: [
-    NgClass,
-    CosmeticItemComponent,
-  ],
-  templateUrl: './shop-entry.component.html',
-  styleUrl: './shop-entry.component.scss'
+    selector: 'app-shop-entry',
+    imports: [
+        NgClass,
+        CosmeticItemComponent,
+    ],
+    templateUrl: './shop-entry.component.html',
+    styleUrl: './shop-entry.component.scss'
 })
 
 //Waits until allItems has received the values via @Input

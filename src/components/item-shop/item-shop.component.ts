@@ -7,14 +7,13 @@ import { ShopService } from '../../services/shop.service';
 import { CosmeticListComponent } from '../cosmetic-list/cosmetic-list.component';
 
 @Component({
-  selector: 'app-item-shop',
-  standalone: true,
-  imports: [
-    CosmeticListComponent,
-    DatePipe
-  ],
-  templateUrl: './item-shop.component.html',
-  styleUrl: './item-shop.component.scss'
+    selector: 'app-item-shop',
+    imports: [
+        CosmeticListComponent,
+        DatePipe
+    ],
+    templateUrl: './item-shop.component.html',
+    styleUrl: './item-shop.component.scss'
 })
 
 export class ItemShopComponent implements OnInit {

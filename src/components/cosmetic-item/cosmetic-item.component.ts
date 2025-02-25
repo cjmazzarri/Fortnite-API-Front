@@ -11,26 +11,25 @@ import { BreakpointService } from '../../services/breakpoint.service';
 import { Utils } from '../../util/utils';
 
 @Component({
-  selector: 'app-cosmetic-item',
-  standalone: true,
-  imports: [
-    MatIconModule,
-    MatMenuModule,
-    NgStyle,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
-    SlicePipe
-  ],
-  providers: [
-    {
-      provide: MAT_MENU_PANEL,
-      useValue: {
-        overlayPanelClass: 'variant-menu'
-      }
-    }
-  ],
-  templateUrl: './cosmetic-item.component.html',
-  styleUrl: './cosmetic-item.component.scss'
+    selector: 'app-cosmetic-item',
+    imports: [
+        MatIconModule,
+        MatMenuModule,
+        NgStyle,
+        MatProgressSpinnerModule,
+        MatTooltipModule,
+        SlicePipe
+    ],
+    providers: [
+        {
+            provide: MAT_MENU_PANEL,
+            useValue: {
+                overlayPanelClass: 'variant-menu'
+            }
+        }
+    ],
+    templateUrl: './cosmetic-item.component.html',
+    styleUrl: './cosmetic-item.component.scss'
 })
 
 export class CosmeticItemComponent implements OnInit, OnDestroy {

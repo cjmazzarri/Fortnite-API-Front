@@ -16,20 +16,19 @@ import { ShopEntryComponent } from '../shop-entry/shop-entry.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
-  selector: 'app-cosmetic-list',
-  standalone: true,
-  imports: [
-    SearchBarComponent,
-    MatButtonToggleModule,
-    SearchBarComponent,
-    CosmeticItemComponent,
-    MatButtonModule,
-    MatIcon,
-    ShopEntryComponent,
-    MatExpansionModule
-  ],
-  templateUrl: './cosmetic-list.component.html',
-  styleUrl: './cosmetic-list.component.scss'
+    selector: 'app-cosmetic-list',
+    imports: [
+        SearchBarComponent,
+        MatButtonToggleModule,
+        SearchBarComponent,
+        CosmeticItemComponent,
+        MatButtonModule,
+        MatIcon,
+        ShopEntryComponent,
+        MatExpansionModule
+    ],
+    templateUrl: './cosmetic-list.component.html',
+    styleUrl: './cosmetic-list.component.scss'
 })
 export class CosmeticListComponent implements OnChanges {
   @Input() brItems: Array<BrItem> = [];

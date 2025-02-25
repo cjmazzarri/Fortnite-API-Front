@@ -6,15 +6,14 @@ import { RouterLink } from '@angular/router';
 import { Output } from '@angular/core';
 
 @Component({
-  selector: 'app-menu-option',
-  standalone: true,
-  imports: [
-    MatIconModule,
-    MatMenuModule,
-    RouterLink,
-  ],
-  templateUrl: './menu-option.component.html',
-  styleUrl: './menu-option.component.scss'
+    selector: 'app-menu-option',
+    imports: [
+        MatIconModule,
+        MatMenuModule,
+        RouterLink,
+    ],
+    templateUrl: './menu-option.component.html',
+    styleUrl: './menu-option.component.scss'
 })
 
 export class MenuOptionComponent {
