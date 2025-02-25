@@ -88,14 +88,16 @@
     <div class="cosmetics-list">
         @if (shopEntries?.length == 0) {
             <h3>No items found!</h3>
-        } @else {
-                @for (entry of shopEntries; track $index) {
-                    @if (!validateShopJamTrack(entry)) {
-                    <app-shop-entry 
-                        [entry]="entry" 
-                        [legoSkins]="legoSkins" 
-                        [beans]="beans">
+        } @else {            
+                @for (layout of layoutsToDisplay; track $index) {      
+                    @if (!validateShopJamTrack(layout)) {
+                        @for (entry of layout; track $index) {                            
+                            <app-shop-entry 
+                                [entry]="entry" 
+                                [legoSkins]="legoSkins" 
+                                [beans]="beans">
                     </app-shop-entry>
+                        }
                     }
                 }
 
@@ -109,11 +111,13 @@
 
                         <ng-template matExpansionPanelContent>
                             <div class="cosmetics-list">
-                                @for (entry of shopEntries; track $index) {
-                                    @if (validateShopJamTrack(entry)) {
-                                        <app-shop-entry
-                                            [entry]="entry">
-                                        </app-shop-entry>
+                                @for (layout of layoutsToDisplay; track $index) {
+                                    @if (validateShopJamTrack(layout)) {
+                                        @for (entry of layout; track $index) {
+                                            <app-shop-entry
+                                                [entry]="entry">
+                                            </app-shop-entry>
+                                        }
                                     }
                                 }
                             </div>

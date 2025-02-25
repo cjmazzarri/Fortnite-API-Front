@@ -51,7 +51,8 @@ export class CosmeticListComponent implements OnChanges {
   currentCosmetics: Array<BrItem | Car | JamTrack | Instrument> = []; //cosmetics shown on screen (not all)
   showLoadMoreButton: boolean = true;
   loaded: boolean = false;
-  layouts: any
+  layouts!: Partial<Record<string, ShopEntry[]>>;
+  layoutsToDisplay: Array<ShopEntry[] | undefined> = [];
 
   constructor(
     private cosmeticsService: CosmeticsService,
@@ -71,7 +72,8 @@ export class CosmeticListComponent implements OnChanges {
     this.currentCosmetics = this.allCosmetics.slice(0, this.endIndex);
     
     if (this.shopEntries) {
-      this.prioritySort();
+      this.groupByLayout();
+      
       /* for (let entry of this.shopEntries) {
         console.log(entry.tracks);        
         if (entry.tracks && !entry.brItems && !entry.cars && !entry.instruments) {          
@@ -88,13 +90,9 @@ export class CosmeticListComponent implements OnChanges {
     this.timeSub.unsubscribe();
   }
 
-  groupByLayout() {
-    
-  }
-
   //Returns true if the shop entry contains only a Jam Track
-  validateShopJamTrack(entry: ShopEntry) {
-    return entry.offerTag && entry.offerTag.id == 'sparksjamloop';
+  validateShopJamTrack(layout: ShopEntry[] | undefined) {
+    return layout![0].layoutId.toLowerCase().includes('jamtrack');
   }
 
   getBrItemImages(item: BrItem | Cosmetic, legoSkins: Array<LegoSkin>, beans: Array<Bean>) {
@@ -172,14 +170,37 @@ export class CosmeticListComponent implements OnChanges {
     return this.currentRoute == "search";
   }
 
-  prioritySort() {
-    this.shopEntries?.sort((a, b) => {
-      if (a.layout.index > b.layout.index) {
+  groupByLayout() {
+    this.layouts = Object.groupBy(this.shopEntries!, ({ layoutId }) => layoutId);
+    console.log('unsorted layouts: ', this.layouts);
+    this.sortLayoutsByRank();
+    console.log('sorted: ', this.layoutsToDisplay);
+    this.sortLayoutSubitems();
+  }
+
+  sortLayoutsByRank() {
+    const layouts = Object.values(this.layouts);
+    this.layoutsToDisplay = layouts.toSorted((a, b) => {
+      if (a![0].layout.rank > b![0].layout.rank) {
         return -1;
-      } else if (a.layout.index < b.layout.index) {
+      } else if (a![0].layout.rank < b![0].layout.rank) {
         return 1;
       }
       return 0;
+    });
+  }
+
+  sortLayoutSubitems() {
+    this.layoutsToDisplay.forEach((layout) => {
+      layout?.sort((a, b) => {
+        if (a.sortPriority > b.sortPriority) {
+          return -1;
+        } else if (a.sortPriority < b.sortPriority) {
+          return 1;
+        }
+        return 0;
+      })
     })
   }
+
 }
