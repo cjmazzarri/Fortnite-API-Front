@@ -23,6 +23,7 @@ export class ShopEntryComponent implements OnChanges {
   @Input() legoSkins: Array<LegoSkin> = [];
   @Input() beans: Array<Bean> = [];
   allItems: Array<BrItem | Car | JamTrack | Instrument | undefined> = [];
+  showBundleItems: boolean = false; //for toggling between the bundle image and every item
 
   ngOnChanges(): void {
     this.allItems = this.allItems.concat(

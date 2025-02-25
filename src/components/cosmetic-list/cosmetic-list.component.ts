@@ -52,6 +52,7 @@ export class CosmeticListComponent implements OnChanges {
   currentCosmetics: Array<BrItem | Car | JamTrack | Instrument> = []; //cosmetics shown on screen (not all)
   showLoadMoreButton: boolean = true;
   loaded: boolean = false;
+  layouts: any
 
   constructor(
     private cosmeticsService: CosmeticsService,
@@ -86,6 +87,10 @@ export class CosmeticListComponent implements OnChanges {
 
   ngOnDestroy(): void {
     this.timeSub.unsubscribe();
+  }
+
+  groupByLayout() {
+    
   }
 
   //Returns true if the shop entry contains only a Jam Track
@@ -170,9 +175,9 @@ export class CosmeticListComponent implements OnChanges {
 
   prioritySort() {
     this.shopEntries?.sort((a, b) => {
-      if (a.sortPriority > b.sortPriority) {
+      if (a.layout.index > b.layout.index) {
         return -1;
-      } else if (a.sortPriority < b.sortPriority) {
+      } else if (a.layout.index < b.layout.index) {
         return 1;
       }
       return 0;

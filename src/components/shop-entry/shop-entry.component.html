@@ -1,6 +1,34 @@
-@if (entry.bundle) {
+<!-- @if (entry.bundle) {
     <h2 class="bundle-name">{{ entry.bundle.name }}</h2>
-}
+    <article class="entry-container bundle" [ngClass]="allItems.length > 1 ? 'multiple' : ''">
+        @if (showBundleItems) {
+            @for (cosmetic of allItems; track $index) {
+                @if (cosmetic) {
+                <app-cosmetic-item 
+                [id]="cosmetic.id"
+                [itemName]="cosmetic.name == 'null' ? 'Placeholder item' : 
+                    cosmetic.title ? cosmetic.title + ' - ' + cosmetic.artist : cosmetic.name" [image]="checkImageType(cosmetic)"
+                    [rarity]="cosmetic.rarity ? cosmetic.rarity.value : ''"
+                    [images]="isBrItem(cosmetic) ? getBrItemImages(cosmetic) : [] "
+                    [variantImgs]="isBrItem(cosmetic) ? getBrItemVariants(cosmetic) : [] "
+                    [seriesBackground]="formatItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
+                    [type]="getCosmeticType(cosmetic)" [BrItem]="isBrItem(cosmetic)"                    
+                    >
+                </app-cosmetic-item>            
+                }
+            }
+        } @else {
+            <img class="bundle-img" src={{entry.bundle.image}} alt={{entry.bundle.name}}>            
+        }
+    </article>
+    <footer class="price-area">
+        <img class="vbucks" src="assets/vbucks.png" alt="V-Bucks icon">
+        <p class="price">{{ entry.finalPrice }}</p>
+    </footer>
+} @else {
+    
+} -->
+
 <article class="entry-container" [ngClass]="allItems.length > 1 ? 'multiple' : ''">
     @for (cosmetic of allItems; track $index) {
         @if (cosmetic) {
@@ -14,7 +42,7 @@
             [seriesBackground]="formatItemSeriesBackground(cosmetic)" [colorGradient]="getItemColorGradient(cosmetic)"
             [type]="getCosmeticType(cosmetic)" [BrItem]="isBrItem(cosmetic)"                    
             >
-        </app-cosmetic-item>
+        </app-cosmetic-item>            
         }
     }
 </article>
